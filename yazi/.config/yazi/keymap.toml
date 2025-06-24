@@ -1,0 +1,19 @@
+[[manager.prepend_keymap]]
+on = ["f", "g"]
+run = "plugin fg"
+desc = "find file by content (fuzzy match)"
+
+[[manager.prepend_keymap]]
+on = ["f", "G"]
+run = "plugin fg --args='rg'"
+desc = "find file by content (ripgrep match)"
+
+[[manager.prepend_keymap]]
+on = ["f", "f"]
+run = "plugin fg --args='fzf'"
+desc = "find file by filename"
+
+[[manager.prepend_keymap]]
+on = ["c", "p"]
+run = "plugin command"
+desc = "Yazi command prompt"

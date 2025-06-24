@@ -1,0 +1,37 @@
+
+[ollama] # local API, no key required
+url = "http://localhost:11434/api/chat"
+default_model = "phi3"
+timeout_seconds = 180                   # default timeout if not specified
+
+# [openai] # each supported api has their own config section with api and url
+# api_key = "<your_api_key>"
+# default_model = "gpt-4-turbo-preview"
+# url = "https://api.openai.com/v1/chat/completions"
+
+[mistral]
+# you can use a command to grab the key, requires a working `sh` command
+api_key_command = "pass mistral/api_key"
+default_model = "mistral-medium"
+url = "https://api.mistral.ai/v1/chat/completions"
+
+[groq]
+api_key_command = "echo $MY_GROQ_API_KEY"
+default_model = "llama3-70b-8192"
+url = "https://api.groq.com/openai/v1/chat/completions"
+
+[anthropic]
+api_key = "<yet_another_api_key>"
+url = "https://api.anthropic.com/v1/messages"
+default_model = "claude-3-opus-20240229"
+version = "2023-06-01"                        # anthropic API version, see https://docs.anthropic.com/en/api/versioning
+
+[cerebras]
+api_key_command = "pass ApiKeys/Cerebras"
+default_model = "llama3.1-70b"
+url = "https://api.cerebras.ai/v1/chat/completions"
+
+[openai]
+api_key_command = "pass ApiKeys/OpenRouter"
+default_model = "meta-llama/llama-4-scout:free"
+url = "https://openrouter.ai/api/v1/chat/completions"

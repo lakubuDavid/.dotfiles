@@ -1,0 +1,91 @@
+layout {
+  default_tab_template {
+    pane split_direction="vertical" {
+        pane name="editor" command="zsh" {
+          args "-i" "-c" "hx" 
+        }
+        pane name="files" size="25%" command="zsh" {
+            args "-i" "-c" "bt" "."
+        }
+    }
+    pane size="20%" name="terminal"
+    pane size=3 borderless=true {
+      plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
+        format_left "#[fg=#babbf1,bold] {session} {mode}#[fg=#282828] #[fg=#babbf1,bold] {tabs} "
+        format_center "{notifications}"
+        format_right "#[fg=#313244]#[fg=#74c7ec,bg=#313244]{datetime}#[fg=#313244] " \
+
+        //format_space  "#[bg=#282828]"
+        format_hide_on_overlength "true"
+        format_precedence "lrc"
+
+        border_enabled "true"
+        border_char "─"
+        border_format "#[fg=#737994]{char}"
+        border_position "top"
+
+        hide_frame_for_single_pane "false"
+
+        mode_normal "#[fg=#a6da95,bold]  #[bg=#181926,fg=#a6da95]"
+        mode_tmux "#[fg=#cba6f7,bold]  #[bg=#181926,fg=#cba6f7]"
+        mode_locked "#[fg=#f38ba8,bold]  #[bg=#181926,fg=#f38ba8]"
+        mode_pane "#[fg=#94e2d5,bold]  #[bg=#181926,fg=#94e2d5]"
+        mode_tab "#[fg=#94e2d5,bold]  #[bg=#181926,fg=#94e2d5]"
+        mode_scroll "#[fg=#eebebe,bold] SCROLL#[bg=#181926,fg=#eebebe]"
+        mode_enter_search "#[fg=#eebebe,bold] ENT-SEARCH#[bg=#181926,fg=#eebebe]" \
+
+        mode_search "#[fg=#eebebe,bold] SEARCHARCH#[bg=#181926,fg=#eebebe]"
+        mode_resize "#[fg=#e5c890,bold] 󰹷 #[bg=#181926,fg=#e5c890]"
+        mode_rename_tab "#[fg=#e5c890,bold] RENAME-TAB#[bg=#181926, fg=#e5c890]" \
+
+        mode_rename_pane "#[fg=#e5c890,bold] RENAME-PANE#[bg=#181926,fg=#e5c890]" \
+
+        mode_move "#[fg=#e5c890,bold]  #[bg=#181926,fg=#e5c890]"
+        mode_session "#[fg=#f5c2e7,bold]  #[bg=#181926,fg=#f5c2e7]"
+        mode_prompt "#[fg=#f5c2e7,bold]  #[bg=#181926,fg=#f5c2e7]"
+
+        tab_normal "#[fg=#949cbb]#[fg=#949cbb]{index}: {name}#[fg=#949cbb]#[fg=#949cbb] {floating_indicator}" \
+
+        tab_normal_fullscreen "#[fg=#949cbb]#[fg=#949cbb]{index}: {name}#[fg=#949cbb]#[fg=#949cbb] {fullscreen_indicator}" \
+
+        tab_normal_sync "#[fg=#949cbb]#[fg=#949cbb]{index}: {name}#[fg=#949cbb]#[fg=#949cbb] {sync_indicator}" \
+
+        tab_active "#[fg=#ea999c]#[fg=#ea999c,bold]{index}: {name}#[fg=#ea999c]#[fg=#ea999c,bold] {floating_indicator}" \
+
+        tab_active_fullscreen "#[fg=#ea999c]#[fg=#ea999c,bold]{index}: {name}#[fg=#ea999c]#[fg=#ea999c,bold] {fullscreen_indicator}" \
+
+        tab_active_sync "#[fg=#ea999c]#[fg=#ea999c,bold][{index}: {name}]#[fg=#ea999c]#[fg=#ea999c,bold] {sync_indicator}" \
+
+        tab_separator "• "
+
+        tab_sync_indicator " "
+        tab_fullscreen_indicator " 󰊓"
+        tab_floating_indicator " 󰹙"
+
+        notification_format_unread "#[fg=#e5c890]#[fg=#11111b,bg=#e5c890] #[fg=#cdd6f4,bg=#313244] {message}#[fg=#313244]" \
+
+        notification_format_no_notifications ""
+        notification_show_interval "10"
+
+        command_host_command "uname -n"
+        command_host_format "{stdout}"
+        command_host_interval "0"
+        command_host_rendermode "static"
+
+        command_user_command "whoami"
+        command_user_format "{stdout}"
+        command_user_interval "10"
+        command_user_rendermode "static"
+
+        command_ollama_status_command "ollama-status"
+        command_ollama_status_command "{stdout}"
+        command_ollama_status_command "1"
+
+        datetime "{format}"
+        datetime_format "󰅐 %H:%M"
+        datetime_timezone "Indian/Mauritius"
+      }
+    }
+  }
+
+}

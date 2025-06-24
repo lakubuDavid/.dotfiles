@@ -1,0 +1,13 @@
+# #!/bin/bash
+
+options=(
+	style=round
+	width=4.0
+	hidpi=on
+	active_color=0x99b7bdf8
+	inactive_color=0x008087a2 
+	blur_radius=5.0
+	blacklist="Simulator,Dropover"
+)
+
+borders "${options[@]}"

@@ -1,0 +1,148 @@
+#!/bin/bash
+
+# thresholds (px)
+FLOAT_WIDTH=500
+FLOAT_HEIGHT=500
+
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+yabai -m space 1 --label main
+yabai -m space 2 --label terminal
+yabai -m space 3 --label browser
+
+# layout
+yabai -m config layout stack
+
+# window placement
+# New window spawns to the right if vertical split, or bottom if horizontal split
+yabai -m config window_placement second_child
+
+yabai -m config auto_balance auto
+
+#padding
+yabai -m config top_padding    7
+yabai -m config bottom_padding 7
+yabai -m config left_padding   7
+yabai -m config right_padding  7
+yabai -m config window_gap     7
+
+# yabai -m config external_bar all:30:0
+
+# yabai -m config window_animation_duration 0.25
+# yabai -m config window_animation_frame_rate  60           
+# yabai -m config window_animation_easing ease_in_out_quint
+
+# example: render all unfocused windows with 90% opacity
+yabai -m config window_opacity on
+yabai -m config active_window_opacity 1.0
+yabai -m config normal_window_opacity 0.96\
+				window_opacity_duration 0.2
+   
+yabai -m config insert_feedback_color        0xffd75f5f    
+yabai -m config active_window_border_color   0xfffcba03
+yabai -m config normal_window_border_color   0x00FFFFFF   
+# yabai -m config window_shadow off
+# set focus follows mouse mode (default: off, options: off, autoraise, autofocus)
+yabai -m config focus_follows_mouse off\
+		 mouse_follows_focus off
+
+# Disable automatic tiling
+yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^Raycast$" manage=off
+yabai -m rule --add app="^CleanMyMax$" manage=off
+yabai -m rule --add app="^Dropover$" manage=off
+yabai -m rule --add app="^Shottr$" manage=off
+#yabai -m rule --add app="^Finder$" manage=off
+yabai -m rule --add app="^Keka$" manage=off
+yabai -m rule --add app="^Disk Utility$" manage=off
+yabai -m rule --add app="^Activity Monitor$" manage=off
+yabai -m rule --add app="^Window$" manage=off # Dokcey
+yabai -m rule --add app="^Loop$" manage=off
+
+# float system preferences
+yabai -m rule --add app="^System Information$" manage=off
+yabai -m rule --add app="^System Settings$" title=".*" manage=off
+yabai -m rule --add title='Preferences$' manage=off
+yabai -m rule --add title='Settings$' manage=off
+yabai -m rule --add title='^Archive Utility$' manage=off
+
+# set some popup window/settings menu to float
+yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
+yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance|Advanced)$" manage=off
+yabai -m rule --add label="Microsoft Excel" app="^Microsoft Excel$" title="Microsoft Visual Basic" manage=off
+yabai -m rule --add label="TradingView" app="^TradingView$" title="(TradingView|Login )" manage=off
+yabai -m rule --add label="Firefox" app="^Firefox$" title="Opening " manage=off
+yabai -m rule --add label="Parallels Desktop" app="^Parallels Desktop$" title="Control Center " manage=off
+
+# Function to check current space layout and save the state
+save_on_layout_change() {
+    # Get current layout type of the active space
+    current_layout=$(yabai -m query --spaces --space | jq -r '.type')
+    
+    # Save the yabai state
+    echo "Layout changed to $current_layout. Saving state..."
+    ~/yabai_state_manager.sh save
+}
+
+save_on_layout_change() {
+    # Get current layout type of the active space
+    current_layout=$(yabai -m query --spaces --space | jq -r '.type')
+    
+    # Save the yabai state
+    echo "Layout changed to $current_layout. Saving state..."
+    ~/.config/yabai/state.sh save
+}
+
+# Subscribe to yabai events and call the state manager when layout changes
+yabai -m signal --add event=space_changed action="save_on_layout_change"
+yabai -m signal --add event=space_created\
+    action="sh ~/.config/yabai/state.sh save"
+yabai -m signal --add event=space_destroyed\
+    action="sh ~/.config/yabai/state.sh save"
+    
+yabai -m signal --add event=window_created\
+    action="sh ~/.config/yabai/state.sh save"
+yabai -m signal --add event=window_destroyed\
+    action="sh ~/.config/yabai/state.sh save"
+yabai -m signal --add event=window_moved\
+    action="sh ~/.config/yabai/state.sh save"
+yabai -m signal --add event=window_resized\
+    action="sh ~/.config/yabai/state.sh save"
+yabai -m signal --add event=window_minimized\
+    action="sh ~/.config/yabai/state.sh save"
+yabai -m signal --add event=window_deminimized\
+    action="sh ~/.config/yabai/state.sh save"
+    
+yabai -m signal --add event=display_added\
+    action="sh ~/.config/yabai/state.sh save"
+yabai -m signal --add event=display_removed\
+    action="sh ~/.config/yabai/state.sh save"
+
+yabai -m signal --add event=mission_control_exit action='echo "refresh" | nc -U /tmp/yabai-indicator.socket'
+yabai -m signal --add event=display_added action='echo "refresh" | nc -U /tmp/yabai-indicator.socket'
+yabai -m signal --add event=display_removed action='echo "refresh" | nc -U /tmp/yabai-indicator.socket'
+yabai -m signal --add event=window_created action='echo "refresh windows" | nc -U /tmp/yabai-indicator.socket'
+yabai -m signal --add event=window_destroyed action='echo "refresh windows" | nc -U /tmp/yabai-indicator.socket'
+yabai -m signal --add event=window_focused action='echo "refresh windows" | nc -U /tmp/yabai-indicator.socket'
+yabai -m signal --add event=window_moved action='echo "refresh windows" | nc -U /tmp/yabai-indicator.socket'
+yabai -m signal --add event=window_resized action='echo "refresh windows" | nc -U /tmp/yabai-indicator.socket'
+yabai -m signal --add event=window_minimized action='echo "refresh windows" | nc -U /tmp/yabai-indicator.socket'
+yabai -m signal --add event=window_deminimized action='echo "refresh windows" | nc -U /tmp/yabai-indicator.socket'
+
+yabai -m signal --add event=window_created action="~/.config/yabai/float_small.sh"
+
+# yabai -m signal --add event=space_changed action='open "swiftbar://refreshplugin?name=yabai_space_stat.1s.sh"'
+# yabai -m signal --add event=window_moved action='open "swiftbar://refreshplugin?name=yabai_space_stat.5m.sh"'
+
+# # focus window after active space changes
+# yabai -m signal --add event=space_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
+
+# # focus window after active display changes
+# yabai -m signal --add event=display_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
+
+# yabai -m signal --add event=space_changed action='yabai -m window --focus $(yabai -m query --windows --space | jq -r '\''[.[]|select(."is-visible")][0].id'\'')'
+
+sh ~/.config/yabai/state.sh reload
+
+

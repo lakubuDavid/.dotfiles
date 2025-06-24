@@ -1,0 +1,1699 @@
+api = "openai"
+model = "meta-llama/llama-4-scout:free"
+
+[[messages]]
+role = "system"
+content = "You are a git master. You generate git commit messages based on the diff given. What you write will be used as git commit message. Use commit convetions <type>[optional scope]: <description>[optional body][optional footer(s)]Example: fix: prevent racing of requestsIntroduce a request id and a reference to latest request. Dismissincoming responses other than from latest request.Remove timeouts which were used to mitigate the racing issue but areobsolete now.Reviewed-by: ZRefs: #123Never write ``` around your answer, provide only the result of the task you are given. Preserve input formatting."
+
+[[messages]]
+role = "user"
+content = """
+diff --git a/.config b/.config
+new file mode 120000
+index 0000000..c8d6f30
+--- /dev/null
++++ b/.config
+@@ -0,0 +1 @@
++borders/.config
+\\ No newline at end of file
+diff --git a/ghostty/.config/ghostty/config b/ghostty/.config/ghostty/config
+new file mode 100644
+index 0000000..4c2e15b
+--- /dev/null
++++ b/ghostty/.config/ghostty/config
+@@ -0,0 +1,49 @@
++# The syntax is \"key = value\". The whitespace around the
++# equals doesn't matter.
++background = 232330
++# background = 232634
++foreground = ffeeff
++
++# Comments start with a `#` and are only valid on their own line.
++# Blank lines are ignored!
++
++keybind = super+w=close_surface
++keybind = super+ctrl+r=new_split:right
++keybind = super+ctrl+d=new_split:down
++keybind = super+r=reload_config
++keybind = super+\\=toggle_quick_terminal
++keybind = super+v=paste_from_clipboard
++keybind = super+,=open_config
++keybind = super+t=new_tab
++keybind = super+n=new_window
++
++# Empty values reset the configuration to the default value
++font-family = \"VictorMono Nerd Font\"
++font-size = 14
++font-thicken = true
++adjust-cell-height = 1
++
++theme = catppuccin-mocha
++# theme = batman
++cursor-style = bar
++background-opacity = 0.85
++background-blur-radius = 80
++
++command = /usr/local/bin/zellij
++macos-titlebar-style = hidden
++
++window-padding-x = 10,10
++window-padding-y = 10,0
++
++window-width = 100
++window-height = 50
++
++shell-integration = zsh
++
++mouse-scroll-multiplier = 0.9
++
++confirm-close-surface = false 
++macos-option-as-alt = true
++macos-window-shadow = false
++
++auto-update = check
+diff --git a/helix/.config/helix/languages.toml b/helix/.config/helix/languages.toml
+index 5fc07de..ad4ffd8 100644
+--- a/helix/.config/helix/languages.toml
++++ b/helix/.config/helix/languages.toml
+@@ -248,7 +248,7 @@ file-types = [
+ ]
+ # block-comment-tokens = { start = \"<!--\", end = \"-->\" }
+ language-servers = [\"vscode-html-language-server\", \"superhtml\", \"emmet-ls\"]
+-auto-format = true
++auto-format = false
+ indent = { tab-width = 2, unit = \"  \" }
+ # [[language]]
+ # name = \"teal\"
+@@ -273,7 +273,8 @@ roots = [\"sln\", \"csproj\"]
+ # comment-tokens = \"//\"
+ # block-comment-tokens = { start = \"/*\", end = \"*/\" }
+ indent = { tab-width = 4, unit = \"\\t\" }
+-language-servers = [\"omnisharp\", \"scls\"]
++# language-servers = [\"omnisharp\", \"scls\"]
++language-servers = [\"csharp-ls\", \"scls\"]
+ # language-servers = [\"omnisharp\"]
+ [[language]]
+ name = \"git-commit\"
+diff --git a/smartcat/.config/smartcat/.api_configs.toml b/smartcat/.config/smartcat/.api_configs.toml
+new file mode 100644
+index 0000000..fcbc447
+--- /dev/null
++++ b/smartcat/.config/smartcat/.api_configs.toml
+@@ -0,0 +1,37 @@
++
++[ollama] # local API, no key required
++url = \"http://localhost:11434/api/chat\"
++default_model = \"phi3\"
++timeout_seconds = 180                   # default timeout if not specified
++
++# [openai] # each supported api has their own config section with api and url
++# api_key = \"<your_api_key>\"
++# default_model = \"gpt-4-turbo-preview\"
++# url = \"https://api.openai.com/v1/chat/completions\"
++
++[mistral]
++# you can use a command to grab the key, requires a working `sh` command
++api_key_command = \"pass mistral/api_key\"
++default_model = \"mistral-medium\"
++url = \"https://api.mistral.ai/v1/chat/completions\"
++
++[groq]
++api_key_command = \"echo $MY_GROQ_API_KEY\"
++default_model = \"llama3-70b-8192\"
++url = \"https://api.groq.com/openai/v1/chat/completions\"
++
++[anthropic]
++api_key = \"<yet_another_api_key>\"
++url = \"https://api.anthropic.com/v1/messages\"
++default_model = \"claude-3-opus-20240229\"
++version = \"2023-06-01\"                        # anthropic API version, see https://docs.anthropic.com/en/api/versioning
++
++[cerebras]
++api_key = \"<your_api_key>\"
++default_model = \"llama3.1-70b\"
++url = \"https://api.cerebras.ai/v1/chat/completions\"
++
++[openai]
++api_key_command = \"pass ApiKeys/OpenRouter\"
++default_model = \"meta-llama/llama-4-scout:free\"
++url = \"https://openrouter.ai/api/v1/chat/completions\"
+diff --git a/smartcat/.config/smartcat/conversation.toml b/smartcat/.config/smartcat/conversation.toml
+new file mode 100644
+index 0000000..7cb5aa8
+--- /dev/null
++++ b/smartcat/.config/smartcat/conversation.toml
+@@ -0,0 +1,732 @@
++api = \"openai\"
++model = \"meta-llama/llama-4-scout:free\"
++
++[[messages]]
++role = \"system\"
++content = \"You are a git master. You generate git commit messages based on the diff given. What you write will be used as git commit message. Use commit convetions <type>[optional scope]: <description>[optional body][optional footer(s)]Example: fix: prevent racing of requestsIntroduce a request id and a reference to latest request. Dismissincoming responses other than from latest request.Remove timeouts which were used to mitigate the racing issue but areobsolete now.Reviewed-by: ZRefs: #123Never write ``` around your answer, provide only the result of the task you are given. Preserve input formatting.\"
++
++[[messages]]
++role = \"user\"
++content = '''
++diff --git a/helix/.config/helix/languages.toml b/helix/.config/helix/languages.toml
++index 5fc07de..ad4ffd8 100644
++--- a/helix/.config/helix/languages.toml
+++++ b/helix/.config/helix/languages.toml
++@@ -248,7 +248,7 @@ file-types = [
++ ]
++ # block-comment-tokens = { start = \"<!--\", end = \"-->\" }
++ language-servers = [\"vscode-html-language-server\", \"superhtml\", \"emmet-ls\"]
++-auto-format = true
+++auto-format = false
++ indent = { tab-width = 2, unit = \"  \" }
++ # [[language]]
++ # name = \"teal\"
++@@ -273,7 +273,8 @@ roots = [\"sln\", \"csproj\"]
++ # comment-tokens = \"//\"
++ # block-comment-tokens = { start = \"/*\", end = \"*/\" }
++ indent = { tab-width = 4, unit = \"\\t\" }
++-language-servers = [\"omnisharp\", \"scls\"]
+++# language-servers = [\"omnisharp\", \"scls\"]
+++language-servers = [\"csharp-ls\", \"scls\"]
++ # language-servers = [\"omnisharp\"]
++ [[language]]
++ name = \"git-commit\"
++diff --git a/yabai/.config/yabai/yabai_state.json b/yabai/.config/yabai/yabai_state.json
++index 3e09d58..275894d 100644
++--- a/yabai/.config/yabai/yabai_state.json
+++++ b/yabai/.config/yabai/yabai_state.json
++@@ -1,50 +1,50 @@
++ [{
++-\t\"id\":7,
+++\t\"id\":9,
++ \t\"uuid\":\"0CB92712-9E29-4901-B908-FC68CEC52D2C\",
++ \t\"index\":1,
++-\t\"label\":\"terminal\",
++-\t\"type\":\"bsp\",
+++\t\"label\":\"main\",
+++\t\"type\":\"float\",
++ \t\"display\":1,
++-\t\"windows\":[92448, 118, 169, 444, 8598, 89604, 92307],
++-\t\"first-window\":92448,
++-\t\"last-window\":92448,
+++\t\"windows\":[74684, 74634, 281, 5358],
+++\t\"first-window\":0,
+++\t\"last-window\":0,
++ \t\"has-focus\":false,
++ \t\"is-visible\":false,
++ \t\"is-native-fullscreen\":false
++ },{
++-\t\"id\":8,
+++\t\"id\":7,
++ \t\"uuid\":\"6447599E-9348-42E7-B9DB-F95EE4D372E9\",
++ \t\"index\":2,
++-\t\"label\":\"browser\",
+++\t\"label\":\"terminal\",
++ \t\"type\":\"stack\",
++ \t\"display\":1,
++-\t\"windows\":[776, 169, 802, 8598, 17445, 54601, 56368],
++-\t\"first-window\":776,
++-\t\"last-window\":776,
+++\t\"windows\":[445, 72626, 63053, 15300, 5358, 57370, 72496],
+++\t\"first-window\":445,
+++\t\"last-window\":445,
++ \t\"has-focus\":true,
++ \t\"is-visible\":true,
++ \t\"is-native-fullscreen\":false
++ },{
++-\t\"id\":6,
+++\t\"id\":8,
++ \t\"uuid\":\"20CC89DA-68EF-460C-ADBF-B82517A8863E\",
++ \t\"index\":3,
++-\t\"label\":\"main\",
++-\t\"type\":\"stack\",
+++\t\"label\":\"browser\",
+++\t\"type\":\"bsp\",
++ \t\"display\":1,
++-\t\"windows\":[276, 169, 297, 8598],
++-\t\"first-window\":276,
++-\t\"last-window\":276,
+++\t\"windows\":[5267, 5358, 52611, 55386],
+++\t\"first-window\":5267,
+++\t\"last-window\":5267,
++ \t\"has-focus\":false,
++ \t\"is-visible\":false,
++ \t\"is-native-fullscreen\":false
++ },{
++-\t\"id\":9,
+++\t\"id\":6,
++ \t\"uuid\":\"BA0B6118-9EAC-4BCE-93C6-CC260DA42FA8\",
++ \t\"index\":4,
++ \t\"label\":\"\",
++-\t\"type\":\"float\",
+++\t\"type\":\"bsp\",
++ \t\"display\":1,
++-\t\"windows\":[169, 8598],
+++\t\"windows\":[5358],
++ \t\"first-window\":0,
++ \t\"last-window\":0,
++ \t\"has-focus\":false,
++@@ -57,33 +57,33 @@
++ \t\"label\":\"\",
++ \t\"type\":\"float\",
++ \t\"display\":1,
++-\t\"windows\":[169, 8598],
+++\t\"windows\":[5358],
++ \t\"first-window\":0,
++ \t\"last-window\":0,
++ \t\"has-focus\":false,
++ \t\"is-visible\":false,
++ \t\"is-native-fullscreen\":false
++ },{
++-\t\"id\":12,
+++\t\"id\":11,
++ \t\"uuid\":\"68610A2E-F315-424D-86C2-E7A686E26DB3\",
++ \t\"index\":6,
++ \t\"label\":\"\",
++-\t\"type\":\"float\",
+++\t\"type\":\"stack\",
++ \t\"display\":1,
++-\t\"windows\":[169, 8598],
+++\t\"windows\":[5358],
++ \t\"first-window\":0,
++ \t\"last-window\":0,
++ \t\"has-focus\":false,
++ \t\"is-visible\":false,
++ \t\"is-native-fullscreen\":false
++ },{
++-\t\"id\":13,
+++\t\"id\":12,
++ \t\"uuid\":\"D31330A9-6C13-4D1E-972B-D1A9147EAE29\",
++ \t\"index\":7,
++ \t\"label\":\"\",
++ \t\"type\":\"float\",
++ \t\"display\":1,
++-\t\"windows\":[169, 8598],
+++\t\"windows\":[5358],
++ \t\"first-window\":0,
++ \t\"last-window\":0,
++ \t\"has-focus\":false,
++@@ -91,10 +91,10 @@
++ \t\"is-native-fullscreen\":false
++ }]
++ [{
++-\t\"id\":776,
++-\t\"pid\":10650,
+++\t\"id\":445,
+++\t\"pid\":5470,
++ \t\"app\":\"Ghostty\",
++-\t\"title\":\"Zellij (verdant-clarinet) - hx ~/.zshrc\",
+++\t\"title\":\"Zellij (rectangular-duck) - htop\",
++ \t\"scratchpad\":\"\",
++ \t\"frame\":{
++ \t\t\"x\":7.0000,
++@@ -114,7 +114,7 @@
++ \t\"opacity\":1.0000,
++ \t\"split-type\":\"none\",
++ \t\"split-child\":\"second_child\",
++-\t\"stack-index\":0,
+++\t\"stack-index\":3,
++ \t\"can-move\":true,
++ \t\"can-resize\":true,
++ \t\"has-focus\":true,
++@@ -130,49 +130,49 @@
++ \t\"is-sticky\":false,
++ \t\"is-grabbed\":false
++ },{
++-\t\"id\":92448,
++-\t\"pid\":678,
++-\t\"app\":\"Finder\",
++-\t\"title\":\"zellij\",
+++\t\"id\":72626,
+++\t\"pid\":40237,
+++\t\"app\":\"Numbers\",
+++\t\"title\":\"\",
++ \t\"scratchpad\":\"\",
++ \t\"frame\":{
++-\t\t\"x\":7.0000,
++-\t\t\"y\":32.0000,
++-\t\t\"w\":1906.0000,
++-\t\t\"h\":1161.0000
+++\t\t\"x\":745.0000,
+++\t\t\"y\":449.0000,
+++\t\t\"w\":430.0000,
+++\t\t\"h\":327.0000
++ \t},
++-\t\"role\":\"AXWindow\",
++-\t\"subrole\":\"AXStandardWindow\",
++-\t\"root-window\":true,
+++\t\"role\":\"AXSheet\",
+++\t\"subrole\":\"\",
+++\t\"root-window\":false,
++ \t\"display\":1,
++-\t\"space\":1,
+++\t\"space\":2,
++ \t\"level\":0,
++ \t\"sub-level\":0,
++ \t\"layer\":\"normal\",
++ \t\"sub-layer\":\"normal\",
++ \t\"opacity\":1.0000,
++ \t\"split-type\":\"none\",
++-\t\"split-child\":\"second_child\",
+++\t\"split-child\":\"none\",
++ \t\"stack-index\":0,
++ \t\"can-move\":true,
++-\t\"can-resize\":true,
+++\t\"can-resize\":false,
++ \t\"has-focus\":false,
++ \t\"has-shadow\":true,
++ \t\"has-parent-zoom\":false,
++ \t\"has-fullscreen-zoom\":false,
++ \t\"has-ax-reference\":true,
++ \t\"is-native-fullscreen\":false,
++-\t\"is-visible\":false,
+++\t\"is-visible\":true,
++ \t\"is-minimized\":false,
++ \t\"is-hidden\":false,
++-\t\"is-floating\":false,
+++\t\"is-floating\":true,
++ \t\"is-sticky\":false,
++ \t\"is-grabbed\":false
++ },{
++-\t\"id\":118,
++-\t\"pid\":678,
++-\t\"app\":\"Finder\",
++-\t\"title\":\"components\",
+++\t\"id\":63053,
+++\t\"pid\":40237,
+++\t\"app\":\"Numbers\",
+++\t\"title\":\"workflow_data.numbers\",
++ \t\"scratchpad\":\"\",
++ \t\"frame\":{
++ \t\t\"x\":7.0000,
++@@ -180,38 +180,38 @@
++ \t\t\"w\":1906.0000,
++ \t\t\"h\":1161.0000
++ \t},
++-\t\"role\":\"\",
++-\t\"subrole\":\"\",
+++\t\"role\":\"AXWindow\",
+++\t\"subrole\":\"AXStandardWindow\",
++ \t\"root-window\":true,
++ \t\"display\":1,
++-\t\"space\":1,
+++\t\"space\":2,
++ \t\"level\":0,
++ \t\"sub-level\":0,
++ \t\"layer\":\"normal\",
++ \t\"sub-layer\":\"normal\",
++ \t\"opacity\":1.0000,
++ \t\"split-type\":\"none\",
++-\t\"split-child\":\"none\",
++-\t\"stack-index\":0,
++-\t\"can-move\":false,
++-\t\"can-resize\":false,
+++\t\"split-child\":\"second_child\",
+++\t\"stack-index\":1,
+++\t\"can-move\":true,
+++\t\"can-resize\":true,
++ \t\"has-focus\":false,
++ \t\"has-shadow\":true,
++ \t\"has-parent-zoom\":false,
++ \t\"has-fullscreen-zoom\":false,
++-\t\"has-ax-reference\":false,
+++\t\"has-ax-reference\":true,
++ \t\"is-native-fullscreen\":false,
++-\t\"is-visible\":false,
+++\t\"is-visible\":true,
++ \t\"is-minimized\":false,
++ \t\"is-hidden\":false,
++ \t\"is-floating\":false,
++ \t\"is-sticky\":false,
++ \t\"is-grabbed\":false
++ },{
++-\t\"id\":276,
++-\t\"pid\":1303,
++-\t\"app\":\"Google Chrome\",
++-\t\"title\":\"yazi.toml | Yazi - Google Chrome – David\",
+++\t\"id\":15300,
+++\t\"pid\":85958,
+++\t\"app\":\"MarkText\",
+++\t\"title\":\"report_Goburdhan_Bibi_Shanya_Cafe_Assignment_20250603_081942.md - grading-agents\",
++ \t\"scratchpad\":\"\",
++ \t\"frame\":{
++ \t\t\"x\":7.0000,
++@@ -223,7 +223,7 @@
++ \t\"subrole\":\"AXStandardWindow\",
++ \t\"root-window\":true,
++ \t\"display\":1,
++-\t\"space\":3,
+++\t\"space\":2,
++ \t\"level\":0,
++ \t\"sub-level\":0,
++ \t\"layer\":\"normal\",
++@@ -231,7 +231,7 @@
++ \t\"opacity\":1.0000,
++ \t\"split-type\":\"none\",
++ \t\"split-child\":\"second_child\",
++-\t\"stack-index\":0,
+++\t\"stack-index\":2,
++ \t\"can-move\":true,
++ \t\"can-resize\":true,
++ \t\"has-focus\":false,
++@@ -240,29 +240,29 @@
++ \t\"has-fullscreen-zoom\":false,
++ \t\"has-ax-reference\":true,
++ \t\"is-native-fullscreen\":false,
++-\t\"is-visible\":false,
+++\t\"is-visible\":true,
++ \t\"is-minimized\":false,
++ \t\"is-hidden\":false,
++ \t\"is-floating\":false,
++ \t\"is-sticky\":false,
++ \t\"is-grabbed\":false
++ },{
++-\t\"id\":169,
++-\t\"pid\":705,
++-\t\"app\":\"Shottr\",
++-\t\"title\":\"Shottr\",
+++\t\"id\":74684,
+++\t\"pid\":28607,
+++\t\"app\":\"System Settings\",
+++\t\"title\":\"\",
++ \t\"scratchpad\":\"\",
++ \t\"frame\":{
++-\t\t\"x\":542.0000,
++-\t\t\"y\":343.0000,
++-\t\t\"w\":836.0000,
++-\t\t\"h\":470.0000
+++\t\t\"x\":768.0000,
+++\t\t\"y\":371.0000,
+++\t\t\"w\":715.0000,
+++\t\t\"h\":485.0000
++ \t},
++ \t\"role\":\"AXWindow\",
++ \t\"subrole\":\"AXStandardWindow\",
++ \t\"root-window\":true,
++ \t\"display\":1,
++-\t\"space\":3,
+++\t\"space\":1,
++ \t\"level\":0,
++ \t\"sub-level\":0,
++ \t\"layer\":\"normal\",
++@@ -283,35 +283,35 @@
++ \t\"is-minimized\":false,
++ \t\"is-hidden\":false,
++ \t\"is-floating\":true,
++-\t\"is-sticky\":true,
+++\t\"is-sticky\":false,
++ \t\"is-grabbed\":false
++ },{
++-\t\"id\":297,
++-\t\"pid\":1303,
++-\t\"app\":\"Google Chrome\",
++-\t\"title\":\"\",
+++\t\"id\":74634,
+++\t\"pid\":759,
+++\t\"app\":\"Finder\",
+++\t\"title\":\"Pictures\",
++ \t\"scratchpad\":\"\",
++ \t\"frame\":{
++-\t\t\"x\":2613.0000,
++-\t\t\"y\":-285.0000,
++-\t\t\"w\":142.0000,
++-\t\t\"h\":19.0000
+++\t\t\"x\":75.0000,
+++\t\t\"y\":25.0000,
+++\t\t\"w\":1614.0000,
+++\t\t\"h\":1038.0000
++ \t},
++-\t\"role\":\"AXHelpTag\",
++-\t\"subrole\":\"\",
+++\t\"role\":\"AXWindow\",
+++\t\"subrole\":\"AXStandardWindow\",
++ \t\"root-window\":true,
++ \t\"display\":1,
++-\t\"space\":3,
++-\t\"level\":103,
+++\t\"space\":1,
+++\t\"level\":0,
++ \t\"sub-level\":0,
++-\t\"layer\":\"unknown\",
+++\t\"layer\":\"normal\",
++ \t\"sub-layer\":\"normal\",
++ \t\"opacity\":1.0000,
++ \t\"split-type\":\"none\",
++ \t\"split-child\":\"none\",
++ \t\"stack-index\":0,
++ \t\"can-move\":true,
++-\t\"can-resize\":false,
+++\t\"can-resize\":true,
++ \t\"has-focus\":false,
++ \t\"has-shadow\":true,
++ \t\"has-parent-zoom\":false,
++@@ -321,41 +321,41 @@
++ \t\"is-visible\":false,
++ \t\"is-minimized\":false,
++ \t\"is-hidden\":false,
++-\t\"is-floating\":true,
+++\t\"is-floating\":false,
++ \t\"is-sticky\":false,
++ \t\"is-grabbed\":false
++ },{
++-\t\"id\":444,
++-\t\"pid\":4585,
++-\t\"app\":\"fdm\",
++-\t\"title\":\"Free Download Manager\",
+++\t\"id\":5267,
+++\t\"pid\":67760,
+++\t\"app\":\"Google Chrome\",
+++\t\"title\":\"Conventional Commits - Google Chrome – David\",
++ \t\"scratchpad\":\"\",
++ \t\"frame\":{
++ \t\t\"x\":7.0000,
++-\t\t\"y\":53.0000,
+++\t\t\"y\":32.0000,
++ \t\t\"w\":1906.0000,
++-\t\t\"h\":1147.0000
+++\t\t\"h\":1161.0000
++ \t},
++-\t\"role\":\"\",
++-\t\"subrole\":\"\",
+++\t\"role\":\"AXWindow\",
+++\t\"subrole\":\"AXStandardWindow\",
++ \t\"root-window\":true,
++ \t\"display\":1,
++-\t\"space\":1,
+++\t\"space\":3,
++ \t\"level\":0,
++ \t\"sub-level\":0,
++ \t\"layer\":\"normal\",
++ \t\"sub-layer\":\"normal\",
++ \t\"opacity\":1.0000,
++ \t\"split-type\":\"none\",
++-\t\"split-child\":\"none\",
+++\t\"split-child\":\"second_child\",
++ \t\"stack-index\":0,
++-\t\"can-move\":false,
++-\t\"can-resize\":false,
+++\t\"can-move\":true,
+++\t\"can-resize\":true,
++ \t\"has-focus\":false,
++ \t\"has-shadow\":true,
++ \t\"has-parent-zoom\":false,
++ \t\"has-fullscreen-zoom\":false,
++-\t\"has-ax-reference\":false,
+++\t\"has-ax-reference\":true,
++ \t\"is-native-fullscreen\":false,
++ \t\"is-visible\":false,
++ \t\"is-minimized\":false,
++@@ -364,22 +364,22 @@
++ \t\"is-sticky\":false,
++ \t\"is-grabbed\":false
++ },{
++-\t\"id\":802,
++-\t\"pid\":11909,
++-\t\"app\":\"kitty\",
++-\t\"title\":\"exit\",
+++\t\"id\":281,
+++\t\"pid\":2557,
+++\t\"app\":\"fdm\",
+++\t\"title\":\"Free Download Manager\",
++ \t\"scratchpad\":\"\",
++ \t\"frame\":{
++-\t\t\"x\":964.0000,
++-\t\t\"y\":32.0000,
++-\t\t\"w\":949.0000,
++-\t\t\"h\":1161.0000
+++\t\t\"x\":7.0000,
+++\t\t\"y\":53.0000,
+++\t\t\"w\":1906.0000,
+++\t\t\"h\":1147.0000
++ \t},
++ \t\"role\":\"\",
++ \t\"subrole\":\"\",
++ \t\"root-window\":true,
++ \t\"display\":1,
++-\t\"space\":2,
+++\t\"space\":1,
++ \t\"level\":0,
++ \t\"sub-level\":0,
++ \t\"layer\":\"normal\",
++@@ -403,16 +403,16 @@
++ \t\"is-sticky\":false,
++ \t\"is-grabbed\":false
++ },{
++-\t\"id\":8598,
++-\t\"pid\":35458,
+++\t\"id\":5358,
+++\t\"pid\":778,
++ \t\"app\":\"Raycast\",
++ \t\"title\":\"AI Chat\",
++ \t\"scratchpad\":\"\",
++ \t\"frame\":{
++-\t\t\"x\":714.0000,
++-\t\t\"y\":233.0000,
++-\t\t\"w\":1152.0000,
++-\t\t\"h\":705.0000
+++\t\t\"x\":1075.0000,
+++\t\t\"y\":105.0000,
+++\t\t\"w\":819.0000,
+++\t\t\"h\":689.0000
++ \t},
++ \t\"role\":\"\",
++ \t\"subrole\":\"\",
++@@ -442,61 +442,22 @@
++ \t\"is-sticky\":true,
++ \t\"is-grabbed\":false
++ },{
++-\t\"id\":17445,
++-\t\"pid\":59943,
++-\t\"app\":\"Loop\",
++-\t\"title\":\"\",
++-\t\"scratchpad\":\"\",
++-\t\"frame\":{
++-\t\t\"x\":374.0000,
++-\t\t\"y\":568.0000,
++-\t\t\"w\":1172.0000,
++-\t\t\"h\":632.0000
++-\t},
++-\t\"role\":\"AXWindow\",
++-\t\"subrole\":\"AXStandardWindow\",
++-\t\"root-window\":true,
++-\t\"display\":1,
++-\t\"space\":2,
++-\t\"level\":0,
++-\t\"sub-level\":0,
++-\t\"layer\":\"normal\",
++-\t\"sub-layer\":\"normal\",
++-\t\"opacity\":1.0000,
++-\t\"split-type\":\"none\",
++-\t\"split-child\":\"none\",
++-\t\"stack-index\":0,
++-\t\"can-move\":true,
++-\t\"can-resize\":false,
++-\t\"has-focus\":false,
++-\t\"has-shadow\":true,
++-\t\"has-parent-zoom\":false,
++-\t\"has-fullscreen-zoom\":false,
++-\t\"has-ax-reference\":true,
++-\t\"is-native-fullscreen\":false,
++-\t\"is-visible\":false,
++-\t\"is-minimized\":false,
++-\t\"is-hidden\":false,
++-\t\"is-floating\":true,
++-\t\"is-sticky\":false,
++-\t\"is-grabbed\":false
++-},{
++-\t\"id\":54601,
++-\t\"pid\":11848,
++-\t\"app\":\"Mail\",
++-\t\"title\":\"All Inboxes – All Mail · 21,177 messages, 6,208 unread\",
+++\t\"id\":52611,
+++\t\"pid\":67760,
+++\t\"app\":\"Google Chrome\",
+++\t\"title\":\"Using Multiple EF Core DbContexts In a Single Application - Google Chrome – David\",
++ \t\"scratchpad\":\"\",
++ \t\"frame\":{
++-\t\t\"x\":7.0000,
+++\t\t\"x\":964.0000,
++ \t\t\"y\":32.0000,
++-\t\t\"w\":1906.0000,
+++\t\t\"w\":949.0000,
++ \t\t\"h\":1161.0000
++ \t},
++ \t\"role\":\"AXWindow\",
++-\t\"subrole\":\"AXDialog\",
+++\t\"subrole\":\"AXStandardWindow\",
++ \t\"root-window\":true,
++ \t\"display\":1,
++-\t\"space\":2,
+++\t\"space\":3,
++ \t\"level\":0,
++ \t\"sub-level\":0,
++ \t\"layer\":\"normal\",
++@@ -520,10 +481,10 @@
++ \t\"is-sticky\":false,
++ \t\"is-grabbed\":false
++ },{
++-\t\"id\":56368,
++-\t\"pid\":17532,
++-\t\"app\":\"Claude\",
++-\t\"title\":\"Claude\",
+++\t\"id\":55386,
+++\t\"pid\":76528,
+++\t\"app\":\"Preview\",
+++\t\"title\":\"Absa_eStatement_Acc_5230_20250602.pdf – 1 page\",
++ \t\"scratchpad\":\"\",
++ \t\"frame\":{
++ \t\t\"x\":7.0000,
++@@ -532,10 +493,10 @@
++ \t\t\"h\":1161.0000
++ \t},
++ \t\"role\":\"AXWindow\",
++-\t\"subrole\":\"AXStandardWindow\",
+++\t\"subrole\":\"AXDialog\",
++ \t\"root-window\":true,
++ \t\"display\":1,
++-\t\"space\":2,
+++\t\"space\":3,
++ \t\"level\":0,
++ \t\"sub-level\":0,
++ \t\"layer\":\"normal\",
++@@ -559,22 +520,22 @@
++ \t\"is-sticky\":false,
++ \t\"is-grabbed\":false
++ },{
++-\t\"id\":89604,
++-\t\"pid\":678,
++-\t\"app\":\"Finder\",
++-\t\"title\":\"helix\",
+++\t\"id\":57370,
+++\t\"pid\":85958,
+++\t\"app\":\"MarkText\",
+++\t\"title\":\"Untitled-1 - MarkText\",
++ \t\"scratchpad\":\"\",
++ \t\"frame\":{
++ \t\t\"x\":7.0000,
++ \t\t\"y\":32.0000,
++-\t\t\"w\":949.0000,
+++\t\t\"w\":1906.0000,
++ \t\t\"h\":1161.0000
++ \t},
++ \t\"role\":\"AXWindow\",
++-\t\"subrole\":\"AXDialog\",
+++\t\"subrole\":\"AXStandardWindow\",
++ \t\"root-window\":true,
++ \t\"display\":1,
++-\t\"space\":1,
+++\t\"space\":2,
++ \t\"level\":0,
++ \t\"sub-level\":0,
++ \t\"layer\":\"normal\",
++@@ -598,22 +559,22 @@
++ \t\"is-sticky\":false,
++ \t\"is-grabbed\":false
++ },{
++-\t\"id\":92307,
++-\t\"pid\":678,
++-\t\"app\":\"Finder\",
++-\t\"title\":\".config\",
+++\t\"id\":72496,
+++\t\"pid\":5470,
+++\t\"app\":\"Ghostty\",
+++\t\"title\":\"Zellij (tremendous-crab) - dotconfigs\",
++ \t\"scratchpad\":\"\",
++ \t\"frame\":{
++ \t\t\"x\":7.0000,
++ \t\t\"y\":32.0000,
++-\t\t\"w\":949.0000,
+++\t\t\"w\":1906.0000,
++ \t\t\"h\":1161.0000
++ \t},
++ \t\"role\":\"AXWindow\",
++-\t\"subrole\":\"AXDialog\",
+++\t\"subrole\":\"AXStandardWindow\",
++ \t\"root-window\":true,
++ \t\"display\":1,
++-\t\"space\":1,
+++\t\"space\":2,
++ \t\"level\":0,
++ \t\"sub-level\":0,
++ \t\"layer\":\"normal\",
++diff --git a/yabai/.config/yabai/yabairc b/yabai/.config/yabai/yabairc
++index ebaa5ef..e11b78b 100755
++--- a/yabai/.config/yabai/yabairc
+++++ b/yabai/.config/yabai/yabairc
++@@ -39,7 +39,7 @@ yabai -m config active_window_border_color   0xfffcba03
++ yabai -m config normal_window_border_color   0x00FFFFFF   
++ # yabai -m config window_shadow off
++ # set focus follows mouse mode (default: off, options: off, autoraise, autofocus)
++-yabai -m config focus_follows_mouse autofocus\\
+++yabai -m config focus_follows_mouse off\\
++ \t\t mouse_follows_focus off
++ 
++ # Disable automatic tiling
++diff --git a/yazi/.DS_Store b/yazi/.DS_Store
++index e2dbaac..1c024b5 100644
++Binary files a/yazi/.DS_Store and b/yazi/.DS_Store differ
++diff --git a/yazi/.config/yazi/flavors/onedark.yazi b/yazi/.config/yazi/flavors/onedark.yazi
++--- a/yazi/.config/yazi/flavors/onedark.yazi
+++++ b/yazi/.config/yazi/flavors/onedark.yazi
++@@ -1 +1 @@
++-Subproject commit fa1da70556a5654f5d40d063a95e55ecc63b3ef7
+++Subproject commit fa1da70556a5654f5d40d063a95e55ecc63b3ef7-dirty
++diff --git a/yazi/.config/yazi/plugins/command.yazi b/yazi/.config/yazi/plugins/command.yazi
++--- a/yazi/.config/yazi/plugins/command.yazi
+++++ b/yazi/.config/yazi/plugins/command.yazi
++@@ -1 +1 @@
++-Subproject commit 369bdc5089ee4ad1b272d45282acd234ad6e3e38
+++Subproject commit 369bdc5089ee4ad1b272d45282acd234ad6e3e38-dirty
++diff --git a/yazi/.config/yazi/plugins/fg.yazi b/yazi/.config/yazi/plugins/fg.yazi
++--- a/yazi/.config/yazi/plugins/fg.yazi
+++++ b/yazi/.config/yazi/plugins/fg.yazi
++@@ -1 +1 @@
++-Subproject commit f7d41ae71249515763d9ee04ddf4bdc3b0b42f55
+++Subproject commit f7d41ae71249515763d9ee04ddf4bdc3b0b42f55-dirty
++diff --git a/yazi/.config/yazi/plugins/glow.yazi b/yazi/.config/yazi/plugins/glow.yazi
++--- a/yazi/.config/yazi/plugins/glow.yazi
+++++ b/yazi/.config/yazi/plugins/glow.yazi
++@@ -1 +1 @@
++-Subproject commit 536185a4e60ac0adc11d238881e78678fdf084ff
+++Subproject commit 536185a4e60ac0adc11d238881e78678fdf084ff-dirty
++diff --git a/zshrc/.zshrc b/zshrc/.zshrc
++index 200daca..79cd698 100644
++--- a/zshrc/.zshrc
+++++ b/zshrc/.zshrc
++@@ -331,4 +331,7 @@ alias tsgo=\"/Users/davidlakubu/Code/typescript-go/built/local/tsgo\"
++ # PMD
++ export PATH=\"$PATH:$HOME/pmd-bin-7.13.0/bin\"
++ 
+++# dotnet ttools
+++export PATH=\"$PATH:$HOME/.dotnet/tools\"
+++
++ export RESEND_API_KEY=$(pass show ApiKeys/RESEND_API_KEY)
++'''
++
++[[messages]]
++role = \"assistant\"
++content = \"\"\"
++feat(helix): disable auto-format for html 
++feat(yabai): update yabai configuration and state 
++feat(yazi): update yazi plugins 
++feat(zshrc): add dotnet tools to path\"\"\"
+diff --git a/smartcat/.config/smartcat/prompts.toml b/smartcat/.config/smartcat/prompts.toml
+new file mode 100644
+index 0000000..8e96969
+--- /dev/null
++++ b/smartcat/.config/smartcat/prompts.toml
+@@ -0,0 +1,65 @@
++
++[default] # a prompt is a section
++api = \"openai\"                          # must refer to an entry in the `.api_configs.toml` file
++model = \"meta-llama/llama-4-scout:free\" # each prompt may define its own model
++
++[[default.messages]] # then you can list messages
++role = \"system\"
++content = \"\"\"\\
++You are an expert programmer and a shell master. You value code efficiency and clarity above all things. \\
++What you write will be piped in and out of cli programs so you do not explain anything unless explicitely asked to. \\
++Never write ``` around your answer, provide only the result of the task you are given. Preserve input formatting.\\
++\"\"\"
++
++[empty] # always nice to have an empty prompt available
++api = \"openai\"
++# not mentioning the model will use the default from the api config
++messages = []
++
++[test]
++api = \"openai\"
++temperature = 0.0
++
++[[test.messages]]
++role = \"system\"
++content = \"\"\"\\
++You are an expert programmer and a shell master. You value code efficiency and clarity above all things. \\
++What you write will be piped in and out of cli programs so you do not explain anything unless explicitely asked to. \\
++Never write ``` around your answer, provide only the result of the task you are given. Preserve input formatting.\\
++\"\"\"
++
++[[test.messages]]
++role = \"user\"
++# the following placeholder string #[<input>] will be replaced by the input
++# each message seeks it and replaces it
++content = '''Write tests using pytest for the following code. Parametrize it if appropriate.
++
++#[<input>]
++'''
++[commit] # a prompt is a section
++api = \"openai\"                          # must refer to an entry in the `.api_configs.toml` file
++model = \"meta-llama/llama-4-scout:free\" # each prompt may define its own model
++
++[[commit.messages]] # then you can list messages
++role = \"system\"
++content = \"\"\"\\
++You are a git master. You generate git commit messages based on the diff given. \\
++What you write will be used as git commit message. \\
++Use commit convetions \\
++<type>[optional scope]: <description>\\
++[optional body]\\
++[optional footer(s)]\\
++Example: \\
++fix: prevent racing of requests\\
++\\
++Introduce a request id and a reference to latest request. Dismiss\\
++incoming responses other than from latest request.\\
++\\
++Remove timeouts which were used to mitigate the racing issue but are\\
++obsolete now.\\
++\\
++Reviewed-by: Z\\
++Refs: #123\\
++\\
++Never write ``` around your answer, provide only the result of the task you are given. Preserve input formatting.\\
++\"\"\"
+diff --git a/yabai/.config/yabai/yabai_state.json b/yabai/.config/yabai/yabai_state.json
+index 3e09d58..275894d 100644
+--- a/yabai/.config/yabai/yabai_state.json
++++ b/yabai/.config/yabai/yabai_state.json
+@@ -1,50 +1,50 @@
+ [{
+-\t\"id\":7,
++\t\"id\":9,
+ \t\"uuid\":\"0CB92712-9E29-4901-B908-FC68CEC52D2C\",
+ \t\"index\":1,
+-\t\"label\":\"terminal\",
+-\t\"type\":\"bsp\",
++\t\"label\":\"main\",
++\t\"type\":\"float\",
+ \t\"display\":1,
+-\t\"windows\":[92448, 118, 169, 444, 8598, 89604, 92307],
+-\t\"first-window\":92448,
+-\t\"last-window\":92448,
++\t\"windows\":[74684, 74634, 281, 5358],
++\t\"first-window\":0,
++\t\"last-window\":0,
+ \t\"has-focus\":false,
+ \t\"is-visible\":false,
+ \t\"is-native-fullscreen\":false
+ },{
+-\t\"id\":8,
++\t\"id\":7,
+ \t\"uuid\":\"6447599E-9348-42E7-B9DB-F95EE4D372E9\",
+ \t\"index\":2,
+-\t\"label\":\"browser\",
++\t\"label\":\"terminal\",
+ \t\"type\":\"stack\",
+ \t\"display\":1,
+-\t\"windows\":[776, 169, 802, 8598, 17445, 54601, 56368],
+-\t\"first-window\":776,
+-\t\"last-window\":776,
++\t\"windows\":[445, 72626, 63053, 15300, 5358, 57370, 72496],
++\t\"first-window\":445,
++\t\"last-window\":445,
+ \t\"has-focus\":true,
+ \t\"is-visible\":true,
+ \t\"is-native-fullscreen\":false
+ },{
+-\t\"id\":6,
++\t\"id\":8,
+ \t\"uuid\":\"20CC89DA-68EF-460C-ADBF-B82517A8863E\",
+ \t\"index\":3,
+-\t\"label\":\"main\",
+-\t\"type\":\"stack\",
++\t\"label\":\"browser\",
++\t\"type\":\"bsp\",
+ \t\"display\":1,
+-\t\"windows\":[276, 169, 297, 8598],
+-\t\"first-window\":276,
+-\t\"last-window\":276,
++\t\"windows\":[5267, 5358, 52611, 55386],
++\t\"first-window\":5267,
++\t\"last-window\":5267,
+ \t\"has-focus\":false,
+ \t\"is-visible\":false,
+ \t\"is-native-fullscreen\":false
+ },{
+-\t\"id\":9,
++\t\"id\":6,
+ \t\"uuid\":\"BA0B6118-9EAC-4BCE-93C6-CC260DA42FA8\",
+ \t\"index\":4,
+ \t\"label\":\"\",
+-\t\"type\":\"float\",
++\t\"type\":\"bsp\",
+ \t\"display\":1,
+-\t\"windows\":[169, 8598],
++\t\"windows\":[5358],
+ \t\"first-window\":0,
+ \t\"last-window\":0,
+ \t\"has-focus\":false,
+@@ -57,33 +57,33 @@
+ \t\"label\":\"\",
+ \t\"type\":\"float\",
+ \t\"display\":1,
+-\t\"windows\":[169, 8598],
++\t\"windows\":[5358],
+ \t\"first-window\":0,
+ \t\"last-window\":0,
+ \t\"has-focus\":false,
+ \t\"is-visible\":false,
+ \t\"is-native-fullscreen\":false
+ },{
+-\t\"id\":12,
++\t\"id\":11,
+ \t\"uuid\":\"68610A2E-F315-424D-86C2-E7A686E26DB3\",
+ \t\"index\":6,
+ \t\"label\":\"\",
+-\t\"type\":\"float\",
++\t\"type\":\"stack\",
+ \t\"display\":1,
+-\t\"windows\":[169, 8598],
++\t\"windows\":[5358],
+ \t\"first-window\":0,
+ \t\"last-window\":0,
+ \t\"has-focus\":false,
+ \t\"is-visible\":false,
+ \t\"is-native-fullscreen\":false
+ },{
+-\t\"id\":13,
++\t\"id\":12,
+ \t\"uuid\":\"D31330A9-6C13-4D1E-972B-D1A9147EAE29\",
+ \t\"index\":7,
+ \t\"label\":\"\",
+ \t\"type\":\"float\",
+ \t\"display\":1,
+-\t\"windows\":[169, 8598],
++\t\"windows\":[5358],
+ \t\"first-window\":0,
+ \t\"last-window\":0,
+ \t\"has-focus\":false,
+@@ -91,10 +91,10 @@
+ \t\"is-native-fullscreen\":false
+ }]
+ [{
+-\t\"id\":776,
+-\t\"pid\":10650,
++\t\"id\":445,
++\t\"pid\":5470,
+ \t\"app\":\"Ghostty\",
+-\t\"title\":\"Zellij (verdant-clarinet) - hx ~/.zshrc\",
++\t\"title\":\"Zellij (rectangular-duck) - htop\",
+ \t\"scratchpad\":\"\",
+ \t\"frame\":{
+ \t\t\"x\":7.0000,
+@@ -114,7 +114,7 @@
+ \t\"opacity\":1.0000,
+ \t\"split-type\":\"none\",
+ \t\"split-child\":\"second_child\",
+-\t\"stack-index\":0,
++\t\"stack-index\":3,
+ \t\"can-move\":true,
+ \t\"can-resize\":true,
+ \t\"has-focus\":true,
+@@ -130,49 +130,49 @@
+ \t\"is-sticky\":false,
+ \t\"is-grabbed\":false
+ },{
+-\t\"id\":92448,
+-\t\"pid\":678,
+-\t\"app\":\"Finder\",
+-\t\"title\":\"zellij\",
++\t\"id\":72626,
++\t\"pid\":40237,
++\t\"app\":\"Numbers\",
++\t\"title\":\"\",
+ \t\"scratchpad\":\"\",
+ \t\"frame\":{
+-\t\t\"x\":7.0000,
+-\t\t\"y\":32.0000,
+-\t\t\"w\":1906.0000,
+-\t\t\"h\":1161.0000
++\t\t\"x\":745.0000,
++\t\t\"y\":449.0000,
++\t\t\"w\":430.0000,
++\t\t\"h\":327.0000
+ \t},
+-\t\"role\":\"AXWindow\",
+-\t\"subrole\":\"AXStandardWindow\",
+-\t\"root-window\":true,
++\t\"role\":\"AXSheet\",
++\t\"subrole\":\"\",
++\t\"root-window\":false,
+ \t\"display\":1,
+-\t\"space\":1,
++\t\"space\":2,
+ \t\"level\":0,
+ \t\"sub-level\":0,
+ \t\"layer\":\"normal\",
+ \t\"sub-layer\":\"normal\",
+ \t\"opacity\":1.0000,
+ \t\"split-type\":\"none\",
+-\t\"split-child\":\"second_child\",
++\t\"split-child\":\"none\",
+ \t\"stack-index\":0,
+ \t\"can-move\":true,
+-\t\"can-resize\":true,
++\t\"can-resize\":false,
+ \t\"has-focus\":false,
+ \t\"has-shadow\":true,
+ \t\"has-parent-zoom\":false,
+ \t\"has-fullscreen-zoom\":false,
+ \t\"has-ax-reference\":true,
+ \t\"is-native-fullscreen\":false,
+-\t\"is-visible\":false,
++\t\"is-visible\":true,
+ \t\"is-minimized\":false,
+ \t\"is-hidden\":false,
+-\t\"is-floating\":false,
++\t\"is-floating\":true,
+ \t\"is-sticky\":false,
+ \t\"is-grabbed\":false
+ },{
+-\t\"id\":118,
+-\t\"pid\":678,
+-\t\"app\":\"Finder\",
+-\t\"title\":\"components\",
++\t\"id\":63053,
++\t\"pid\":40237,
++\t\"app\":\"Numbers\",
++\t\"title\":\"workflow_data.numbers\",
+ \t\"scratchpad\":\"\",
+ \t\"frame\":{
+ \t\t\"x\":7.0000,
+@@ -180,38 +180,38 @@
+ \t\t\"w\":1906.0000,
+ \t\t\"h\":1161.0000
+ \t},
+-\t\"role\":\"\",
+-\t\"subrole\":\"\",
++\t\"role\":\"AXWindow\",
++\t\"subrole\":\"AXStandardWindow\",
+ \t\"root-window\":true,
+ \t\"display\":1,
+-\t\"space\":1,
++\t\"space\":2,
+ \t\"level\":0,
+ \t\"sub-level\":0,
+ \t\"layer\":\"normal\",
+ \t\"sub-layer\":\"normal\",
+ \t\"opacity\":1.0000,
+ \t\"split-type\":\"none\",
+-\t\"split-child\":\"none\",
+-\t\"stack-index\":0,
+-\t\"can-move\":false,
+-\t\"can-resize\":false,
++\t\"split-child\":\"second_child\",
++\t\"stack-index\":1,
++\t\"can-move\":true,
++\t\"can-resize\":true,
+ \t\"has-focus\":false,
+ \t\"has-shadow\":true,
+ \t\"has-parent-zoom\":false,
+ \t\"has-fullscreen-zoom\":false,
+-\t\"has-ax-reference\":false,
++\t\"has-ax-reference\":true,
+ \t\"is-native-fullscreen\":false,
+-\t\"is-visible\":false,
++\t\"is-visible\":true,
+ \t\"is-minimized\":false,
+ \t\"is-hidden\":false,
+ \t\"is-floating\":false,
+ \t\"is-sticky\":false,
+ \t\"is-grabbed\":false
+ },{
+-\t\"id\":276,
+-\t\"pid\":1303,
+-\t\"app\":\"Google Chrome\",
+-\t\"title\":\"yazi.toml | Yazi - Google Chrome – David\",
++\t\"id\":15300,
++\t\"pid\":85958,
++\t\"app\":\"MarkText\",
++\t\"title\":\"report_Goburdhan_Bibi_Shanya_Cafe_Assignment_20250603_081942.md - grading-agents\",
+ \t\"scratchpad\":\"\",
+ \t\"frame\":{
+ \t\t\"x\":7.0000,
+@@ -223,7 +223,7 @@
+ \t\"subrole\":\"AXStandardWindow\",
+ \t\"root-window\":true,
+ \t\"display\":1,
+-\t\"space\":3,
++\t\"space\":2,
+ \t\"level\":0,
+ \t\"sub-level\":0,
+ \t\"layer\":\"normal\",
+@@ -231,7 +231,7 @@
+ \t\"opacity\":1.0000,
+ \t\"split-type\":\"none\",
+ \t\"split-child\":\"second_child\",
+-\t\"stack-index\":0,
++\t\"stack-index\":2,
+ \t\"can-move\":true,
+ \t\"can-resize\":true,
+ \t\"has-focus\":false,
+@@ -240,29 +240,29 @@
+ \t\"has-fullscreen-zoom\":false,
+ \t\"has-ax-reference\":true,
+ \t\"is-native-fullscreen\":false,
+-\t\"is-visible\":false,
++\t\"is-visible\":true,
+ \t\"is-minimized\":false,
+ \t\"is-hidden\":false,
+ \t\"is-floating\":false,
+ \t\"is-sticky\":false,
+ \t\"is-grabbed\":false
+ },{
+-\t\"id\":169,
+-\t\"pid\":705,
+-\t\"app\":\"Shottr\",
+-\t\"title\":\"Shottr\",
++\t\"id\":74684,
++\t\"pid\":28607,
++\t\"app\":\"System Settings\",
++\t\"title\":\"\",
+ \t\"scratchpad\":\"\",
+ \t\"frame\":{
+-\t\t\"x\":542.0000,
+-\t\t\"y\":343.0000,
+-\t\t\"w\":836.0000,
+-\t\t\"h\":470.0000
++\t\t\"x\":768.0000,
++\t\t\"y\":371.0000,
++\t\t\"w\":715.0000,
++\t\t\"h\":485.0000
+ \t},
+ \t\"role\":\"AXWindow\",
+ \t\"subrole\":\"AXStandardWindow\",
+ \t\"root-window\":true,
+ \t\"display\":1,
+-\t\"space\":3,
++\t\"space\":1,
+ \t\"level\":0,
+ \t\"sub-level\":0,
+ \t\"layer\":\"normal\",
+@@ -283,35 +283,35 @@
+ \t\"is-minimized\":false,
+ \t\"is-hidden\":false,
+ \t\"is-floating\":true,
+-\t\"is-sticky\":true,
++\t\"is-sticky\":false,
+ \t\"is-grabbed\":false
+ },{
+-\t\"id\":297,
+-\t\"pid\":1303,
+-\t\"app\":\"Google Chrome\",
+-\t\"title\":\"\",
++\t\"id\":74634,
++\t\"pid\":759,
++\t\"app\":\"Finder\",
++\t\"title\":\"Pictures\",
+ \t\"scratchpad\":\"\",
+ \t\"frame\":{
+-\t\t\"x\":2613.0000,
+-\t\t\"y\":-285.0000,
+-\t\t\"w\":142.0000,
+-\t\t\"h\":19.0000
++\t\t\"x\":75.0000,
++\t\t\"y\":25.0000,
++\t\t\"w\":1614.0000,
++\t\t\"h\":1038.0000
+ \t},
+-\t\"role\":\"AXHelpTag\",
+-\t\"subrole\":\"\",
++\t\"role\":\"AXWindow\",
++\t\"subrole\":\"AXStandardWindow\",
+ \t\"root-window\":true,
+ \t\"display\":1,
+-\t\"space\":3,
+-\t\"level\":103,
++\t\"space\":1,
++\t\"level\":0,
+ \t\"sub-level\":0,
+-\t\"layer\":\"unknown\",
++\t\"layer\":\"normal\",
+ \t\"sub-layer\":\"normal\",
+ \t\"opacity\":1.0000,
+ \t\"split-type\":\"none\",
+ \t\"split-child\":\"none\",
+ \t\"stack-index\":0,
+ \t\"can-move\":true,
+-\t\"can-resize\":false,
++\t\"can-resize\":true,
+ \t\"has-focus\":false,
+ \t\"has-shadow\":true,
+ \t\"has-parent-zoom\":false,
+@@ -321,41 +321,41 @@
+ \t\"is-visible\":false,
+ \t\"is-minimized\":false,
+ \t\"is-hidden\":false,
+-\t\"is-floating\":true,
++\t\"is-floating\":false,
+ \t\"is-sticky\":false,
+ \t\"is-grabbed\":false
+ },{
+-\t\"id\":444,
+-\t\"pid\":4585,
+-\t\"app\":\"fdm\",
+-\t\"title\":\"Free Download Manager\",
++\t\"id\":5267,
++\t\"pid\":67760,
++\t\"app\":\"Google Chrome\",
++\t\"title\":\"Conventional Commits - Google Chrome – David\",
+ \t\"scratchpad\":\"\",
+ \t\"frame\":{
+ \t\t\"x\":7.0000,
+-\t\t\"y\":53.0000,
++\t\t\"y\":32.0000,
+ \t\t\"w\":1906.0000,
+-\t\t\"h\":1147.0000
++\t\t\"h\":1161.0000
+ \t},
+-\t\"role\":\"\",
+-\t\"subrole\":\"\",
++\t\"role\":\"AXWindow\",
++\t\"subrole\":\"AXStandardWindow\",
+ \t\"root-window\":true,
+ \t\"display\":1,
+-\t\"space\":1,
++\t\"space\":3,
+ \t\"level\":0,
+ \t\"sub-level\":0,
+ \t\"layer\":\"normal\",
+ \t\"sub-layer\":\"normal\",
+ \t\"opacity\":1.0000,
+ \t\"split-type\":\"none\",
+-\t\"split-child\":\"none\",
++\t\"split-child\":\"second_child\",
+ \t\"stack-index\":0,
+-\t\"can-move\":false,
+-\t\"can-resize\":false,
++\t\"can-move\":true,
++\t\"can-resize\":true,
+ \t\"has-focus\":false,
+ \t\"has-shadow\":true,
+ \t\"has-parent-zoom\":false,
+ \t\"has-fullscreen-zoom\":false,
+-\t\"has-ax-reference\":false,
++\t\"has-ax-reference\":true,
+ \t\"is-native-fullscreen\":false,
+ \t\"is-visible\":false,
+ \t\"is-minimized\":false,
+@@ -364,22 +364,22 @@
+ \t\"is-sticky\":false,
+ \t\"is-grabbed\":false
+ },{
+-\t\"id\":802,
+-\t\"pid\":11909,
+-\t\"app\":\"kitty\",
+-\t\"title\":\"exit\",
++\t\"id\":281,
++\t\"pid\":2557,
++\t\"app\":\"fdm\",
++\t\"title\":\"Free Download Manager\",
+ \t\"scratchpad\":\"\",
+ \t\"frame\":{
+-\t\t\"x\":964.0000,
+-\t\t\"y\":32.0000,
+-\t\t\"w\":949.0000,
+-\t\t\"h\":1161.0000
++\t\t\"x\":7.0000,
++\t\t\"y\":53.0000,
++\t\t\"w\":1906.0000,
++\t\t\"h\":1147.0000
+ \t},
+ \t\"role\":\"\",
+ \t\"subrole\":\"\",
+ \t\"root-window\":true,
+ \t\"display\":1,
+-\t\"space\":2,
++\t\"space\":1,
+ \t\"level\":0,
+ \t\"sub-level\":0,
+ \t\"layer\":\"normal\",
+@@ -403,16 +403,16 @@
+ \t\"is-sticky\":false,
+ \t\"is-grabbed\":false
+ },{
+-\t\"id\":8598,
+-\t\"pid\":35458,
++\t\"id\":5358,
++\t\"pid\":778,
+ \t\"app\":\"Raycast\",
+ \t\"title\":\"AI Chat\",
+ \t\"scratchpad\":\"\",
+ \t\"frame\":{
+-\t\t\"x\":714.0000,
+-\t\t\"y\":233.0000,
+-\t\t\"w\":1152.0000,
+-\t\t\"h\":705.0000
++\t\t\"x\":1075.0000,
++\t\t\"y\":105.0000,
++\t\t\"w\":819.0000,
++\t\t\"h\":689.0000
+ \t},
+ \t\"role\":\"\",
+ \t\"subrole\":\"\",
+@@ -442,61 +442,22 @@
+ \t\"is-sticky\":true,
+ \t\"is-grabbed\":false
+ },{
+-\t\"id\":17445,
+-\t\"pid\":59943,
+-\t\"app\":\"Loop\",
+-\t\"title\":\"\",
+-\t\"scratchpad\":\"\",
+-\t\"frame\":{
+-\t\t\"x\":374.0000,
+-\t\t\"y\":568.0000,
+-\t\t\"w\":1172.0000,
+-\t\t\"h\":632.0000
+-\t},
+-\t\"role\":\"AXWindow\",
+-\t\"subrole\":\"AXStandardWindow\",
+-\t\"root-window\":true,
+-\t\"display\":1,
+-\t\"space\":2,
+-\t\"level\":0,
+-\t\"sub-level\":0,
+-\t\"layer\":\"normal\",
+-\t\"sub-layer\":\"normal\",
+-\t\"opacity\":1.0000,
+-\t\"split-type\":\"none\",
+-\t\"split-child\":\"none\",
+-\t\"stack-index\":0,
+-\t\"can-move\":true,
+-\t\"can-resize\":false,
+-\t\"has-focus\":false,
+-\t\"has-shadow\":true,
+-\t\"has-parent-zoom\":false,
+-\t\"has-fullscreen-zoom\":false,
+-\t\"has-ax-reference\":true,
+-\t\"is-native-fullscreen\":false,
+-\t\"is-visible\":false,
+-\t\"is-minimized\":false,
+-\t\"is-hidden\":false,
+-\t\"is-floating\":true,
+-\t\"is-sticky\":false,
+-\t\"is-grabbed\":false
+-},{
+-\t\"id\":54601,
+-\t\"pid\":11848,
+-\t\"app\":\"Mail\",
+-\t\"title\":\"All Inboxes – All Mail · 21,177 messages, 6,208 unread\",
++\t\"id\":52611,
++\t\"pid\":67760,
++\t\"app\":\"Google Chrome\",
++\t\"title\":\"Using Multiple EF Core DbContexts In a Single Application - Google Chrome – David\",
+ \t\"scratchpad\":\"\",
+ \t\"frame\":{
+-\t\t\"x\":7.0000,
++\t\t\"x\":964.0000,
+ \t\t\"y\":32.0000,
+-\t\t\"w\":1906.0000,
++\t\t\"w\":949.0000,
+ \t\t\"h\":1161.0000
+ \t},
+ \t\"role\":\"AXWindow\",
+-\t\"subrole\":\"AXDialog\",
++\t\"subrole\":\"AXStandardWindow\",
+ \t\"root-window\":true,
+ \t\"display\":1,
+-\t\"space\":2,
++\t\"space\":3,
+ \t\"level\":0,
+ \t\"sub-level\":0,
+ \t\"layer\":\"normal\",
+@@ -520,10 +481,10 @@
+ \t\"is-sticky\":false,
+ \t\"is-grabbed\":false
+ },{
+-\t\"id\":56368,
+-\t\"pid\":17532,
+-\t\"app\":\"Claude\",
+-\t\"title\":\"Claude\",
++\t\"id\":55386,
++\t\"pid\":76528,
++\t\"app\":\"Preview\",
++\t\"title\":\"Absa_eStatement_Acc_5230_20250602.pdf – 1 page\",
+ \t\"scratchpad\":\"\",
+ \t\"frame\":{
+ \t\t\"x\":7.0000,
+@@ -532,10 +493,10 @@
+ \t\t\"h\":1161.0000
+ \t},
+ \t\"role\":\"AXWindow\",
+-\t\"subrole\":\"AXStandardWindow\",
++\t\"subrole\":\"AXDialog\",
+ \t\"root-window\":true,
+ \t\"display\":1,
+-\t\"space\":2,
++\t\"space\":3,
+ \t\"level\":0,
+ \t\"sub-level\":0,
+ \t\"layer\":\"normal\",
+@@ -559,22 +520,22 @@
+ \t\"is-sticky\":false,
+ \t\"is-grabbed\":false
+ },{
+-\t\"id\":89604,
+-\t\"pid\":678,
+-\t\"app\":\"Finder\",
+-\t\"title\":\"helix\",
++\t\"id\":57370,
++\t\"pid\":85958,
++\t\"app\":\"MarkText\",
++\t\"title\":\"Untitled-1 - MarkText\",
+ \t\"scratchpad\":\"\",
+ \t\"frame\":{
+ \t\t\"x\":7.0000,
+ \t\t\"y\":32.0000,
+-\t\t\"w\":949.0000,
++\t\t\"w\":1906.0000,
+ \t\t\"h\":1161.0000
+ \t},
+ \t\"role\":\"AXWindow\",
+-\t\"subrole\":\"AXDialog\",
++\t\"subrole\":\"AXStandardWindow\",
+ \t\"root-window\":true,
+ \t\"display\":1,
+-\t\"space\":1,
++\t\"space\":2,
+ \t\"level\":0,
+ \t\"sub-level\":0,
+ \t\"layer\":\"normal\",
+@@ -598,22 +559,22 @@
+ \t\"is-sticky\":false,
+ \t\"is-grabbed\":false
+ },{
+-\t\"id\":92307,
+-\t\"pid\":678,
+-\t\"app\":\"Finder\",
+-\t\"title\":\".config\",
++\t\"id\":72496,
++\t\"pid\":5470,
++\t\"app\":\"Ghostty\",
++\t\"title\":\"Zellij (tremendous-crab) - dotconfigs\",
+ \t\"scratchpad\":\"\",
+ \t\"frame\":{
+ \t\t\"x\":7.0000,
+ \t\t\"y\":32.0000,
+-\t\t\"w\":949.0000,
++\t\t\"w\":1906.0000,
+ \t\t\"h\":1161.0000
+ \t},
+ \t\"role\":\"AXWindow\",
+-\t\"subrole\":\"AXDialog\",
++\t\"subrole\":\"AXStandardWindow\",
+ \t\"root-window\":true,
+ \t\"display\":1,
+-\t\"space\":1,
++\t\"space\":2,
+ \t\"level\":0,
+ \t\"sub-level\":0,
+ \t\"layer\":\"normal\",
+diff --git a/yabai/.config/yabai/yabairc b/yabai/.config/yabai/yabairc
+index ebaa5ef..e11b78b 100755
+--- a/yabai/.config/yabai/yabairc
++++ b/yabai/.config/yabai/yabairc
+@@ -39,7 +39,7 @@ yabai -m config active_window_border_color   0xfffcba03
+ yabai -m config normal_window_border_color   0x00FFFFFF   
+ # yabai -m config window_shadow off
+ # set focus follows mouse mode (default: off, options: off, autoraise, autofocus)
+-yabai -m config focus_follows_mouse autofocus\\
++yabai -m config focus_follows_mouse off\\
+ \t\t mouse_follows_focus off
+ 
+ # Disable automatic tiling
+diff --git a/yazi/.DS_Store b/yazi/.DS_Store
+index e2dbaac..1c024b5 100644
+Binary files a/yazi/.DS_Store and b/yazi/.DS_Store differ
+diff --git a/zshrc/.config/aliases.zsh b/zshrc/.config/aliases.zsh
+new file mode 100644
+index 0000000..16a6b55
+--- /dev/null
++++ b/zshrc/.config/aliases.zsh
+@@ -0,0 +1,67 @@
++alias zshconfig=\"hx ~/.zshrc\"
++alias mtmrconfig=\"hx ~/Library/Application\\ Support/MTMR/items.json\"
++alias zd=zed
++alias f=fuck
++alias c=code
++alias air='~/go/bin/air'
++# Eza and zoxide
++alias ls=\"eza --icons=always --all\"
++alias cd=z
++#pip
++alias python=\"python3\"
++alias clr=\"clear && exec zsh\"
++alias pmd=\"$HOME/pmd-bin-7.13.0/bin/pmd\"
++
++
++# Ollama aliases
++function mistral(){
++\tclear && tgpt --provider ollama --model mistral -i
++}
++
++function llama3-1(){
++\tclear && tgpt --provider ollama --model llama3.1 -i
++}
++# function codellama(){
++# \tclear && tgpt --provider ollama --model codellama -i
++# }
++function granitecode(){
++\tclear && tgpt --provider ollama --model granite-code:3b -i
++}
++function phi3(){
++\tclear && tgpt --provider ollama --model phi3:mini -i
++}
++function smollm(){
++\tclear && tgpt --provider ollama --model smollm:1.7b -i
++}
++function phi3-5(){
++\tclear && tgpt --provider ollama --model phi3.5:latest -i
++}
++
++
++psay() {
++\t# Check if a text argument was provided
++if [ -z \"$1\" ]; then
++  echo \"Usage: $0 'text to speak'\"
++\treturn
++fi
++
++# PSAY_MODEL=\"en_US-libritts-high\"
++PSAY_SPEAKER=\"0\"
++PSAY_MODEL=\"en_GB-alba-medium\"
++# PSAY_MODEL=\"en_GB-cori-high.onnx\"
++# Combine all input arguments into a single string
++\tTEXT=\"$*\"
++\t# Define the temporary wav file
++TEMP_WAV_FILE=\"$PIPER_DATA/tmp_say.wav\"
++
++# Call piper-tts with the input text and output to a wav file
++echo \"$TEXT\" | piper \\
++\t--model $PSAY_MODEL \\
++\t--speak $PSAY_SPEAKER \\
++\t--output-file $TEMP_WAV_FILE \\
++\t>/dev/null 2>&1
++# Play the wav file using afplay
++afplay \"$TEMP_WAV_FILE\" 
++# Clean up by removing the wav file
++rm \"$TEMP_WAV_FILE\" >/dev/null 2>&1
++}
+diff --git a/zshrc/.zshrc b/zshrc/.zshrc
+index 200daca..79cd698 100644
+--- a/zshrc/.zshrc
++++ b/zshrc/.zshrc
+@@ -331,4 +331,7 @@ alias tsgo=\"/Users/davidlakubu/Code/typescript-go/built/local/tsgo\"
+ # PMD
+ export PATH=\"$PATH:$HOME/pmd-bin-7.13.0/bin\"
+ 
++# dotnet ttools
++export PATH=\"$PATH:$HOME/.dotnet/tools\"
++
+ export RESEND_API_KEY=$(pass show ApiKeys/RESEND_API_KEY)
+"""
+
+[[messages]]
+role = "assistant"
+content = """
+feat(helix): disable auto-format for html 
+feat(yabai): update yabai configuration and state 
+feat(yazi): update yazi plugins 
+feat(zshrc): add dotnet tools to path 
+fix(ghostty): add config 
+fix(smartcat): add api configs and prompts 
+fix(yabai): update yabai config"""

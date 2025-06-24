@@ -1,0 +1,5 @@
+{
+    "plugins": [
+        "@bgotink/prettier-plugin-kdl"
+    ]
+}

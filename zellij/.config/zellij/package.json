@@ -1,0 +1,7 @@
+{
+  "name": "zellij",
+  "version": "1.0.0",
+  "dependencies": {
+    "@bgotink/prettier-plugin-kdl": "^0.1.3"
+  }
+}

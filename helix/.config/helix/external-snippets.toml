@@ -1,0 +1,37 @@
+[[sources]] # list of sources to load
+name = "friendly-snippets"                                  # optional name shown on snippet description
+git = "https://github.com/rafamadriz/friendly-snippets.git" # git repo with snippets collections
+
+[[sources.paths]] # list of paths to load on current source
+scope = ["javascript"]       # optional scopes for current snippets
+path = "snippets/javascript" # where snippet file or dir located in repo
+[[sources.paths]] # list of paths to load on current source
+scope = ["c-sharp"]                  # optional scopes for current snippets
+path = "snippets/csharp/csharp.json" # where snippet file or dir located in repo
+[[sources.paths]] # list of paths to load on current source
+scope = ["go"]            # optional scopes for current snippets
+path = "snippets/go.json" # where snippet file or dir located in repo:w
+[[sources.paths]]
+path = "snippets/global.json"
+[[sources.paths]]
+path = "snippets/license.json"
+[[sources.paths]] # list of paths to load on current source
+scope = ["vue"]                  # optional scopes for current snippets
+path = "snippets/frameworks/vue" # where snippet file or dir located in repo
+[[sources.paths]]
+scope = ["sql"]
+path = "snippets/sql.json"
+[[sources.paths]]
+scope = ["lua"]
+path = "snippets/lua"
+[[sources.paths]]
+scope = ["python"]
+path = "snippets/python"
+[[sources.paths]]
+scope = ["php"]
+path = "snippets/php"
+[[sources.paths]]
+scope = ["java"]
+path = "snippets/java"
+[[sources.paths]]
+path = "snippets/global.json"

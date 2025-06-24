@@ -1,0 +1,15 @@
+layout {
+  pane
+}
+
+ui {
+  pane_frames = false
+  theme = "default"
+
+  status_bar {
+    enabled = true
+    position = "top"
+    mode = "session"
+    components = ["pane_name"]
+  }
+}

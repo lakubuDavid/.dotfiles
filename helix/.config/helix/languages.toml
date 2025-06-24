@@ -1,0 +1,303 @@
+[language-server]
+emmet-ls = { command = "emmet-ls", args = ["--stdio"] }
+taplo-lsp = { command = "taplo", args = ["lsp", "stdio"] }
+sql-language-server = { command = "sql-language-server", args = [
+  "up",
+  "--method",
+  "stdio",
+] }
+# gpt = { command = "bun", args = ["run", "~/bun/helix-gpt.js"] }
+gpt = { command = "helix-gpt" }
+omnisharp = { command = "omnisharp", args = ["--languageserver"] }
+templ-lsp = { command = "templ", args = ["lsp"] }
+teal-lsp = { command = "teal-language-server", args = ["--verbose=true"] }
+
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
+[language-server.pyright]
+command = "pyright-langserver"
+args = ["--stdio"]
+
+[language-server.pyright.config]
+python.analysis.venvPath = "."
+python.analysis.venv = ".venv"
+python.analysis.lint = true
+python.analysis.inlayHint.enable = true
+python.analysis.autoSearchPaths = true
+python.analysis.diagnosticMode = "workspace"
+python.analysis.useLibraryCodeForType = true
+python.analysis.logLevel = "Error"
+python.analysis.typeCheckingMode = "off"
+python.analysis.autoImoprtCompletion = true
+python.analysis.reportOptionalSubscript = false
+python.analysis.reportOptionalMemberAccess = false
+[language-server.lsp-ai]
+command = "lsp-ai"
+
+[language-server.lsp-ai.config.memory]
+file_store = {}
+
+[language-server.lsp-ai.config.models.model1]
+type = "ollama"
+model = "smollm:mini"
+max_requests_per_second = 1
+
+[language-server.lsp-ai.config.completion]
+model = "model1"
+
+[language-server.lsp-ai.config.completion.parameters]
+# max_tokens = 32
+max_context = 2000
+
+[language-server.lsp-ai.config.completion.parameters.options]
+num_predict = 32
+# introduce new language server
+[language-server.scls]
+command = "simple-completion-language-server"
+
+[language-server.scls.config]
+max_completion_items = 20    # set max completion results len for each group: words, snippets, unicode-input
+snippets_first = true        # completions will return before snippets by default
+feature_words = true         # enable completion by word
+feature_snippets = true      # enable snippets
+feature_unicode_input = true # enable "unicode input"
+feature_paths = true         # enable path completion
+
+
+# write logs to /tmp/completion.log
+[language-server.scls.environment]
+RUST_LOG = "info,simple-completion-language-server=info"
+LOG_FILE = "/tmp/completion.log"
+
+[language-server.typescript-language-server.config]
+plugins = [
+  { name = "@vue/typescript-plugin", location = "/usr/local/lib/node_modules/@vue/language-server", languages = [
+    "vue",
+  ] },
+]
+
+tsserver = { path = "./node_modules/typescript/lib" }
+typescript = { tsdk = "./node_modules/typescript/lib" }
+[language-server.godot]
+command = "nc"
+args = ["127.0.0.1", "6005"]
+
+[[language]]
+name = "csv"
+file-types = ["csv"]
+scope = "source.csv"
+
+[[grammar]]
+name = "csv"
+source.git = "https://github.com/weartist/rainbow-csv-tree-sitter"
+source.rev = "896e6d09b23a1b0d87e45bf97ca34a249f41495c"
+[[grammar]]
+name = "teal"
+source.git = "https://github.com/euclidianAce/tree-sitter-teal"
+source.rev = "78aebca8ad05017bbb08fd5257e1f3461fdb2d6f"
+[[language]]
+name = "templ"
+auto-format = true
+scope = "source.templ"
+injection-regex = "templ"
+grammar = "templ"
+file-types = ["templ"]
+roots = ["go.sum"]
+# comment-tokens = ["//"]
+indent = { tab-width = 4, unit = "\t" }
+language-servers = ["templ", "scls"]
+formatter = { command = "templ", args = ["fmt"] }
+[[language]]
+name = "python"
+scope = "source.python"
+injection-regex = "python"
+file-types = [
+  "py",
+  "pyi",
+  "py3",
+  "pyw",
+  "ptl",
+  "rpy",
+  "cpy",
+  "ipy",
+  "pyt",
+  { glob = ".python_history" },
+  { glob = ".pythonstartup" },
+  { glob = ".pythonrc" },
+  { glob = "SConstruct" },
+  { glob = "SConscript" },
+]
+shebangs = ["python"]
+roots = [
+  "pyproject.toml",
+  "setup.py",
+  "poetry.lock",
+  "pyrightconfig.json",
+  "requirements.txt",
+  ".venv/",
+]
+comment-token = "#"
+language-servers = [
+  "ruff",
+  "jedi",
+  { name = "pyright", except-features = [
+    "diagnostics",
+  ] },
+]
+auto-format = true
+
+[[language]]
+name = "gdscript"
+language-servers = ["godot"]
+
+[[language]]
+name = "go"
+auto-format = true
+formatter = { command = "goimports" }
+
+[[language]]
+name = "toml"
+auto-format = true
+# language-servers = ["scls", "taplo-lsp", "gpt"]
+formatter = { command = "taplo", args = ["fmt", "-"], formatStdin = true }
+
+[[language]]
+name = "json"
+formatter = { command = "jq", args = ["--indent", "2"], formatStdin = true }
+
+[[language]]
+name = "javascript"
+formatter = { command = "prettier", args = [
+  "--parser",
+  "typescript",
+], formatStdin = true }
+# language-servers = ["typescript-language-server", "gpt"]
+
+[[language]]
+name = "typescript"
+formatter = { command = "prettier", args = [
+  "--parser",
+  "typescript",
+], formatStdin = true }
+# language-servers = ["typescript-language-server", "gpt"]
+
+[language-server.volar]
+command = "vue-language-server"
+args = ["--stdio"]
+
+[language-server.volar.config]
+typescript = { tsdk = "./node_modules/typescript/lib" }
+vue = { hybridMode = false }
+# typescript = { tsdk = "" }
+
+[language-server.coffee]
+command = "coffeesense-language-server"
+args = ["--stdio"]
+
+[[language]]
+name = "vue"
+auto-format = true
+scope = "source.vue"
+injection-regex = "vue"
+file-types = ["vue"]
+# language-servers = ["volar", "typescript-language-server", "emmet-ls", "scls"]
+language-servers = ["typescript-language-server", "emmet-ls", "scls"]
+formatter = { command = 'prettier', args = ["--parser", "vue"] }
+roots = [
+  "package.json",
+  "vue.config.js",
+  "vite.config.js",
+  "nuxt.config.js",
+  ".prettierrc",
+  ".prettierrc.js",
+  ".prettierrc.json",
+  ".prettierrc.yaml",
+  ".prettierrc.yml",
+  ".prettierrc.toml",
+  ".prettierrc.cjs",
+]
+[[language]]
+name = "lua"
+injection-regex = "lua"
+scope = "source.lua"
+file-types = ["lua"]
+shebangs = ["lua", "luajit"]
+roots = [".luarc.json", ".luacheckrc", ".stylua.toml", "selene.toml", ".git"]
+# comment-tokens = "--"
+# block-comment-tokens = { start = "--[[", end = "--]]" }
+indent = { tab-width = 2, unit = "  " }
+language-servers = ["lua-language-server"]
+[[language]]
+name = "html"
+scope = "text.html.basic"
+injection-regex = "html"
+file-types = [
+  "html",
+  "htm",
+  "shtml",
+  "xhtml",
+  "xht",
+  "jsp",
+  "asp",
+  "aspx",
+  "jshtm",
+  "volt",
+  "rhtml",
+  "cshtml",
+]
+# block-comment-tokens = { start = "<!--", end = "-->" }
+language-servers = ["vscode-html-language-server", "superhtml", "emmet-ls"]
+auto-format = false
+indent = { tab-width = 2, unit = "  " }
+# [[language]]
+# name = "teal"
+# scope = "source.teal"
+# file-types = ["tl"]
+# shebangs = ["teal"]
+# roots = ["tlconfig.lua"]
+# comment-tokens = "--"
+# block-comment-tokens = { start = "--[[", end = "--]]" }
+# indent = { tab-width = 2, unit = "  " }
+# language-servers = ["teal-lsp", "scls"]
+[[language]]
+name = "sql"
+language-servers = ["sql-language-server"]
+formatter = { command = "sql-formatter", formatStdin = true }
+[[language]]
+name = "c-sharp"
+scope = "source.csharp"
+injection-regex = "c-sharp"
+file-types = ["cs", "csx", "cake"]
+roots = ["sln", "csproj"]
+# comment-tokens = "//"
+# block-comment-tokens = { start = "/*", end = "*/" }
+indent = { tab-width = 4, unit = "\t" }
+# language-servers = ["omnisharp", "scls"]
+language-servers = ["csharp-ls", "scls"]
+# language-servers = ["omnisharp"]
+[[language]]
+name = "git-commit"
+language-servers = ["scls"]
+
+# etc..
+
+# introduce a new language to enable completion on any doc by forcing set language with :set-language stub
+[[language]]
+name = "stub"
+scope = "text.stub"
+file-types = []
+shebangs = []
+roots = []
+auto-format = false
+language-servers = ["scls"]
+
+[[language]]
+name = "coffeescript"
+scope = "source.coffee"
+injection-regex = "(coffee|coffeescript)"
+file-types = ["coffee"]
+shebangs = []
+roots = []
+language-servers = ["coffee", "scls"]
+indent = { tab-width = 2, unit = " " }

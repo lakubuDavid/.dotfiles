@@ -1,0 +1,17 @@
+[http]
+	postBuffer = 524288000
+	version = HTTP/1.1
+	maxRequestBuffer = 524288000
+[user]
+	email = Lakubudavid@gmail.com
+	name = lakubuDavid
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[core]
+	compression = 0
+	autocrlf = input
+[init]
+	defaultBranch = main

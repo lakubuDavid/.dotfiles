@@ -1,0 +1,39 @@
+
+inherits = "catppuccin_frappe"
+
+"ui.background" = { fg = "#c6d0f5" }
+
+"ui.statusline" = { fg = "statuslineFg" }
+
+"ui.statusline.normal" = { fg = "white" }
+"ui.statusline.insert" = { fg = "statusModeInsertFg" }
+"ui.statusline.select" = { fg = "light-red" }
+"ui.statusline.separator" = { fg = "light-gray" }
+
+"ui.bufferline.background" = {}
+"ui.bufferline" = { fg = "#a5adce", modifiers = ["dim"] }
+"ui.bufferline.active" = { fg = "#ca9ee6", modifiers = ["bold"] }
+
+"ui.linenr" = { fg = "#626880" }
+"ui.virtual.inlay-hint" = { fg = "#626880" }
+
+"keyword" = { fg = "mauve", modifiers = ["italic"] }
+
+"variable.builtin" = { fg = "red", modifiers = ["italic"] }
+
+"string" = { fg = "green", modifiers = ["italic"] }
+[palette]
+# typeFg = "#eeaa33"
+# builtin-constant = "#ff7788"
+# stringFg = "#ffaa88"
+# green = "#22aa77"
+# commentFg = "#999999"
+# light-magenta = "#cc77cc"
+# light-gray = "#cccccc"
+# constantFg = "#ffcc66"
+# variableFg = "#77bbcc"
+# memberFg = "#ffaabb"
+# parameterFg = "#ffdddd"
+statuslineBg = "#282C3C11"
+statusModeInsertFg = "#8caaee"
+statuslineFg = "#c6d0f5"

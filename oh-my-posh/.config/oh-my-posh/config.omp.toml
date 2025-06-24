@@ -1,0 +1,199 @@
+console_title_template = '{{.Folder}}{{if .Root}} :: root{{end}} :: {{.Shell}}'
+version = 3
+final_space = true
+
+[palette]
+base = '#303446'
+blue = '#8caaee'
+flamingo = '#eebebe'
+green = '#a6d189'
+grey = '#999'
+lavender = '#babbf1'
+mantle = '#292c3c'
+maroon = '#ea999c'
+mauve = '#ca9ee6'
+overlay0 = '#737994'
+overlay1 = '#838ba7'
+overlay2 = '#949cbb'
+peach = '#ef9f76'
+pink = '#f4b8e4'
+red = '#e78284'
+rosewater = '#f2d5cf'
+sapphire = '#85c1dc'
+sky = '#99d1db'
+subtext0 = '#a5adce'
+subtext1 = '#b5bfe2'
+surface0 = '#414559'
+surface1 = '#51576d'
+surface2 = '#626880'
+teal = '#81c8be'
+text = '#c6d0f5'
+yellow = '#e5c890'
+
+[secondary_prompt]
+template = ' ❯❯ '
+foreground = 'p:flamingo'
+background = 'transparent'
+
+[transient_prompt]
+template = '{{if eq .Code 0}} ❯ {{else}}<#e78284> ❯</> {{end}}'
+foreground = 'p:green'
+background = 'transparent'
+
+[[blocks]]
+type = 'prompt'
+alignment = 'left'
+
+# [[blocks.segments]]
+#   template = '<b>╭╴</b>'
+#   foreground = 'p:overlay2'
+#   type = 'text'
+#   style = 'plain'
+
+#   [blocks.segments.properties]
+#     cache_duration = 'none'
+
+[[blocks.segments]]
+template = '{{.Icon}}'
+foreground = 'p:text'
+background = 'transparent'
+type = 'os'
+style = 'plain'
+
+[blocks.segments.properties]
+cache_duration = 'none'
+
+[[blocks.segments]]
+template = ' {{ .UserName }}'
+foreground = 'p:blue'
+type = 'session'
+style = 'plain'
+
+[blocks.segments.properties]
+cache_duration = 'none'
+
+[[blocks.segments]]
+template = '<#ffffff> on </>{{ .Shell }} '
+foreground = 'p:subtext0'
+type = 'session'
+style = 'plain'
+
+[[blocks.segments]]
+template = '<#ffffff>in</> {{ .Path }} '
+foreground = 'p:lavender'
+type = 'path'
+style = 'plain'
+
+[blocks.segments.properties]
+cache_duration = 'none'
+style = 'folder'
+
+[[blocks.segments]]
+template = '<#ffffff>on</> {{ .HEAD }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }} '
+foreground = 'p:sapphire'
+type = 'git'
+style = 'plain'
+
+[blocks.segments.properties]
+branch_icon = ' <b> </b>'
+cache_duration = 'none'
+fetch_stash_count = true
+
+[[blocks]]
+type = 'rprompt'
+alignment = 'right'
+newline = true
+
+[[blocks.segments]]
+template = ' <b></b> {{ .Full }} '
+foreground = 'p:sky'
+background = 'transparent'
+type = 'go'
+style = 'plain'
+
+[blocks.segments.properties]
+cache_duration = 'none'
+
+[[blocks.segments]]
+alias = 'Node'
+template = '{{if .Segments.Bun }}{{else}}  {{ .Full }}{{end}}'
+foreground = 'p:green'
+background = 'transparent'
+type = 'node'
+style = 'plain'
+
+[blocks.segments.properties]
+cache_duration = 'none'
+
+[[blocks.segments]]
+alias = 'Bun'
+template = ' bun {{ .Full }} '
+foreground = 'p:yellow'
+type = 'bun'
+style = 'plain'
+
+[blocks.segments.properties]
+cache_duration = 'none'
+
+[[blocks.segments]]
+template = '{{ if glob "*.lua" }}  {{ .Full }} {{end}}'
+foreground = 'p:blue'
+background = 'transparent'
+type = 'lua'
+style = 'plain'
+
+[blocks.segments.properties]
+cache_duration = 'none'
+display_mode = 'files'
+home_enabled = true
+
+[[blocks.segments]]
+template = '{{ if glob "*.py" }}  {{ .Full }} {{ end }}'
+foreground = 'p:blue'
+background = 'transparent'
+type = 'python'
+style = 'plain'
+
+[blocks.segments.properties]
+cache_duration = 'none'
+
+[[blocks.segments]]
+template = ' {{ .FormattedMs }} '
+foreground = 'p:yellow'
+background = 'transparent'
+type = 'executiontime'
+style = 'plain'
+
+[blocks.segments.properties]
+always_enabled = true
+cache_duration = 'none'
+style = 'austin'
+threshold = 500
+[[blocks.segments]]
+type = "upgrade"
+style = "plain"
+foreground = "#FFD664"
+
+[blocks.segments.properties]
+cache_duration = "168h"
+[[blocks]]
+type = 'prompt'
+alignment = 'left'
+
+# [[blocks.segments]]
+#   template = '<b>╰</b>'
+#   foreground = 'p:overlay2'
+#   type = 'text'
+#   style = 'plain'
+
+#   [blocks.segments.properties]
+#     cache_duration = 'none'
+
+[[blocks.segments]]
+template = '❯'
+foreground = 'p:flamingo'
+type = 'text'
+style = 'plain'
+
+[blocks.segments.properties]
+cache_duration = 'none'

@@ -1,0 +1,38 @@
+[flavor]
+use = "onedark"
+[manager]
+show_hidden = true
+mouse_events = ["click", "scroll", "touch"]
+[[manager.prepend_keymap]]
+on = ["f", "g"]
+run = "plugin fg"
+desc = "find file by content (fuzzy match)"
+[[manager.prepend_keymap]]
+on = ["f", "G"]
+run = "plugin fg --args='rg'"
+desc = "find file by content (ripgrep match)"
+[[manager.prepend_keymap]]
+on = ["f", "f"]
+run = "plugin fg --args='fzf'"
+desc = "find file by filename"
+[opener]
+edit = [{ run = 'hx "$@"', block = true }]
+play = [{ run = 'mpv "$@"', orphan = true, for = "unix" }]
+open = [{ run = 'xdg-open "$@"', desc = "Open" }]
+glow = [{ run = 'glow "$@" -p && clear', block = true, desc = "Open Markdown" }]
+
+[open]
+prepend_rules = [
+  # Multiple openers for a single rule
+  { name = "*.md", use = ["glow"] },
+]
+
+append_rules = [
+  { mime = "text/*", use = "edit" },
+  { name = "*", use = [
+    "open",
+  ] },
+]
+
+[plugin]
+prepend_previewers = [{ name = "*.md", run = "glow" }]
