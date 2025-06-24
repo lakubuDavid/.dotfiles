@@ -69,6 +69,7 @@ rm "$TEMP_WAV_FILE" >/dev/null 2>&1
 # Git Aliases
 alias gs="git status --short"
 alias ga="git add"
+alias gaa="git add ."
 alias gc="git commit"
 
 alias gp="git push"
@@ -77,4 +78,6 @@ alias gu="git pull"
 alias gi="git init"
 alias gcl="git clone"
 
-alias gd="gi diff"
+alias gd="git diff"
+
+alias gl="git log --all --graph --pretty=format:'%C(magenta)%h %C(white) %an %ar%C(auto) %D%n%s%n'"

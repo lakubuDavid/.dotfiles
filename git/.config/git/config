@@ -21,11 +21,39 @@
 [status]
 	branch = true
 	showStash = true
-	
+	showUntrackedFiles = all
 
-[url "git@github.com:lakubudavid/"]
+[diff]
+	context = 3
+	renames = copies
+	interHunkContext = 10
+
+[color "diff"]
+	meta = white bold
+	frag = magenta
+	context = white
+	whitespace = yellow reverse
+	old = red
+
+[push]
+	autoRemote = true
+	default = current
+	followTags = true
+
+[pull]
+	default = true
+	rebase = true
+
+[rebase]
+	autoStash = true
+	missingCommitsCheck = warn
+
+[pager]
+	diff = delta --diff-so-fancy
+
+[url "https://github.com/lakubudavid/"]
 	insteadOf = ld:
-[url "git@github.com:Solution-Inc/"]
+[url "https://github.com/Solution-Inc/"]
 	insteadOf = solution:
-[url "git@github.com:"]
+[url "https://github.com/"]
 	insteadOf = gh:
