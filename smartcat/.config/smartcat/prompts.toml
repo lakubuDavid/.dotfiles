@@ -37,8 +37,8 @@ content = '''Write tests using pytest for the following code. Parametrize it if 
 #[<input>]
 '''
 [commit] # a prompt is a section
-api = "openai"                          # must refer to an entry in the `.api_configs.toml` file
-model = "meta-llama/llama-4-scout:free" # each prompt may define its own model
+api = "openai"                             # must refer to an entry in the `.api_configs.toml` file
+model = "meta-llama/llama-4-maverick:free" # each prompt may define its own model
 # api = "cerebras"                          # must refer to an entry in the `.api_configs.toml` file
 # model = "llama-4-scout-17b-16e-instruct	" # each prompt may define its own model
 

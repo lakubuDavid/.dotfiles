@@ -5,6 +5,9 @@
 [user]
 	email = lakubudavid@gmail.com
 	name = lakubuDavid
+	signingkey = E3D9744DB1E721B7CA7E1B706BFDD5E4105B649E
+[commit]
+	gpgSign = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -34,7 +37,16 @@
 	context = white
 	whitespace = yellow reverse
 	old = red
+[color "decorate"]
+	HEAD = green
+	branch = blue
+	tag = yellow
+	remoteBranch = magenta
 
+[log]
+	abbrevCommitt = true
+	graphColors = blue,yellow,cyan,magenta,green,red
+	
 [push]
 	autoRemote = true
 	default = current
