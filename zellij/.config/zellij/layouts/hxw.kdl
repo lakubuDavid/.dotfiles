@@ -1,14 +1,16 @@
 layout {
   default_tab_template {
-    pane split_direction="vertical" {
+    pane split_direction="vertical"{
+      pane split_direction="horizontal" {
         pane name="editor" command="zsh" {
           args "-i" "-c" "hx" 
         }
-        pane name="files" size="25%" command="zsh" {
-            args "-i" "-c" "bt" "."
-        }
+        pane size="16%" name="terminal"
+      }
+      pane name="files" size="25%" command="zsh" {
+        args "-i" "-c" "bt" "."
+      }
     }
-    pane size="20%" name="terminal"
     pane size=3 borderless=true {
       plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
         format_left "#[fg=#babbf1,bold] {session} {mode}#[fg=#282828] #[fg=#babbf1,bold] {tabs} "

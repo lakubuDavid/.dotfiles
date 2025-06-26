@@ -5,7 +5,7 @@
 [user]
 	email = lakubudavid@gmail.com
 	name = lakubuDavid
-	signingkey = E3D9744DB1E721B7CA7E1B706BFDD5E4105B649E
+	signingkey = BE9B241F43F7085A
 [commit]
 	gpgSign = true
 [filter "lfs"]
@@ -14,6 +14,7 @@
 	process = git-lfs filter-process
 	required = true
 [core]
+    pager = delta
 	compression = 9
 	autocrlf = input
 	whitespace = error
@@ -62,6 +63,7 @@
 
 [pager]
 	diff = delta --diff-so-fancy
+	blame = delta
 
 [url "https://github.com/lakubudavid/"]
 	insteadOf = ld:
@@ -69,3 +71,15 @@
 	insteadOf = solution:
 [url "https://github.com/"]
 	insteadOf = gh:
+
+[delta]
+	line-numbers = true
+	side-by-side = true
+    navigate = true  # use n and N to move between diff sections
+    dark = true      # or light = true, or omit for auto-detection
+
+[interactive]
+    diffFilter = delta --color-only
+
+[merge]
+    conflictstyle = zdiff3    
