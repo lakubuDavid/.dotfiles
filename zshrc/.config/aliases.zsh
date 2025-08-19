@@ -12,6 +12,7 @@ alias python="python3"
 alias clr="clear && exec zsh"
 alias pmd="$HOME/pmd-bin-7.13.0/bin/pmd"
 
+alias zhx="zewrap hx"
 
 # Ollama aliases
 function mistral(){

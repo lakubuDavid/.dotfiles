@@ -1,0 +1,10 @@
+{
+  "checkpointing": {
+    "enabled": true
+  },
+  "contextFileName": "AGENTS.md",
+  "autoAccept": false,
+  "theme": "Default",
+  "selectedAuthType": "oauth-personal",
+  "preferredEditor": "zed"
+}

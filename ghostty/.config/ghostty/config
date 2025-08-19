@@ -47,3 +47,4 @@ macos-option-as-alt = true
 macos-window-shadow = false
 
 auto-update = check
+keybind = shift+enter=text:\n

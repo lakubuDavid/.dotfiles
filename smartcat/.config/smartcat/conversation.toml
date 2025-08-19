@@ -8,72 +8,161 @@ content = "You are a git master. You generate git commit messages based on the d
 [[messages]]
 role = "user"
 content = """
-diff --git a/yabai/.config/yabai/yabai_state.json b/yabai/.config/yabai/yabai_state.json
-index c228db2..ff46b08 100644
---- a/yabai/.config/yabai/yabai_state.json
-+++ b/yabai/.config/yabai/yabai_state.json
-@@ -16,7 +16,7 @@
- \t\"uuid\":\"3C63CA7A-05F5-4CCD-AC72-260233FCDC32\",
- \t\"index\":2,
- \t\"label\":\"terminal\",
--\t\"type\":\"stack\",
-+\t\"type\":\"bsp\",
- \t\"display\":1,
- \t\"windows\":[6752, 1675, 9172, 1354, 2415, 3195, 9151, 9276, 9469, 11365],
- \t\"first-window\":1675,
-@@ -104,7 +104,7 @@
- \t\"stack-index\":0,
- \t\"can-move\":true,
- \t\"can-resize\":true,
--\t\"has-focus\":false,
-+\t\"has-focus\":true,
- \t\"has-shadow\":true,
- \t\"has-parent-zoom\":false,
- \t\"has-fullscreen-zoom\":false,
-@@ -159,7 +159,7 @@
- \t\"id\":1406,
- \t\"pid\":18580,
- \t\"app\":\"zen\",
--\t\"title\":\"ubuy - Google Search\",
-+\t\"title\":\"Generating a new GPG key - GitHub Docs\",
- \t\"scratchpad\":\"\",
- \t\"frame\":{
- \t\t\"x\":0.0000,
-@@ -884,7 +884,7 @@
- \t\"stack-index\":0,
- \t\"can-move\":true,
- \t\"can-resize\":true,
--\t\"has-focus\":true,
-+\t\"has-focus\":false,
- \t\"has-shadow\":true,
- \t\"has-parent-zoom\":false,
- \t\"has-fullscreen-zoom\":false,
-diff --git a/yazi/.config/yazi/flavors/onedark.yazi b/yazi/.config/yazi/flavors/onedark.yazi
---- a/yazi/.config/yazi/flavors/onedark.yazi
-+++ b/yazi/.config/yazi/flavors/onedark.yazi
-@@ -1 +1 @@
--Subproject commit fa1da70556a5654f5d40d063a95e55ecc63b3ef7
-+Subproject commit fa1da70556a5654f5d40d063a95e55ecc63b3ef7-dirty
-diff --git a/yazi/.config/yazi/plugins/command.yazi b/yazi/.config/yazi/plugins/command.yazi
---- a/yazi/.config/yazi/plugins/command.yazi
-+++ b/yazi/.config/yazi/plugins/command.yazi
-@@ -1 +1 @@
--Subproject commit 369bdc5089ee4ad1b272d45282acd234ad6e3e38
-+Subproject commit 369bdc5089ee4ad1b272d45282acd234ad6e3e38-dirty
-diff --git a/yazi/.config/yazi/plugins/fg.yazi b/yazi/.config/yazi/plugins/fg.yazi
---- a/yazi/.config/yazi/plugins/fg.yazi
-+++ b/yazi/.config/yazi/plugins/fg.yazi
-@@ -1 +1 @@
--Subproject commit f7d41ae71249515763d9ee04ddf4bdc3b0b42f55
-+Subproject commit f7d41ae71249515763d9ee04ddf4bdc3b0b42f55-dirty
-diff --git a/yazi/.config/yazi/plugins/glow.yazi b/yazi/.config/yazi/plugins/glow.yazi
---- a/yazi/.config/yazi/plugins/glow.yazi
-+++ b/yazi/.config/yazi/plugins/glow.yazi
-@@ -1 +1 @@
--Subproject commit 536185a4e60ac0adc11d238881e78678fdf084ff
-+Subproject commit 536185a4e60ac0adc11d238881e78678fdf084ff-dirty
+:000000 100644 0000000 13b5cba A\t.idea/rcb-settings.xml
+:100644 100644 0937a0b 6c702f7 M\t.ignore
+:000000 100644 0000000 010699c A\tAGENTS.md
+:000000 100644 0000000 d519a18 A\tapi/.idea/.idea.HelpDesk.dir/.idea/dataSources.xml
+:100644 100644 0937a0b 6c702f7 C099\t.ignore\tapi/.ignore
+:100644 100644 d897868 69ac659 M\tapi/ApplicationDbContext.cs
+:000000 100644 0000000 5fa17fa A\tapi/Controllers/AdminClientController.cs
+:100644 100644 96427ed 73b302f M\tapi/Controllers/AdminController.cs
+:000000 100644 0000000 f34b9f7 A\tapi/Controllers/AdminProductController.cs
+:000000 100644 0000000 33dd9bd A\tapi/Controllers/AdminSlaController.cs
+:000000 100644 0000000 011697a A\tapi/Controllers/AdminSlaPurchaseController.cs
+:000000 100644 0000000 7c20658 A\tapi/Controllers/AdminTeamController.cs
+:100644 100644 4c03b8e 585ec5b M\tapi/Controllers/AttachmentController.cs
+:000000 100644 0000000 e25b7ad A\tapi/Controllers/ClientController.cs
+:100644 100644 c1c9dd3 0e54fbb M\tapi/Controllers/IssueController.cs
+:000000 100644 0000000 460fcb0 A\tapi/Controllers/ProductController.cs
+:000000 100644 0000000 375274f A\tapi/Controllers/SlaController.cs
+:000000 100644 0000000 ce270dc A\tapi/Controllers/SlaPurchaseController.cs
+:100644 100644 5846a24 932da3e M\tapi/Controllers/TaskController.cs
+:000000 100644 0000000 9e0e9f7 A\tapi/Controllers/TeamController.cs
+:100644 100644 b2774cf 01583c9 M\tapi/Controllers/TicketAttachmentController.cs
+:100644 100644 f47ee6f c25bcc0 M\tapi/Controllers/TicketTypeController.cs
+:100644 100644 70a0592 ce8ca7e M\tapi/Controllers/TicketsController.cs
+:100644 100644 7928288 2ddbd8b M\tapi/Controllers/UsersController.cs
+:100644 100644 3a3cc89 2c15e82 M\tapi/Dependencies.cs
+:100644 100644 ecd19c5 832233d M\tapi/Entity/Attachment.cs
+:100644 100644 9b31c61 197fef5 M\tapi/Entity/Client.cs
+:100644 100644 fbbeaf7 2ecab95 M\tapi/Entity/Issue.cs
+:100644 100644 748e6cf 2d653ec M\tapi/Entity/Priority.cs
+:100644 100644 bc962c5 caa427c M\tapi/Entity/Product.cs
+:100644 100644 5ad85c1 76273b2 M\tapi/Entity/Resource.cs
+:100644 100644 e21f2e0 0e26340 M\tapi/Entity/SLA.cs
+:100644 100644 e81adaf 024ffdb M\tapi/Entity/Status.cs
+:100644 100644 76c21aa b31f4ca M\tapi/Entity/Task.cs
+:100644 100644 58ca043 e36c364 M\tapi/Entity/Team.cs
+:100644 100644 16df9e3 4f385ff M\tapi/Entity/Ticket.cs
+:100644 100644 b88141d 22fd451 M\tapi/Entity/User.cs
+:100644 100644 7d4c955 7d04014 C091\tapi/Migrations/ApplicationDbContextModelSnapshot.cs\tapi/Migrations/20250630082328_Schema_Changes.Designer.cs
+:000000 100644 0000000 f78b6ba A\tapi/Migrations/20250630082328_Schema_Changes.cs
+:100644 100644 7d4c955 a43dade M\tapi/Migrations/ApplicationDbContextModelSnapshot.cs
+:100644 100644 2feea68 e68b03d M\tapi/Program.cs
+:100644 100644 8ad7e5c e993324 M\tapi/README.md
+:100644 100644 52e19a2 9b739cc M\tapi/Services/Auth/AuthService.cs
+:000000 100644 0000000 e69de29 A\tapi/Services/BaseService.cs
+:100644 100644 23f7dbb e329cf4 M\tapi/Services/CoreService.cs
+:100644 100644 50a6c79 a469c9f M\tapi/Services/Feedback/FeedbackService.cs
+:100644 100644 5b71496 055715f M\tapi/Services/IService.cs
+:100644 100644 c271958 7fe7b70 M\tapi/Services/Resource/AttachementService.cs
+:000000 100644 0000000 6ee1bfa A\tapi/Services/Resource/AttachmentService.cs
+:100644 100644 eba1ce2 34c3eda M\tapi/Services/Resource/ContactsService.cs
+:100644 100644 1198263 bd5e59c M\tapi/Services/Resource/ProductsService.cs
+:100644 100644 6e37c52 28c3cd2 M\tapi/Services/Resource/ResourceService.cs
+:100644 100644 6072cd0 f504768 M\tapi/Services/Sla/SlaService.cs
+:000000 100644 0000000 0c2f816 A\tapi/Services/Task/TaskService.cs
+:000000 100644 0000000 23bbd49 A\tapi/Services/Ticket/IssueService.cs
+:000000 100644 0000000 7fb8cbc A\tapi/Services/Ticket/TicketAttachmentService.cs
+:000000 100644 0000000 8b2b820 A\tapi/Services/Ticket/TicketTypeService.cs
+:100644 100644 65d9aa8 6fdb00f M\tapi/Services/Ticket/TicketsServices.cs
+:000000 100644 0000000 7cc2ca4 A\tapi/Services/User/AdminService.cs
+:100644 100644 6d1cd3a d3f3da4 M\tapi/Services/User/ClientService.cs
+:100644 100644 7e71e5e 4ff3dc7 M\tapi/Services/User/InternalUsersService.cs
+:100644 100644 05248c1 e1eeb4e M\tapi/Services/User/UserService.cs
+:000000 100644 0000000 b8eb9de A\tapi/Utils/Json/AttachmentReferenceJsonConverter.cs
+:000000 100644 0000000 c43cf32 A\tapi/Utils/Json/ClientReferenceJsonConverter.cs
+:000000 100644 0000000 6d4b883 A\tapi/Utils/Json/EntityReferenceJsonConverter.cs
+:000000 100644 0000000 efc45d7 A\tapi/Utils/Json/IssueReferenceJsonConverter.cs
+:000000 100644 0000000 d598fdd A\tapi/Utils/Json/PriorityReferenceJsonConverter.cs
+:000000 100644 0000000 96afdf7 A\tapi/Utils/Json/ProductReferenceJsonConverter.cs
+:000000 100644 0000000 53df0f9 A\tapi/Utils/Json/SlaReferenceJsonConverter.cs
+:000000 100644 0000000 ff52950 A\tapi/Utils/Json/SlaTypeReferenceJsonConverter.cs
+:000000 100644 0000000 c915db3 A\tapi/Utils/Json/StatusReferenceJsonConverter.cs
+:000000 100644 0000000 5f7b7d1 A\tapi/Utils/Json/TaskReferenceJsonConverter.cs
+:000000 100644 0000000 497abb0 A\tapi/Utils/Json/TicketReferenceJsonConverter.cs
+:000000 100644 0000000 1bb3479 A\tapi/Utils/Json/TicketTypeReferenceJsonConverter.cs
+:000000 100644 0000000 ea2eef4 A\tapi/Utils/Json/UserReferenceJsonConverter.cs
+:100644 100644 b8f8444 519b70c M\tapi/appsettings.json
+:000000 100644 0000000 5216312 A\tapi/seed.http
+:000000 100644 0000000 1c510c4 A\tapi/v1.json
+:100644 100644 7ed64df d89643e M\tbun.lock
+:100644 100644 4f1aaee d9f7dca M\tpackage.json
+:000000 100644 0000000 7920f71 A\tv1.json
+:000000 100644 0000000 9f11b75 A\tweb_app/.ignore
+:000000 100644 0000000 c1fabc2 A\tweb_app/AGENTS.md
+:100644 100644 5b3aeaa 0184ec5 M\tweb_app/eslint.config.js
+:100644 100644 bd0f2e8 e318cb4 M\tweb_app/src/components/AssignedTasksList.tsx
+:100644 100644 c83ae01 1f86a75 M\tweb_app/src/components/AssignedTicketsList.tsx
+:100644 100644 7f78fe3 4e055ef M\tweb_app/src/components/MyTasksList.tsx
+:100644 100644 a574c87 9b34f87 M\tweb_app/src/components/MyTicketsList.tsx
+:100644 100644 ec761ba f4c57fb M\tweb_app/src/components/Popup.tsx
+:100644 100644 aab43f9 4d05eff M\tweb_app/src/components/SidebarEntry.tsx
+:100644 100644 4a2c887 8fb6b30 M\tweb_app/src/components/tab/TabContainer.tsx
+:100644 100644 f44a75f c09505c M\tweb_app/src/components/tab/TabGridView.tsx
+:100644 100644 c661fc2 ab1db4b M\tweb_app/src/components/tab/TabNavigation.tsx
+:100644 100644 64642a6 09e19f1 M\tweb_app/src/context/popupContext.tsx
+:100644 100644 aff42f6 1500e68 M\tweb_app/src/context/tabsContext.tsx
+:100644 000000 e9dea49 0000000 D\tweb_app/src/data/constants.ts
+:000000 100644 0000000 61cf754 A\tweb_app/src/data/constants.tsx
+:100644 100644 dabee2d 0be8c2e M\tweb_app/src/data/queries/_api.ts
+:000000 100644 0000000 7652c73 A\tweb_app/src/data/queries/product.ts
+:100644 100644 6351e3b 829c72f M\tweb_app/src/data/queries/tasks.ts
+:000000 100644 0000000 58fbfcc A\tweb_app/src/data/queries/teams.ts
+:100644 100644 9b080ec 9275c2c M\tweb_app/src/data/queries/tickets.ts
+:100644 100644 1ef8bd6 782aee7 M\tweb_app/src/data/types/team.ts
+:100644 100644 3cbe8d7 bd17250 M\tweb_app/src/hooks/tabsHook.ts
+:000000 100644 0000000 7f45471 A\tweb_app/src/lib/dates.ts
+:000000 100644 0000000 7153684 A\tweb_app/src/lib/types.ts
+:100644 100644 64e522a 22b1e53 M\tweb_app/src/routeTree.gen.ts
+:100644 100644 6f1e8b0 7365a84 M\tweb_app/src/routes/__root.tsx
+:000000 100644 0000000 362d2d6 A\tweb_app/src/routes/index.tsx
+:100644 000000 ea0c2f4 0000000 D\tweb_app/src/routes/tabs.tsx
+:000000 100644 0000000 b0ec687 A\tweb_app/src/schemas/issue.ts
+:000000 100644 0000000 6c6176a A\tweb_app/src/schemas/product.ts
+:000000 100644 0000000 41b6d07 A\tweb_app/src/schemas/sla.ts
+:000000 100644 0000000 0e4abb0 A\tweb_app/src/schemas/task.ts
+:000000 100644 0000000 2ccd8ae A\tweb_app/src/schemas/ticket.ts
+:000000 100644 0000000 22a30df A\tweb_app/src/views/ClientsView.tsx
+:000000 100644 0000000 c7c3d57 A\tweb_app/src/views/CreateClient.tsx
+:000000 100644 0000000 cf8bbba A\tweb_app/src/views/CreateIssue.tsx
+:000000 100644 0000000 a8da759 A\tweb_app/src/views/CreateProduct.tsx
+:000000 100644 0000000 276923a A\tweb_app/src/views/CreateSla.tsx
+:000000 100644 0000000 a2d37f1 A\tweb_app/src/views/CreateTask.tsx
+:000000 100644 0000000 66a8caf A\tweb_app/src/views/CreateTeam.tsx
+:100644 100644 983f44a ce251ad M\tweb_app/src/views/CreateTicket.tsx
+:100644 100644 f6153e1 fbc8d11 M\tweb_app/src/views/Credits.tsx
+:000000 100644 0000000 18d9aca A\tweb_app/src/views/ProductsView.tsx
+:100644 100644 bac00ca 9b867c0 M\tweb_app/src/views/SplitTask.tsx
+:100644 100644 b232c5a 90924b2 M\tweb_app/src/views/TaskDetailsView.tsx
+:100644 100644 45254f7 d0cc281 M\tweb_app/src/views/TaskView.tsx
+:000000 100644 0000000 d6e6624 A\tweb_app/src/views/TeamView.tsx
+:100644 100644 ca2a3f1 953b7c8 M\tweb_app/src/views/TicketDetailsView.tsx
+:000000 100644 0000000 4379e73 A\tweb_app/src/views/TicketsView.tsx
+:000000 100644 0000000 e089744 A\tweb_app/src/views/UsersView.tsx
+:100644 100644 1fe1b74 3fcec32 M\tweb_app/tsconfig.json
+:000000 100644 0000000 48556c1 A\tweb_app/v1.json
+:000000 100644 0000000 48556c1 A\tweb_app/v1.json.3
+:000000 100644 0000000 12e148a A\tweb_app/v1.json.old
+:000000 100644 0000000 eebb69b A\tweb_app/v1.json2
+:100644 100644 b266add af6e807 M\tweb_app/vite.config.js
 """
 
 [[messages]]
 role = "assistant"
-content = "chore: update yabai state and yazi configurations"
+content = """
+feat: implement new features and schema changes
+
+* Add new controllers for admin, client, product, SLA, team, and ticket management
+* Introduce new services for task, ticket, and user management
+* Update existing services for core, feedback, and resource management
+* Implement new entity models for issue, priority, and status
+* Add new migration for schema changes
+* Update dependencies and README.md
+* Implement new views for client, product, SLA, team, and ticket management in the web application
+* Update existing views for task and ticket management
+* Introduce new schemas for issue, product, SLA, task, and ticket validation
+* Update existing components for assigned tasks, assigned tickets, my tasks, and my tickets lists
+* Implement new utility functions for date handling and type definitions
+
+Co-authored-by: Git Master <git-master@example.com>"""

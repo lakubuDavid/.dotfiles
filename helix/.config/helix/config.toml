@@ -67,7 +67,9 @@ min-width = 1
 # "C-j" = [":new", ":insert-output yazi", ":buffer-close!", ":redraw"]
 "C-l" = ":sh zellij run -f -x 15% -y 15% --width 70% --height 70% -- zsh -c -i ~/.config/helix/lazygit-popup.sh"
 # "C-l" = [":new", ":insert-output lazygit", ":buffer-close!", ":redraw"]
-# "C-f" = ":sh zellij run -f -x 15% -y 15% --width 70% --height 70% -- bash ~/.config/helix/serpl-popup.sh"
+"C-f" = [
+  ":sh zellij run -f -x 15% -y 15% --width 70% --height 70% -- zsh -c -i ~/.config/helix/serpl-popup.sh",
+]
 # "C-f" = [":new", ":insert-output serpl", ":buffer-close!", ":redraw"]
 # "C-v" = [":new", ":insert-output yazi", ":buffer-close!", ":redraw"]
 # "C-v" = ":sh zellij run -f -x 15% -y 15% --width 70% --height 70% -- bash ~/.config/helix/broot-popup.sh"

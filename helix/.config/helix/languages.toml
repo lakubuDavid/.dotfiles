@@ -83,6 +83,24 @@ typescript = { tsdk = "./node_modules/typescript/lib" }
 command = "nc"
 args = ["127.0.0.1", "6005"]
 
+[language-server.eslint]
+command = "vscode-eslint-language-server"
+args = ["--stdio"]
+[language-server.eslint.config]
+codeActionsOnSave = { mode = "all", "source.fixAll.eslint" = true }
+format = { enable = true }
+nodePath = ""
+quiet = false
+rulesCustomizations = []
+run = "onType"
+validate = "on"
+experimental = {}
+problems = { shortenToSingleLine = false }
+
+[language-server.eslint.config.codeAction]
+disableRuleComment = { enable = true, location = "separateLine" }
+showDocumentation = { enable = true }
+
 [[language]]
 name = "csv"
 file-types = ["csv"]
@@ -168,19 +186,35 @@ formatter = { command = "jq", args = ["--indent", "2"], formatStdin = true }
 
 [[language]]
 name = "javascript"
-formatter = { command = "prettier", args = [
-  "--parser",
-  "typescript",
-], formatStdin = true }
+language-servers = ["typescript-language-server", "eslint", "emmet-ls"]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+# formatter = { command = "dprint", args = ["fmt", "--stdin", "javascript"] }
+# auto-format = true
+# formatter = { command = "prettier", args = [
+#   "--parser",
+#   "typescript",
+# ], formatStdin = true }
 # language-servers = ["typescript-language-server", "gpt"]
 
 [[language]]
 name = "typescript"
+language-servers = ["typescript-language-server", "eslint", "emmet-ls"]
+# formatter = { command = "dprint", args = ["fmt", "--stdin", "typescript"] }
 formatter = { command = "prettier", args = [
   "--parser",
   "typescript",
 ], formatStdin = true }
 # language-servers = ["typescript-language-server", "gpt"]
+[[language]]
+name = "tsx"
+language-servers = ["typescript-language-server", "eslint", "emmet-ls"]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+# formatter = { command = "dprint", args = ["fmt", "--stdin", "tsx"] }
+[[language]]
+name = "jsx"
+language-servers = ["typescript-language-server", "eslint", "emmet-ls"]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+# formatter = { command = "dprint", args = ["fmt", "--stdin", "jsx"] }
 
 [language-server.volar]
 command = "vue-language-server"
