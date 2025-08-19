@@ -62,7 +62,6 @@
   "collaboration_panel": {
     "dock": "left"
   },
-  // "helix_mode": true,
   "vim_mode": false,
   "project_panel": {
     "dock": "right"
@@ -76,7 +75,6 @@
   "buffer_font_size": 13,
   "buffer_font_weight": 500,
   "buffer_font_family": "VictorMono Nerd Font",
-  // "buffer_font_family": "JetBrainsMono Nerd Font Mono",
   "ui_font_family": "Zed Plex Mono",
   "autosave": "on_focus_change",
   "format_on_save": "on",
@@ -92,10 +90,15 @@
       "host": "debian.local",
       "username": "davidlakubu",
       "port": 22,
-      "args": ["-i", "~/.ssh/home-debian"],
+      "args": [
+        "-i",
+        "~/.ssh/home-debian"
+      ],
       "projects": [
         {
-          "paths": ["~/server"]
+          "paths": [
+            "~/server"
+          ]
         }
       ]
     }
