@@ -1,0 +1,65 @@
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      "y": null,
+      "d": null,
+      "p": null
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-shift-left": "pane::ActivatePreviousItem",
+      "cmd-shift-right": "pane::ActivateNextItem",
+      "cmd-shift-up": "file_finder::Toggle",
+      "p": null
+    }
+  },
+  {
+    "context": "Editor && (vim_mode==helix_normal||vim_mode==normal)  ",
+    "bindings": {
+      "alt-shift-f": "editor::Format",
+      "~": "editor::ToggleCase",
+      "x": "editor::SelectLine",
+      "p": "editor::Paste",
+      "d": "vim::HelixDelete",
+      "r": "vim::PushReplace",
+      "/": "buffer_search::Deploy",
+      "space /": "pane::DeploySearch",
+      "space S": "project_symbols::Toggle",
+      "alt-right": "editor::MoveRight",
+      "alt-left": "editor::MoveLeft"
+    }
+  },
+  {
+    "context": "Editor && (vim_mode!=helix_normal )",
+    "bindings": {
+      "esc": "vim::SwitchToHelixNormalMode"
+    }
+  },
+  {
+    "context": "Editor && (vim_mode!=insert)",
+    "bindings": {
+      "d": "vim::HelixDelete"
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "shift-left": "pane::ActivatePreviousItem",
+      "shift-right": "pane::ActivateNextItem",
+      "shift-up": "file_finder::Toggle",
+      "space S": "project_symbols::Toggle"
+    }
+  },
+  {
+    "context": "Editor && vim_mode==helix_insert",
+    "bindings": {}
+  },
+  {
+    "bindings": {
+      "cmd-q": "workspace::CloseWindow"
+    }
+  }
+]

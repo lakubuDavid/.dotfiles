@@ -1,0 +1,112 @@
+{
+  "context_servers": {
+    "mcp-server-context7": {
+      "source": "extension",
+      "enabled": true,
+      "settings": {
+        "default_minimum_tokens": "10000"
+      }
+    }
+  },
+  "telemetry": {
+    "diagnostics": true,
+    "metrics": true
+  },
+  "edit_predictions": {
+    "mode": "subtle",
+    "copilot": {
+      "proxy": null,
+      "proxy_no_verify": null,
+      "enterprise_uri": null
+    },
+    "enabled_in_text_threads": false
+  },
+  "inlay_hints": {
+    "enabled": true,
+    "show_type_hints": false,
+    "show_parameter_hints": true,
+    "show_other_hints": true,
+    "show_background": false,
+    "edit_debounce_ms": 700,
+    "scroll_debounce_ms": 50,
+    "toggle_on_modifiers_press": null
+  },
+  "icon_theme": "Warm Charmed Icons",
+  "features": {
+    "edit_prediction_provider": "zed"
+  },
+  "agent": {
+    "inline_assistant_model": {
+      "provider": "zed.dev",
+      "model": "claude-3-5-sonnet"
+    },
+    "always_allow_tool_actions": true,
+    "default_profile": "write",
+    "play_sound_when_agent_done": true,
+    "default_model": {
+      "provider": "openai",
+      "model": "gpt-5-mini"
+    }
+  },
+  "double_click_in_multibuffer": "open",
+  "auto_update": true,
+  "ensure_final_newline_on_save": true,
+  "chat_panel": {
+    "dock": "left"
+  },
+  "languages": {
+    "TypeScript": {
+      "formatter": "language_server"
+    }
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  // "helix_mode": true,
+  "vim_mode": false,
+  "project_panel": {
+    "dock": "right"
+  },
+  "outline_panel": {
+    "dock": "left"
+  },
+  "base_keymap": "VSCode",
+  "theme": "Catppuccin Frappé",
+  "ui_font_size": 13,
+  "buffer_font_size": 13,
+  "buffer_font_weight": 500,
+  "buffer_font_family": "VictorMono Nerd Font",
+  // "buffer_font_family": "JetBrainsMono Nerd Font Mono",
+  "ui_font_family": "Zed Plex Mono",
+  "autosave": "on_focus_change",
+  "format_on_save": "on",
+  "confirm_quit": true,
+  "tabs": {
+    "file_icons": true
+  },
+  "auto_indent_on_paste": true,
+  "lsp_document_colors": "inlay",
+  "tab_size": 2,
+  "ssh_connections": [
+    {
+      "host": "debian.local",
+      "username": "davidlakubu",
+      "port": 22,
+      "args": ["-i", "~/.ssh/home-debian"],
+      "projects": [
+        {
+          "paths": ["~/server"]
+        }
+      ]
+    }
+  ],
+  "lsp": {
+    "pyright": {
+      "settings": {
+        "python": {
+          "pythonPath": ".venv/bin/python"
+        }
+      }
+    }
+  }
+}

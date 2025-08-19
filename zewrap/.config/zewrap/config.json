@@ -1,0 +1,61 @@
+{
+  "wsPort": 8080,
+  "tools": [
+    {
+      "name": "Helix",
+      "cmd": "hx",
+      "commands": [
+        {
+          "name": "insert",
+          "actions": [
+            {
+              "type": "raw",
+              "parameters": {
+                "input": [
+                  "i {0} "
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "parameters": {
+                "name": [
+                  "esc"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "open",
+          "actions": [
+            {
+              "type": "key",
+              "parameters": {
+                "name": [
+                  "esc"
+                ]
+              }
+            },
+            {
+              "type": "raw",
+              "parameters": {
+                "input": [
+                  ":o {0}"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "parameters": {
+                "name": [
+                  "return"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

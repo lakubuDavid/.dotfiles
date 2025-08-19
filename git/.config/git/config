@@ -29,7 +29,7 @@
 
 [diff]
 	context = 3
-	renames = copies
+	# renames = copies
 	interHunkContext = 10
 
 [color "diff"]

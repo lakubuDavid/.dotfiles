@@ -1,0 +1,61 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "icon_theme": "Zed (Default)",
+  "features": {
+    "edit_prediction_provider": "zed"
+  },
+  "assistant": {
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "claude-3-5-sonnet-latest"
+    },
+    "version": "2",
+    "provider": null
+  },
+  "language_models": {
+    "ollama": {
+      "low_speed_timeout_in_seconds": 120
+    }
+  },
+  "vim_mode": false,
+  "project_panel": {
+    "dock": "right"
+  },
+  "outline_panel": {
+    "dock": "left"
+  },
+  "base_keymap": "VSCode",
+  // "base_keymap": "VSCode",
+  "theme": "Catppuccin Frappé",
+  "ui_font_size": 14,
+  "buffer_font_size": 14,
+  // "buffer_font_family": "JetBrainsMono Nerd Font",
+  "buffer_font_family": "VictorMono Nerd Font Mono",
+  "ui_font_family": "Zed Plex Mono",
+  "autosave": "on_focus_change",
+  "format_on_save": "on",
+  "confirm_quit": true,
+  "tabs": {
+    "file_icons": true
+  },
+  "ssh_connections": [
+    {
+      "host": "debian.local",
+      "username": "davidlakubu",
+      "port": 22,
+      "args": ["-i", "~/.ssh/home-debian"],
+      "projects": [
+        {
+          "paths": ["~/server"]
+        }
+      ]
+    }
+  ]
+}

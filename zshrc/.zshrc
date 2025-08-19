@@ -64,7 +64,7 @@ export PATH="/Applications/XAMPP/bin:$PATH"
 # export JAVA_HOME="$HOME/Applications/Android Studio.app/Contents/jbr/Contents/Home"
 # export JAVA_HOME="/usr/local/opt/openjdk/bin"
 export ANDROID_HOME="$HOME/Library/Android/sdk"
-export NDK_HOME="$ANDROID_HOME/ndk/26.2.11394342"
+export NDK_HOME="$ANDROID_HOME/ndk/29.0.13846066"
 export PATH="$PATH:$ANDROID_HOME/tools"
 export PATH="$PATH:$ANDROID_HOME/tools/bin"
 
@@ -97,6 +97,10 @@ function yaz() {
 	fi
 	rm -f -- "$tmp"
 }
+
+#STARTUP MESSAGE
+source ~/.config/startup.sh
+
 # Shell integration
 eval "$(brew shellenv)"
 eval "$(fzf --zsh)"
@@ -104,7 +108,7 @@ eval "$(zoxide init zsh)"
 # eval "$(thefuck --alias)"
 # eval "$(chezmoi completion zsh)"
 # tere
-echo "-- Loaded Shell integration"
+echo " • Loaded Shell integration"
 
 tere() {
     local result=$(command tere "$@")
@@ -248,8 +252,6 @@ tere() {
     [ -n "$result" ] && cd -- "$result"
 }
 
-#STARTUP MESSAGE
-# source ~/.config/startup.sh
 
 # Emacs keybind
 bindkey -e
@@ -274,7 +276,7 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
-
+echo " • Intialized zsh plugins"
 #fzf
 export FZF_DEFAULT_OPTS=" \
 --color=bg+:#414559,bg:#303446,spinner:#f2d5cf,hl:#e78284 \
@@ -292,17 +294,16 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-nvm use --lts --silent 
-echo "-- Intialized nvm"
+echo " • Intialized nvm"
 
 export HELIX_RUNTIME=~/.config/helix/runtime
 
 source "/Users/davidlakubu/.config/aliases.zsh"
-echo "-- Intialized aliases"
+echo " • Intialized aliases"
 
 # Python path
 export PATH="$PATH:/Library/Frameworks/Python.framework/Versions/3.11/bin"
-alias tsgo="/Users/davidlakubu/Code/typescript-go/built/local/tsgo"
+# alias tsgo="/Users/davidlakubu/Code/typescript-go/built/local/tsgo"
 
 # PMD
 export PATH="$PATH:$HOME/pmd-bin-7.13.0/bin"
@@ -313,4 +314,17 @@ export PATH="$PATH:$HOME/.dotnet/tools"
 export RESEND_API_KEY=$(pass show ApiKeys/RESEND_API_KEY)
 
 export PATH="$PATH:$HOME/.local/bin"
-tput cuu 3
+# tput cuu 4
+clear
+
+# Dprint
+
+export DPRINT_INSTALL="/Users/davidlakubu/.dprint"
+export PATH="$DPRINT_INSTALL/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/Users/davidlakubu/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
+
+PATH=~/.console-ninja/.bin:$PATH

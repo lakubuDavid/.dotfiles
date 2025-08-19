@@ -1,0 +1,16 @@
+{"signed_in":false,"milliseconds_since_first_event":0,"type":"Setting","setting":"theme","value":"One Dark"}
+{"signed_in":false,"milliseconds_since_first_event":0,"type":"Setting","setting":"keymap","value":"VSCode"}
+{"signed_in":false,"milliseconds_since_first_event":0,"type":"App","operation":"open"}
+{"signed_in":false,"milliseconds_since_first_event":0,"type":"Editor","operation":"open","file_extension":"go","vim_mode":false,"copilot_enabled":true,"copilot_enabled_for_language":true}
+{"signed_in":false,"milliseconds_since_first_event":156,"type":"Editor","operation":"open","file_extension":"go","vim_mode":false,"copilot_enabled":true,"copilot_enabled_for_language":true}
+{"signed_in":false,"milliseconds_since_first_event":135690,"type":"Editor","operation":"open","file_extension":"php","vim_mode":false,"copilot_enabled":true,"copilot_enabled_for_language":true}
+{"signed_in":false,"milliseconds_since_first_event":135690,"type":"Editor","operation":"open","file_extension":"php","vim_mode":false,"copilot_enabled":true,"copilot_enabled_for_language":true}
+{"signed_in":false,"milliseconds_since_first_event":206445,"type":"Editor","operation":"open","file_extension":null,"vim_mode":false,"copilot_enabled":true,"copilot_enabled_for_language":true}
+{"signed_in":false,"milliseconds_since_first_event":231871,"type":"Memory","memory_in_bytes":348966912,"virtual_memory_in_bytes":63840927744}
+{"signed_in":false,"milliseconds_since_first_event":231871,"type":"Cpu","usage_as_percentage":13.888645,"core_count":12}
+{"signed_in":false,"milliseconds_since_first_event":0,"type":"App","operation":"open project"}
+{"signed_in":false,"milliseconds_since_first_event":11585,"type":"App","operation":"open project"}
+{"signed_in":false,"milliseconds_since_first_event":97806,"type":"Memory","memory_in_bytes":200773632,"virtual_memory_in_bytes":55203864576}
+{"signed_in":false,"milliseconds_since_first_event":97806,"type":"Cpu","usage_as_percentage":5.7268305,"core_count":12}
+{"signed_in":false,"milliseconds_since_first_event":251850,"type":"Edit","duration":19998,"environment":"terminal"}
+{"signed_in":false,"milliseconds_since_first_event":263918,"type":"Editor","operation":"open","file_extension":"php","vim_mode":false,"copilot_enabled":true,"copilot_enabled_for_language":true}
