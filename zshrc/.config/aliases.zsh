@@ -14,6 +14,8 @@ alias pmd="$HOME/pmd-bin-7.13.0/bin/pmd"
 
 alias zhx="zewrap hx"
 
+alias rm=safe-rm
+
 # Ollama aliases
 function mistral(){
 	clear && tgpt --provider ollama --model mistral -i

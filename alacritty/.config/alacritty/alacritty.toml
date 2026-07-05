@@ -1,0 +1,37 @@
+
+[window]
+opacity = 0.87
+blur = true
+decorations = "buttonless"
+padding = { x = 8, y = 0 }
+option_as_alt = "OnlyLeft"
+dynamic_padding = true
+[font]
+normal = { family = "VictorMono Nerd Font", style = "Regular" }
+# normal = {family="Agave Nerd Font"}
+size = 14
+[terminal.shell]
+program = "/bin/zsh"
+args = []
+[keyboard]
+bindings = [
+  # { key = "ArrowLeft", mods = "Option", action = "WordLeft" },
+  # { key = "ArrowRight", mods = "Option", action = "WordRight" },
+  { key = "ArrowLeft", mods = "Option", chars = "\u001bb" },
+  { key = "ArrowRight", mods = "Option", chars = "\u001bf" },
+]
+[cursor]
+style = { shape = "Beam", blinking = "on" }
+blink_interval = 450
+
+[general]
+
+import = [
+  # uncomment the flavour you want below:
+  # "~/.config/alacritty/catppuccin-latte.toml"
+  "~/.config/alacritty/catppuccin-frappe.toml",
+  # "~/.config/alacritty/catppuccin-macchiato.toml"
+  # "~/.config/alacritty/catppuccin-mocha.toml"
+]
+
+[terminal]

@@ -1,17 +1,51 @@
 [language-server]
 emmet-ls = { command = "emmet-ls", args = ["--stdio"] }
-taplo-lsp = { command = "taplo", args = ["lsp", "stdio"] }
+taplo = { command = "taplo", args = ["lsp", "stdio"] }
+tombi = { command = "tombi", args = ["lsp"] }
 sql-language-server = { command = "sql-language-server", args = [
   "up",
   "--method",
   "stdio",
 ] }
+vscode-json-language-server = { command = "vscode-json-language-server", args = [
+  "--stdio",
+], config = { provideFormatter = true, json = { validate = { enable = true } } } }
 # gpt = { command = "bun", args = ["run", "~/bun/helix-gpt.js"] }
 gpt = { command = "helix-gpt" }
 omnisharp = { command = "omnisharp", args = ["--languageserver"] }
 templ-lsp = { command = "templ", args = ["lsp"] }
-teal-lsp = { command = "teal-language-server", args = ["--verbose=true"] }
+# teal-lsp = { command = "teal-language-server" }
+superhtml = { command = "superhtml", args = ["lsp"] }
+vscode-html-language-server = { command = "vscode-html-language-server", args = [
+  "--stdio",
+], config = { provideFormatter = true } }
+tsgo = { command = "tsgo", args = ["--lsp", "--stdio"] }
+[language-server.harper-ls]
+command = "harper-ls"
+args = ["--stdio"]
+[language-server.teal-lsp]
+command = "teal-language-server"
 
+[language-server.teal-lsp.config]
+plugins = []
+workspace_config = []
+[language-server.lua-language-server]
+command = "lua-language-server"
+
+[language-server.lua-language-server.config.Lua.hint]
+enable = true
+arrayIndex = "Enable"
+setType = true
+paramName = "All"
+paramType = true
+await = true
+
+[language-server.lua-language-server.config.Lua]
+# For Windows user: find the correspondent path of /usr/lib/lua-language-server/meta/3rd/love2d
+workspace.library = [
+  "/Users/davidlakubu/.lualspaddons/love2d/library",
+  "/Users/davidlakubu/lsp/lua/addons/xmake-luals-addon/library",
+]
 [language-server.ruff]
 command = "ruff"
 args = ["server"]
@@ -32,8 +66,35 @@ python.analysis.typeCheckingMode = "off"
 python.analysis.autoImoprtCompletion = true
 python.analysis.reportOptionalSubscript = false
 python.analysis.reportOptionalMemberAccess = false
+
+[language-server.basedpyright]
+command = "basedpyright-langserver"
+args = ["--stdio"]
+
+[language-server.basedpyright.config]
+# basedpyright.analysis.diagnosticMode = "openFilesOnly"
+basedpyright.analysis.lint = true
+basedpyright.analysis.inlayHint.enable = true
+basedpyright.analysis.autoSearchPaths = true
+basedpyright.analysis.diagnosticMode = "workspace"
+basedpyright.analysis.useLibraryCodeForType = true
+basedpyright.analysis.logLevel = "Error"
+basedpyright.analysis.typeCheckingMode = "off"
+basedpyright.analysis.autoImoprtCompletion = true
+basedpyright.analysis.reportOptionalSubscript = false
+basedpyright.analysis.reportOptionalMemberAccess = false
 [language-server.lsp-ai]
 command = "lsp-ai"
+[language-server.biome]
+command = "biome"
+args = ["lsp-proxy"]
+[language-server.biome.json.parser]
+allowTrailingCommas = true
+allowComments = true
+[language-server.biome.json.formatter]
+enabled = true
+indentStyle = "space"
+idnentWidth = 2
 
 [language-server.lsp-ai.config.memory]
 file_store = {}
@@ -82,6 +143,9 @@ typescript = { tsdk = "./node_modules/typescript/lib" }
 [language-server.godot]
 command = "nc"
 args = ["127.0.0.1", "6005"]
+[language-server.gdscript-formatter]
+command = "gdscript-formatter"
+args = ["lint"]
 
 [language-server.eslint]
 command = "vscode-eslint-language-server"
@@ -112,8 +176,7 @@ source.git = "https://github.com/weartist/rainbow-csv-tree-sitter"
 source.rev = "896e6d09b23a1b0d87e45bf97ca34a249f41495c"
 [[grammar]]
 name = "teal"
-source.git = "https://github.com/euclidianAce/tree-sitter-teal"
-source.rev = "78aebca8ad05017bbb08fd5257e1f3461fdb2d6f"
+source = { git = "https://github.com/lakubudavid/tree-sitter-teal-4-hx", rev = "ef6ccbb1a18eeb502c6785c6147ea226135e0753" }
 [[language]]
 name = "templ"
 auto-format = true
@@ -159,15 +222,24 @@ comment-token = "#"
 language-servers = [
   "ruff",
   "jedi",
-  { name = "pyright", except-features = [
-    "diagnostics",
-  ] },
+  { name = "basedpyright", except-features = ["diagnostics"] },
+  # { name = "pyright", except-features = [
+  #   "diagnostics",
+  # ] },
 ]
 auto-format = true
 
 [[language]]
 name = "gdscript"
-language-servers = ["godot"]
+language-servers = ["godot", "gdscript-formatter"]
+formatter = { command = "gdscript-formatter", args = [
+  # "--reorder-code",
+  "--use-spaces",
+  "--indent-size",
+  "2",
+  "--safe",
+] }
+auto-format = true
 
 [[language]]
 name = "go"
@@ -177,16 +249,24 @@ formatter = { command = "goimports" }
 [[language]]
 name = "toml"
 auto-format = true
-# language-servers = ["scls", "taplo-lsp", "gpt"]
+language-servers = ["scls", "taplo", "tombi"]
 formatter = { command = "taplo", args = ["fmt", "-"], formatStdin = true }
 
 [[language]]
 name = "json"
 formatter = { command = "jq", args = ["--indent", "2"], formatStdin = true }
+language-servers = ["vscode-json-language-server"]                           #, "biome"]
+# formatter = { command = "biome", args = ["format"], formatStdin = false }
 
 [[language]]
 name = "javascript"
-language-servers = ["typescript-language-server", "eslint", "emmet-ls"]
+language-servers = [
+  # "tsgo",
+  "typescript-language-server",
+  # "eslint",
+  # "biome",
+  "emmet-ls",
+]
 formatter = { command = "prettier", args = ["--parser", "typescript"] }
 # formatter = { command = "dprint", args = ["fmt", "--stdin", "javascript"] }
 # auto-format = true
@@ -198,7 +278,12 @@ formatter = { command = "prettier", args = ["--parser", "typescript"] }
 
 [[language]]
 name = "typescript"
-language-servers = ["typescript-language-server", "eslint", "emmet-ls"]
+language-servers = [
+  # "tsgo",
+  # "biome",
+  "typescript-language-server",
+  "emmet-ls",
+]
 # formatter = { command = "dprint", args = ["fmt", "--stdin", "typescript"] }
 formatter = { command = "prettier", args = [
   "--parser",
@@ -284,16 +369,26 @@ file-types = [
 language-servers = ["vscode-html-language-server", "superhtml", "emmet-ls"]
 auto-format = false
 indent = { tab-width = 2, unit = "  " }
+[[language]]
+name = "teal"
+scope = "source.tl"
+# injection-regex = "teal"
+file-types = ["tl"]
+# shebangs = ["teal"]
+roots = ["tlconfig.lua"]
+comment-tokens = "--"
+block-comment-tokens = { start = "--[[", end = "--]]" }
+indent = { tab-width = 2, unit = "  " }
+language-servers = ["teal-lsp", "scls"]
 # [[language]]
 # name = "teal"
-# scope = "source.teal"
+# scope = "source.tl"
+# injection-regex = "teal"
 # file-types = ["tl"]
-# shebangs = ["teal"]
-# roots = ["tlconfig.lua"]
 # comment-tokens = "--"
 # block-comment-tokens = { start = "--[[", end = "--]]" }
-# indent = { tab-width = 2, unit = "  " }
-# language-servers = ["teal-lsp", "scls"]
+# roots = [ "tlconfig.lua" ]
+# language-servers = [ "teal-language-server" ]
 [[language]]
 name = "sql"
 language-servers = ["sql-language-server"]
@@ -335,3 +430,36 @@ shebangs = []
 roots = []
 language-servers = ["coffee", "scls"]
 indent = { tab-width = 2, unit = " " }
+[[language]]
+name = "markdown"
+scope = "source.md"
+injection-regex = "md|markdown"
+file-types = [
+  "md",
+  "livemd",
+  "markdown",
+  "mdx",
+  "mkd",
+  "mkdn",
+  "mdwn",
+  "mdown",
+  "markdn",
+  "mdtxt",
+  "mdtext",
+  "workbook",
+  { glob = "PULLREQ_EDITMSG" },
+]
+roots = [".marksman.toml"]
+language-servers = ["marksman", "markdown-oxide", "rumdl", "harper-ls"]
+indent = { tab-width = 2, unit = "  " }
+block-comment-tokens = { start = "<!--", end = "-->" }
+# word-completion.trigger-length = 4
+[[language]]
+name = "typst"
+scope = "source.typst"
+injection-regex = "typ(st)?"
+file-types = ["typst", "typ"]
+comment-token = "//"
+block-comment-tokens = { start = "/*", end = "*/" }
+language-servers = ["tinymist", "harper-ls"]
+indent = { tab-width = 2, unit = "  " }

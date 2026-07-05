@@ -1,0 +1,12 @@
+[tools]
+harper-ls = "latest"
+node = "latest"
+"npm:@earendil-works/pi-coding-agent" = "latest"
+"npm:@pintora/cli" = "latest"
+rumdl = "latest"
+rust = "latest"
+tinymist = "latest"
+typst = "latest"
+
+[settings]
+experimental = true
