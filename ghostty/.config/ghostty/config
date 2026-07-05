@@ -23,13 +23,13 @@ font-size = 14
 font-thicken = true
 adjust-cell-height = 1
 
-theme = catppuccin-mocha
+theme = "Catppuccin Mocha"
 # theme = batman
 cursor-style = bar
 background-opacity = 0.85
 background-blur-radius = 80
 
-command = /usr/local/bin/zellij
+command = /bin/zsh
 macos-titlebar-style = hidden
 
 window-padding-x = 10,10

@@ -1,25 +1,147 @@
 {
+  "semantic_tokens": "combined",
+  "helix_mode": false,
+  "redact_private_values": true,
+  "agent_servers": {
+    "github-copilot-cli": {
+      "type": "registry",
+    },
+    "pi-acp": {
+      "type": "registry",
+    },
+    "opencode": {
+      "type": "registry",
+    },
+    "mistral-vibe": {
+      "type": "registry",
+    },
+    "github-copilot": {
+      "type": "registry",
+    },
+  },
+  "git_panel": {
+    "dock": "left",
+    "tree_view": true,
+  },
   "context_servers": {
-    "mcp-server-context7": {
-      "source": "extension",
+    "sm-unsplash-mcp": {
       "enabled": true,
+      "url": "https://server.smithery.ai/@hellokaton/unsplash-mcp-server",
+      "headers": {
+        "Authorization": "Bearer a796a7e6-8cb7-4248-ba5e-8ec1ebfbe26f",
+      },
+    },
+    "bun-docs-mcp": {
+      "enabled": false,
+      "remote": false,
+      "settings": {},
+    },
+    "software-planning-tool": {
+      "enabled": false,
+      "command": "bun",
+      "args": ["/Users/davidlakubu/bun/Software-planning-mcp/build/index.js"],
+    },
+    "deepl": {
+      "enabled": false,
+      "command": "npx",
+      "args": ["deepl-mcp-server"],
+      "env": {
+        "DEEPL_API_KEY": "6d0fabc3-cf50-4834-9cb1-d2e151fc5fcb:fx",
+      },
+    },
+    "unsplash": {
+      "enabled": false,
+      "command": "unsplash-mcp-server",
+      "args": [],
+      "env": {
+        "UNSPLASH_ACCESS_KEY": "qSCongdmyOsCw5W2zWpvGEHG4M9XmCHUPWE9sZ2V21E",
+      },
+    },
+    "unsplash-mcp-server": {
+      "enabled": true,
+      "command": "bunx",
+      "args": [
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "@hellokaton/unsplash-mcp-server",
+        "--key",
+        "a796a7e6-8cb7-4248-ba5e-8ec1ebfbe26f",
+        "--profile",
+        "capitalist-donkey-nLxtO1",
+      ],
+    },
+    "betterstack": {
+      "enabled": false,
+      "command": "bunx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://mcp.betterstack.com",
+        "--header",
+        "Authorization: Bearer ${BETTERSTACK_API_TOKEN}",
+      ],
+      "env": {
+        "BETTERSTACK_API_TOKEN": "xJYNWhTCXqTo6sdKhiQ8dZZ7",
+      },
+    },
+    "mcp-mermaid": {
+      "enabled": false,
+      "command": "bunx",
+      "args": ["-y", "mcp-mermaid"],
+    },
+    "cloudflare-docs": {
+      "env": {},
+      "enabled": false,
+      "command": "npx",
+      "args": ["mcp-remote", "https://docs.mcp.cloudflare.com/sse"],
+    },
+    "playwright": {
+      "enabled": false,
+      "command": "bunx",
+      "args": ["@playwright/mcp@latest"],
+    },
+    "browsermcp": {
+      "enabled": false,
+      "command": "bunx",
+      "args": ["@browsermcp/mcp@latest"],
+    },
+    "shadcn": {
+      "enabled": true,
+      "command": "bunx",
+      "args": ["shadcn@latest", "mcp"],
+    },
+    "mcp-server-context7": {
+      "enabled": false,
       "settings": {
-        "default_minimum_tokens": "10000"
-      }
-    }
+        "default_minimum_tokens": "10000",
+      },
+    },
   },
   "telemetry": {
-    "diagnostics": true,
-    "metrics": true
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "git": {
+    "inline_blame": {
+      "show_commit_summary": true,
+    },
+    "blame": {
+      "show_avatar": true,
+    },
   },
   "edit_predictions": {
-    "mode": "subtle",
+    "provider": "zed",
+    "codestral": {
+      "api_url": "https://codestral.mistral.ai",
+    },
+    "mode": "eager",
     "copilot": {
       "proxy": null,
       "proxy_no_verify": null,
-      "enterprise_uri": null
+      "enterprise_uri": null,
     },
-    "enabled_in_text_threads": false
+    "enabled_in_text_threads": false,
   },
   "inlay_hints": {
     "enabled": true,
@@ -29,49 +151,94 @@
     "show_background": false,
     "edit_debounce_ms": 700,
     "scroll_debounce_ms": 50,
-    "toggle_on_modifiers_press": null
+    "toggle_on_modifiers_press": null,
   },
   "icon_theme": "Warm Charmed Icons",
-  "features": {
-    "edit_prediction_provider": "zed"
-  },
   "agent": {
-    "inline_assistant_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-5-sonnet"
-    },
-    "always_allow_tool_actions": true,
     "default_profile": "write",
-    "play_sound_when_agent_done": true,
+    "dock": "right",
+    "tool_permissions": {
+      "tools": {
+        "create_directory": {
+          "default": "allow",
+        },
+        "mcp:software-planning-tool:update_todo_status": {
+          "default": "allow",
+        },
+        "mcp:software-planning-tool:save_plan": {
+          "default": "allow",
+        },
+        "mcp:software-planning-tool:add_todo": {
+          "default": "allow",
+        },
+        "mcp:mcp-server-context7:query-docs": {
+          "default": "allow",
+        },
+        "fetch": {
+          "default": "allow",
+        },
+        "terminal": {
+          "default": "allow",
+        },
+        "mcp:bun-docs-mcp:SearchBun": {
+          "default": "allow",
+        },
+      },
+    },
     "default_model": {
-      "provider": "openai",
-      "model": "gpt-5-mini"
-    }
+      "enable_thinking": false,
+      "provider": "opencode",
+      "model": "minimax-m2.5-free",
+    },
+    "favorite_models": [
+      {
+        "provider": "copilot_chat",
+        "model": "gemini-3-flash-preview",
+      },
+      {
+        "provider": "copilot_chat",
+        "model": "claude-opus-4.6",
+      },
+      {
+        "provider": "copilot_chat",
+        "model": "claude-opus-4.5",
+      },
+      {
+        "provider": "copilot_chat",
+        "model": "gemini-2.5-pro",
+      },
+      {
+        "provider": "copilot_chat",
+        "model": "claude-haiku-4.5",
+      },
+    ],
+    "model_parameters": [],
+    "commit_message_model": {
+      "provider": "copilot_chat",
+      "model": "claude-haiku-4.5",
+    },
   },
   "double_click_in_multibuffer": "open",
   "auto_update": true,
   "ensure_final_newline_on_save": true,
-  "chat_panel": {
-    "dock": "left"
-  },
-  "languages": {
-    "TypeScript": {
-      "formatter": "language_server"
-    }
-  },
+
+  // "chat_panel": {
+  //   "dock": "left"
+  // },
   "collaboration_panel": {
-    "dock": "left"
+    "dock": "left",
   },
   "vim_mode": false,
   "project_panel": {
-    "dock": "right"
+    "dock": "right",
   },
   "outline_panel": {
-    "dock": "left"
+    "dock": "left",
   },
   "base_keymap": "VSCode",
   "theme": "Catppuccin Frappé",
   "ui_font_size": 13,
+  "use_system_window_tabs": true,
   "buffer_font_size": 13,
   "buffer_font_weight": 500,
   "buffer_font_family": "VictorMono Nerd Font",
@@ -80,7 +247,10 @@
   "format_on_save": "on",
   "confirm_quit": true,
   "tabs": {
-    "file_icons": true
+    "file_icons": true,
+  },
+  "status_bar": {
+    "active_language_button": true,
   },
   "auto_indent_on_paste": true,
   "lsp_document_colors": "inlay",
@@ -90,26 +260,125 @@
       "host": "debian.local",
       "username": "davidlakubu",
       "port": 22,
-      "args": [
-        "-i",
-        "~/.ssh/home-debian"
-      ],
+      "args": ["-i", "~/.ssh/home-debian"],
       "projects": [
         {
-          "paths": [
-            "~/server"
-          ]
-        }
-      ]
-    }
+          "paths": ["~/server"],
+        },
+      ],
+    },
+    {
+      "host": "100.119.67.117",
+      "username": "gaming3",
+      "args": [],
+      "projects": [
+        {
+          "paths": ["/home/gaming3/eclosia"],
+        },
+      ],
+    },
   ],
+  "code_actions_on_format": {
+    "source.fixAll.biome": true,
+  },
+  "languages": {
+    "Python": {
+      "format_on_save": "on",
+      "formatter": [
+        {
+          "language_server": {
+            "name": "ruff",
+          },
+        },
+      ],
+      // "language_servers": ["ruff"]
+      // Or, if there are other language servers you want to use with Python
+      "language_servers": [
+        // "pyright",
+        "ruff",
+        "basedpyright",
+        // disable the other python language servers
+        "!pyright",
+        "!pylsp",
+      ],
+    },
+    // "TypeScript": {
+    //   "formatter": "language_server",
+    //   "language_servers": [""]
+    // },
+    "TypeScript": {
+      "prettier": {
+        "allowed": false,
+      },
+
+      "colorize_brackets": true,
+      "soft_wrap": "editor_width",
+      "language_servers": [
+        "!tsgo",
+        "typescript-language-server",
+        "!vtsls",
+        "oxlint",
+        // "...",
+      ],
+    },
+    "TSX": {
+      "prettier": {
+        "allowed": false,
+      },
+
+      "colorize_brackets": true,
+      "soft_wrap": "editor_width",
+      "language_servers": [
+        "!tsgo",
+        "typescript-language-server",
+        "!vtsls",
+        "oxlint",
+        // "...",
+      ],
+      // "language_servers": ["typescript-language-server", "!vtsls"],
+    },
+    "JavaScript": {
+      "language_servers": ["typescript-language-server", "!vtsls"],
+    },
+    "Teal": {
+      "language_servers": ["teal-lsp"],
+    },
+    "HTML": {
+      "language_servers": ["!superhtml"],
+    },
+    "GDScript": {
+      "formatter": {
+        "external": {
+          "command": "gdscript-formatter",
+          "arguments": ["--use-spaces", "--indent-size", "2", "--safe"],
+        },
+      },
+      "format_on_save": "on",
+    },
+  },
   "lsp": {
+    "teal-lsp": {
+      "binary": {
+        "path": "teal-language-server",
+      },
+    },
     "pyright": {
       "settings": {
         "python": {
-          "pythonPath": ".venv/bin/python"
-        }
-      }
-    }
-  }
+          "pythonPath": ".venv/bin/python",
+        },
+      },
+    },
+    "ruff": {
+      "initialization_options": {
+        "settings": {
+          // Ruff server settings goes here
+          "lineLength": 80,
+          "lint": {
+            "extendSelect": ["I"],
+          },
+        },
+      },
+    },
+  },
 }

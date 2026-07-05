@@ -484,7 +484,10 @@ keybinds clear-defaults=false {
       SwitchToMode "Normal"
     }
   }
-  shared_except "pane" "locked" {
+  shared_except "locked" {
+    bind "Alt p" {
+      WriteChars "zellij run --floating -- bash -c 'recipe=$(just --list | fzf --height=40% --border --prompt=\"Recipe: \"); [[ -n \"$recipe\" ]] && just \"$recipe\"; read -n1 -rsp \"Press any key to close...\"; zellij action close-pane'; exit\n"
+    }
     bind "Ctrl p" {
       SwitchToMode "Pane"
     }

@@ -1,11 +1,16 @@
 source ~/.zsh/catppuccin_frappe-zsh-syntax-highlighting.zsh
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
+export TMPDIR=$(getconf DARWIN_USER_TEMP_DIR)
+
 
 
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="true"
 COMPLETION_WAITING_DOTS="true"
+PAGER="moor"
+
+fpath+=~/.zfunc
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -46,7 +51,7 @@ alias love-export=/Users/davidlakubu/love-export/main.sh
 alias love-export=/Users/davidlakubu/tools/love-export/main.sh
 
 #php
-export PATH="/Applications/XAMPP/bin:$PATH"
+# export PATH="/Applications/XAMPP/bin:$PATH"
 
 #zsh colors
 # autoload -Uz vcs_info
@@ -82,8 +87,7 @@ export PATH="$PATH:/usr/local/Cellar/docker/26.1.1/bin"
 # test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # luarocks
-export LUAROCKS="/usr/local/Cellar/luarocks/3.11.0/share/lua/5.4/luarocks"
-
+# export LUAROCKS="/usr/local/Cellar/luarocks/3.11.0/share/lua/5.4/luarocks"
 # torch
 # ./Users/davidlakubu/torch/install/bin/torch-activate
 
@@ -243,6 +247,7 @@ zinit cdreplay -q
 
 #My tools
 export PATH="$PATH:/Users/davidlakubu/tools"
+export PATH="$PATH:$HOME/.config/scripts"
 
 source /Users/davidlakubu/.config/broot/launcher/bash/br
 
@@ -288,17 +293,17 @@ export FZF_DEFAULT_OPTS=" \
 export PATH=$PATH:/Users/davidlakubu/.spicetify
 # source "$(gopass completion zsh)"
 
-source "/Users/davidlakubu/.config/zellij_tab_name.zsh"
+# source "/Users/davidlakubu/.config/zellij_tab_name.zsh"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-echo " • Intialized nvm"
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# echo " • Intialized nvm"
 
 export HELIX_RUNTIME=~/.config/helix/runtime
 
 source "/Users/davidlakubu/.config/aliases.zsh"
+
 echo " • Intialized aliases"
 
 # Python path
@@ -311,7 +316,12 @@ export PATH="$PATH:$HOME/pmd-bin-7.13.0/bin"
 # dotnet ttools
 export PATH="$PATH:$HOME/.dotnet/tools"
 
+export POP_FROM=pop@lakubudavid.me
+export POP_SIGNATURE="Sent with [Pop](https://github.com/charmbracelet/pop)!"
+
 export RESEND_API_KEY=$(pass show ApiKeys/RESEND_API_KEY)
+export OPENROUTER_API_KEY=$(pass show ApiKeys/OpenRouter)
+export OPENCODE_API_KEY=$(pass show ApiKeys/OpencodeZen)
 
 export PATH="$PATH:$HOME/.local/bin"
 # tput cuu 4
@@ -328,3 +338,16 @@ export PATH="$PNPM_HOME:$PATH"
 # pnpm end
 
 PATH=~/.console-ninja/.bin:$PATH
+export PATH="$PATH:$HOME/.gem/ruby/2.6.0/bin"
+export PATH="/usr/local/opt/ruby@3.3/bin:$PATH"
+export PATH="/usr/local/opt/ruby@3.3/bin:$PATH"
+export OPENAI_API_KEY=$(pass show ApiKeys/OpenAI/PersonalAI/Intelibar)
+
+
+export PATH="$PATH:/Users/davidlakubu/Library/Application Support/pear/bin"
+export PATH="$PATH:/Users/davidlakubu/2025/bin/universal-darwin"
+export MANTPATH="$MANTPATH:/Users/davidlakubu/2025/texmf-dist/doc/man"
+export INFOPATH="$INFOPATH:/Users/davidlakubu/2025/texmf-dist/doc/info"
+
+eval "$(mise activate zsh)"
+eval $(luarocks path)
