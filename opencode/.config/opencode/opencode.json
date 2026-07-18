@@ -37,13 +37,6 @@
         "@playwright/mcp@latest"
       ]
     },
-    "context7": {
-      "type": "remote",
-      "url": "https://mcp.context7.com/mcp",
-      "headers": {
-        "CONTEXT7_API_KEY": "ctx7sk-ec6f502a-a000-4b1f-9857-989c1619b4fg"
-      },
-    },
     "lucide-icon": {
       "type": "local",
       "command": [
