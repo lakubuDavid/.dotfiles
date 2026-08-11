@@ -9,3 +9,4 @@ yazi/plugins/**
 *.swp
 # runtime databases (zed embeddings/prompts db locks)
 **/lock.mdb
+**/settings_backup.json

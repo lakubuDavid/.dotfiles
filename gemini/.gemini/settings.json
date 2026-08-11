@@ -1,10 +1,41 @@
 {
-  "checkpointing": {
-    "enabled": true
+  "tools": {
+    "autoAccept": false,
+    "useRipgrep": true,
+    "shell": {
+      "showColor": true
+    }
   },
-  "contextFileName": "AGENTS.md",
-  "autoAccept": false,
-  "theme": "Default",
-  "selectedAuthType": "oauth-personal",
-  "preferredEditor": "zed"
+  "general": {
+    "checkpointing": {
+      "enabled": true
+    },
+    "preferredEditor": "zed",
+    "previewFeatures": true
+  },
+  "context": {
+    "fileName": "AGENTS.md",
+    "fileFiltering": {
+      "enableRecursiveFileSearch": false
+    }
+  },
+  "security": {
+    "auth": {
+      "selectedType": "gemini-api-key"
+    },
+    "folderTrust": {
+      "enabled": true
+    }
+  },
+  "ui": {
+    "theme": "Default",
+    "showMemoryUsage": true,
+    "showStatusInTitle": true,
+    "showLineNumbers": true,
+    "showCitations": true,
+    "showModelInfoInChat": true
+  },
+  "output": {
+    "format": "text"
+  }
 }
