@@ -3,16 +3,20 @@
 ## Quick start
 
 ```bash
+# One-liner (handles brew/lua checkout/bootstrap.lua)
+curl -fsSL https://raw.githubusercontent.com/lakubudavid/.dotfiles/main/bootstrap.sh | sh -- --stow
+
+# Manual steps (if preferred)
 # macOS: Xcode CLT first
 xcode-select --install
 
-# Homebrew (macOS or Linux)
+# Install Homebrew (macOS or Linux)
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew install lua git
 
-# bootstrap everything
+# Clone dotfiles and run bootstrap
 git clone https://github.com/lakubudavid/.dotfiles.git ~/.dotfiles
-lua ~/.dotfiles/bootstrap.lua
+lua ~/.dotfiles/bootstrap.lua --stow
 ```
 
 ## What `bootstrap.lua` does
