@@ -3,8 +3,11 @@
 ## Quick start
 
 ```bash
-# One-liner (handles brew/lua checkout/bootstrap.lua)
+# Fresh machine — one-liner (handles brew + lua + dotfiles checkout)
 curl -fsSL https://raw.githubusercontent.com/lakubudavid/.dotfiles/main/bootstrap.sh | sh -- --stow
+
+# Existing setup — just re-run bootstrap with args
+# bootstrap.sh --stow
 
 # Manual steps (if preferred)
 # macOS: Xcode CLT first
