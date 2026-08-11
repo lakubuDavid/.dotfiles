@@ -1,7 +1,7 @@
 
 [default] # a prompt is a section
-api = "openai"                          # must refer to an entry in the `.api_configs.toml` file
-model = "meta-llama/llama-4-scout:free" # each prompt may define its own model
+api = "openai"                    # must refer to an entry in the `.api_configs.toml` file
+model = "openrouter/aurora-alpha" # each prompt may define its own model
 
 [[default.messages]] # then you can list messages
 role = "system"

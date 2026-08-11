@@ -1,168 +1,4795 @@
 api = "openai"
-model = "meta-llama/llama-4-maverick:free"
+model = "openrouter/aurora-alpha"
 
 [[messages]]
 role = "system"
-content = "You are a git master. You generate git commit messages based on the diff given. What you write will be used as git commit message. Use commit convetions <type>[optional scope]: <description>[optional body][optional footer(s)]Example: fix: prevent racing of requestsIntroduce a request id and a reference to latest request. Dismissincoming responses other than from latest request.Remove timeouts which were used to mitigate the racing issue but areobsolete now.Reviewed-by: ZRefs: #123Never write ``` around your answer, provide only the result of the task you are given. Preserve input formatting."
+content = "You are an expert programmer and a shell master. You value code efficiency and clarity above all things. What you write will be piped in and out of cli programs so you do not explain anything unless explicitely asked to. Never write ``` around your answer, provide only the result of the task you are given. Preserve input formatting."
 
 [[messages]]
 role = "user"
-content = """
-:000000 100644 0000000 13b5cba A\t.idea/rcb-settings.xml
-:100644 100644 0937a0b 6c702f7 M\t.ignore
-:000000 100644 0000000 010699c A\tAGENTS.md
-:000000 100644 0000000 d519a18 A\tapi/.idea/.idea.HelpDesk.dir/.idea/dataSources.xml
-:100644 100644 0937a0b 6c702f7 C099\t.ignore\tapi/.ignore
-:100644 100644 d897868 69ac659 M\tapi/ApplicationDbContext.cs
-:000000 100644 0000000 5fa17fa A\tapi/Controllers/AdminClientController.cs
-:100644 100644 96427ed 73b302f M\tapi/Controllers/AdminController.cs
-:000000 100644 0000000 f34b9f7 A\tapi/Controllers/AdminProductController.cs
-:000000 100644 0000000 33dd9bd A\tapi/Controllers/AdminSlaController.cs
-:000000 100644 0000000 011697a A\tapi/Controllers/AdminSlaPurchaseController.cs
-:000000 100644 0000000 7c20658 A\tapi/Controllers/AdminTeamController.cs
-:100644 100644 4c03b8e 585ec5b M\tapi/Controllers/AttachmentController.cs
-:000000 100644 0000000 e25b7ad A\tapi/Controllers/ClientController.cs
-:100644 100644 c1c9dd3 0e54fbb M\tapi/Controllers/IssueController.cs
-:000000 100644 0000000 460fcb0 A\tapi/Controllers/ProductController.cs
-:000000 100644 0000000 375274f A\tapi/Controllers/SlaController.cs
-:000000 100644 0000000 ce270dc A\tapi/Controllers/SlaPurchaseController.cs
-:100644 100644 5846a24 932da3e M\tapi/Controllers/TaskController.cs
-:000000 100644 0000000 9e0e9f7 A\tapi/Controllers/TeamController.cs
-:100644 100644 b2774cf 01583c9 M\tapi/Controllers/TicketAttachmentController.cs
-:100644 100644 f47ee6f c25bcc0 M\tapi/Controllers/TicketTypeController.cs
-:100644 100644 70a0592 ce8ca7e M\tapi/Controllers/TicketsController.cs
-:100644 100644 7928288 2ddbd8b M\tapi/Controllers/UsersController.cs
-:100644 100644 3a3cc89 2c15e82 M\tapi/Dependencies.cs
-:100644 100644 ecd19c5 832233d M\tapi/Entity/Attachment.cs
-:100644 100644 9b31c61 197fef5 M\tapi/Entity/Client.cs
-:100644 100644 fbbeaf7 2ecab95 M\tapi/Entity/Issue.cs
-:100644 100644 748e6cf 2d653ec M\tapi/Entity/Priority.cs
-:100644 100644 bc962c5 caa427c M\tapi/Entity/Product.cs
-:100644 100644 5ad85c1 76273b2 M\tapi/Entity/Resource.cs
-:100644 100644 e21f2e0 0e26340 M\tapi/Entity/SLA.cs
-:100644 100644 e81adaf 024ffdb M\tapi/Entity/Status.cs
-:100644 100644 76c21aa b31f4ca M\tapi/Entity/Task.cs
-:100644 100644 58ca043 e36c364 M\tapi/Entity/Team.cs
-:100644 100644 16df9e3 4f385ff M\tapi/Entity/Ticket.cs
-:100644 100644 b88141d 22fd451 M\tapi/Entity/User.cs
-:100644 100644 7d4c955 7d04014 C091\tapi/Migrations/ApplicationDbContextModelSnapshot.cs\tapi/Migrations/20250630082328_Schema_Changes.Designer.cs
-:000000 100644 0000000 f78b6ba A\tapi/Migrations/20250630082328_Schema_Changes.cs
-:100644 100644 7d4c955 a43dade M\tapi/Migrations/ApplicationDbContextModelSnapshot.cs
-:100644 100644 2feea68 e68b03d M\tapi/Program.cs
-:100644 100644 8ad7e5c e993324 M\tapi/README.md
-:100644 100644 52e19a2 9b739cc M\tapi/Services/Auth/AuthService.cs
-:000000 100644 0000000 e69de29 A\tapi/Services/BaseService.cs
-:100644 100644 23f7dbb e329cf4 M\tapi/Services/CoreService.cs
-:100644 100644 50a6c79 a469c9f M\tapi/Services/Feedback/FeedbackService.cs
-:100644 100644 5b71496 055715f M\tapi/Services/IService.cs
-:100644 100644 c271958 7fe7b70 M\tapi/Services/Resource/AttachementService.cs
-:000000 100644 0000000 6ee1bfa A\tapi/Services/Resource/AttachmentService.cs
-:100644 100644 eba1ce2 34c3eda M\tapi/Services/Resource/ContactsService.cs
-:100644 100644 1198263 bd5e59c M\tapi/Services/Resource/ProductsService.cs
-:100644 100644 6e37c52 28c3cd2 M\tapi/Services/Resource/ResourceService.cs
-:100644 100644 6072cd0 f504768 M\tapi/Services/Sla/SlaService.cs
-:000000 100644 0000000 0c2f816 A\tapi/Services/Task/TaskService.cs
-:000000 100644 0000000 23bbd49 A\tapi/Services/Ticket/IssueService.cs
-:000000 100644 0000000 7fb8cbc A\tapi/Services/Ticket/TicketAttachmentService.cs
-:000000 100644 0000000 8b2b820 A\tapi/Services/Ticket/TicketTypeService.cs
-:100644 100644 65d9aa8 6fdb00f M\tapi/Services/Ticket/TicketsServices.cs
-:000000 100644 0000000 7cc2ca4 A\tapi/Services/User/AdminService.cs
-:100644 100644 6d1cd3a d3f3da4 M\tapi/Services/User/ClientService.cs
-:100644 100644 7e71e5e 4ff3dc7 M\tapi/Services/User/InternalUsersService.cs
-:100644 100644 05248c1 e1eeb4e M\tapi/Services/User/UserService.cs
-:000000 100644 0000000 b8eb9de A\tapi/Utils/Json/AttachmentReferenceJsonConverter.cs
-:000000 100644 0000000 c43cf32 A\tapi/Utils/Json/ClientReferenceJsonConverter.cs
-:000000 100644 0000000 6d4b883 A\tapi/Utils/Json/EntityReferenceJsonConverter.cs
-:000000 100644 0000000 efc45d7 A\tapi/Utils/Json/IssueReferenceJsonConverter.cs
-:000000 100644 0000000 d598fdd A\tapi/Utils/Json/PriorityReferenceJsonConverter.cs
-:000000 100644 0000000 96afdf7 A\tapi/Utils/Json/ProductReferenceJsonConverter.cs
-:000000 100644 0000000 53df0f9 A\tapi/Utils/Json/SlaReferenceJsonConverter.cs
-:000000 100644 0000000 ff52950 A\tapi/Utils/Json/SlaTypeReferenceJsonConverter.cs
-:000000 100644 0000000 c915db3 A\tapi/Utils/Json/StatusReferenceJsonConverter.cs
-:000000 100644 0000000 5f7b7d1 A\tapi/Utils/Json/TaskReferenceJsonConverter.cs
-:000000 100644 0000000 497abb0 A\tapi/Utils/Json/TicketReferenceJsonConverter.cs
-:000000 100644 0000000 1bb3479 A\tapi/Utils/Json/TicketTypeReferenceJsonConverter.cs
-:000000 100644 0000000 ea2eef4 A\tapi/Utils/Json/UserReferenceJsonConverter.cs
-:100644 100644 b8f8444 519b70c M\tapi/appsettings.json
-:000000 100644 0000000 5216312 A\tapi/seed.http
-:000000 100644 0000000 1c510c4 A\tapi/v1.json
-:100644 100644 7ed64df d89643e M\tbun.lock
-:100644 100644 4f1aaee d9f7dca M\tpackage.json
-:000000 100644 0000000 7920f71 A\tv1.json
-:000000 100644 0000000 9f11b75 A\tweb_app/.ignore
-:000000 100644 0000000 c1fabc2 A\tweb_app/AGENTS.md
-:100644 100644 5b3aeaa 0184ec5 M\tweb_app/eslint.config.js
-:100644 100644 bd0f2e8 e318cb4 M\tweb_app/src/components/AssignedTasksList.tsx
-:100644 100644 c83ae01 1f86a75 M\tweb_app/src/components/AssignedTicketsList.tsx
-:100644 100644 7f78fe3 4e055ef M\tweb_app/src/components/MyTasksList.tsx
-:100644 100644 a574c87 9b34f87 M\tweb_app/src/components/MyTicketsList.tsx
-:100644 100644 ec761ba f4c57fb M\tweb_app/src/components/Popup.tsx
-:100644 100644 aab43f9 4d05eff M\tweb_app/src/components/SidebarEntry.tsx
-:100644 100644 4a2c887 8fb6b30 M\tweb_app/src/components/tab/TabContainer.tsx
-:100644 100644 f44a75f c09505c M\tweb_app/src/components/tab/TabGridView.tsx
-:100644 100644 c661fc2 ab1db4b M\tweb_app/src/components/tab/TabNavigation.tsx
-:100644 100644 64642a6 09e19f1 M\tweb_app/src/context/popupContext.tsx
-:100644 100644 aff42f6 1500e68 M\tweb_app/src/context/tabsContext.tsx
-:100644 000000 e9dea49 0000000 D\tweb_app/src/data/constants.ts
-:000000 100644 0000000 61cf754 A\tweb_app/src/data/constants.tsx
-:100644 100644 dabee2d 0be8c2e M\tweb_app/src/data/queries/_api.ts
-:000000 100644 0000000 7652c73 A\tweb_app/src/data/queries/product.ts
-:100644 100644 6351e3b 829c72f M\tweb_app/src/data/queries/tasks.ts
-:000000 100644 0000000 58fbfcc A\tweb_app/src/data/queries/teams.ts
-:100644 100644 9b080ec 9275c2c M\tweb_app/src/data/queries/tickets.ts
-:100644 100644 1ef8bd6 782aee7 M\tweb_app/src/data/types/team.ts
-:100644 100644 3cbe8d7 bd17250 M\tweb_app/src/hooks/tabsHook.ts
-:000000 100644 0000000 7f45471 A\tweb_app/src/lib/dates.ts
-:000000 100644 0000000 7153684 A\tweb_app/src/lib/types.ts
-:100644 100644 64e522a 22b1e53 M\tweb_app/src/routeTree.gen.ts
-:100644 100644 6f1e8b0 7365a84 M\tweb_app/src/routes/__root.tsx
-:000000 100644 0000000 362d2d6 A\tweb_app/src/routes/index.tsx
-:100644 000000 ea0c2f4 0000000 D\tweb_app/src/routes/tabs.tsx
-:000000 100644 0000000 b0ec687 A\tweb_app/src/schemas/issue.ts
-:000000 100644 0000000 6c6176a A\tweb_app/src/schemas/product.ts
-:000000 100644 0000000 41b6d07 A\tweb_app/src/schemas/sla.ts
-:000000 100644 0000000 0e4abb0 A\tweb_app/src/schemas/task.ts
-:000000 100644 0000000 2ccd8ae A\tweb_app/src/schemas/ticket.ts
-:000000 100644 0000000 22a30df A\tweb_app/src/views/ClientsView.tsx
-:000000 100644 0000000 c7c3d57 A\tweb_app/src/views/CreateClient.tsx
-:000000 100644 0000000 cf8bbba A\tweb_app/src/views/CreateIssue.tsx
-:000000 100644 0000000 a8da759 A\tweb_app/src/views/CreateProduct.tsx
-:000000 100644 0000000 276923a A\tweb_app/src/views/CreateSla.tsx
-:000000 100644 0000000 a2d37f1 A\tweb_app/src/views/CreateTask.tsx
-:000000 100644 0000000 66a8caf A\tweb_app/src/views/CreateTeam.tsx
-:100644 100644 983f44a ce251ad M\tweb_app/src/views/CreateTicket.tsx
-:100644 100644 f6153e1 fbc8d11 M\tweb_app/src/views/Credits.tsx
-:000000 100644 0000000 18d9aca A\tweb_app/src/views/ProductsView.tsx
-:100644 100644 bac00ca 9b867c0 M\tweb_app/src/views/SplitTask.tsx
-:100644 100644 b232c5a 90924b2 M\tweb_app/src/views/TaskDetailsView.tsx
-:100644 100644 45254f7 d0cc281 M\tweb_app/src/views/TaskView.tsx
-:000000 100644 0000000 d6e6624 A\tweb_app/src/views/TeamView.tsx
-:100644 100644 ca2a3f1 953b7c8 M\tweb_app/src/views/TicketDetailsView.tsx
-:000000 100644 0000000 4379e73 A\tweb_app/src/views/TicketsView.tsx
-:000000 100644 0000000 e089744 A\tweb_app/src/views/UsersView.tsx
-:100644 100644 1fe1b74 3fcec32 M\tweb_app/tsconfig.json
-:000000 100644 0000000 48556c1 A\tweb_app/v1.json
-:000000 100644 0000000 48556c1 A\tweb_app/v1.json.3
-:000000 100644 0000000 12e148a A\tweb_app/v1.json.old
-:000000 100644 0000000 eebb69b A\tweb_app/v1.json2
-:100644 100644 b266add af6e807 M\tweb_app/vite.config.js
-"""
+content = '''
+generate a commit messagediff --git a/apps/web-app/drizzle/meta/_journal.json b/apps/web-app/drizzle/meta/_journal.json
+index abebc57..d65d083 100644
+--- a/apps/web-app/drizzle/meta/_journal.json
++++ b/apps/web-app/drizzle/meta/_journal.json
+@@ -36,6 +36,13 @@
+       "when": 1770197394856,
+       "tag": "0004_dizzy_psynapse",
+       "breakpoints": true
++    },
++    {
++      "idx": 5,
++      "version": "6",
++      "when": 1770897168133,
++      "tag": "0005_premium_payback",
++      "breakpoints": true
+     }
+   ]
+-}
++}
+\ No newline at end of file
+diff --git a/apps/web-app/src/db/queries/files.ts b/apps/web-app/src/db/queries/files.ts
+index c86bc6c..aa84999 100644
+--- a/apps/web-app/src/db/queries/files.ts
++++ b/apps/web-app/src/db/queries/files.ts
+@@ -1,261 +1,314 @@
+-import { and, desc, eq, like, or, sql } from "drizzle-orm";
++import { and, desc, eq, like, or, sql } from 'drizzle-orm'
+ 
+-import { db } from "@/db";
++import { db } from '@/db'
+ import {
+   fileMetadata,
+   type FileMetadata as FileMetadataRow,
+   type NewFileMetadata,
+-} from "../schema/file-schema";
++} from '../schema/file-schema'
+ 
+-export type FileMetadataRecord = FileMetadataRow;
+-export type InsertFileMetadataRecord = NewFileMetadata;
++export type FileMetadataRecord = FileMetadataRow
++export type InsertFileMetadataRecord = NewFileMetadata
+ export type UpdateFileMetadataRecord = Partial<
+-  Pick<NewFileMetadata, "displayName" | "description" | "tags" | "isPublic" | "indexedAt">
+->;
++  Pick<
++    NewFileMetadata,
++    | 'displayName'
++    | 'description'
++    | 'tags'
++    | 'keywords'
++    | 'isPublic'
++    | 'indexedAt'
++  >
++>
+ 
+ export interface FileListParams {
+-  limit: number;
+-  offset: number;
+-  search?: string;
+-  isPublic?: boolean;
+-  scope?: FileAccessScope;
+-  onlyForUserId?: string;
++  limit: number
++  offset: number
++  search?: string
++  isPublic?: boolean
++  scope?: FileAccessScope
++  onlyForUserId?: string
+ }
+ 
+ export interface FileAccessScope {
+-  userId: string;
++  userId: string
+   /**
+    * When true (default), include private files owned by the user alongside public ones.
+    * When false, only public files are returned for the scope.
+    */
+-  allowOwnPrivate?: boolean;
++  allowOwnPrivate?: boolean
+ }
+ 
+ export interface PaginatedFilesResult {
+-  data: FileMetadataRecord[];
++  data: FileMetadataRecord[]
+   pagination: {
+-    limit: number;
+-    offset: number;
+-    totalCount: number;
+-    hasMore: boolean;
+-  };
++    limit: number
++    offset: number
++    totalCount: number
++    hasMore: boolean
++  }
+ }
+ 
+ export interface UserFileListParams {
+-  userId: string;
+-  limit: number;
+-  offset: number;
+-  search?: string;
++  userId: string
++  limit: number
++  offset: number
++  search?: string
+ }
+ 
+-type Condition = Parameters<typeof and>[number];
++type Condition = Parameters<typeof and>[number]
+ 
+ /**
+  * List files with the provided filters and privacy scope.
+  */
+-export async function listFiles(params: FileListParams): Promise<PaginatedFilesResult> {
+-  const { limit, offset } = params;
+-  const whereClause = buildFileWhereClause(params);
++export async function listFiles(
++  params: FileListParams,
++): Promise<PaginatedFilesResult> {
++  const { limit, offset } = params
++  const whereClause = buildFileWhereClause(params)
+ 
+-  let dataQuery = db.select().from(fileMetadata);
++  let dataQuery = db.select().from(fileMetadata)
+   if (whereClause) {
+-    dataQuery = dataQuery.where(whereClause);
++    dataQuery = dataQuery.where(whereClause)
+   }
+ 
+-  const data = await dataQuery.orderBy(desc(fileMetadata.uploadedAt)).limit(limit).offset(offset);
++  const data = await dataQuery
++    .orderBy(desc(fileMetadata.uploadedAt))
++    .limit(limit)
++    .offset(offset)
+ 
+-  const totalCount = await countFiles(whereClause);
++  const totalCount = await countFiles(whereClause)
+ 
+   return {
+     data,
+     pagination: {
+       limit,
+       offset,
+       totalCount,
+       hasMore: offset + data.length < totalCount,
+     },
+-  };
++  }
+ }
+ 
+ /**
+  * Convenience helper dedicated to admin views targeting a specific user.
+  */
+-export function listFilesForUser(params: UserFileListParams): Promise<PaginatedFilesResult> {
+-  const { userId, ...rest } = params;
++export function listFilesForUser(
++  params: UserFileListParams,
++): Promise<PaginatedFilesResult> {
++  const { userId, ...rest } = params
+   return listFiles({
+     ...rest,
+     onlyForUserId: userId,
+-  });
++  })
+ }
+ 
+ /**
+  * Fetch a single file without applying any privacy rules.
+  */
+-export async function findFileById(id: string): Promise<FileMetadataRecord | null> {
+-  const [record] = await db.select().from(fileMetadata).where(eq(fileMetadata.id, id)).limit(1);
++export async function findFileById(
++  id: string,
++): Promise<FileMetadataRecord | null> {
++  const [record] = await db
++    .select()
++    .from(fileMetadata)
++    .where(eq(fileMetadata.id, id))
++    .limit(1)
+ 
+-  return record ?? null;
++  return record ?? null
+ }
+ 
+-export async function findFileByFilename(filename: string): Promise<FileMetadataRecord | null> {
++export async function findFileByFilename(
++  filename: string,
++): Promise<FileMetadataRecord | null> {
+   const [record] = await db
+     .select()
+     .from(fileMetadata)
+     .where(eq(fileMetadata.filename, filename))
+-    .limit(1);
++    .limit(1)
+ 
+-  return record ?? null;
++  return record ?? null
+ }
+ 
+ /**
+  * Fetch a single file while enforcing the provided privacy scope.
+  */
+ export async function findFileForScope(
+   id: string,
+   scope?: FileAccessScope,
+ ): Promise<FileMetadataRecord | null> {
+-  const scopeCondition = buildScopeCondition(scope);
+-  const conditions: Condition[] = [eq(fileMetadata.id, id)];
++  const scopeCondition = buildScopeCondition(scope)
++  const conditions: Condition[] = [eq(fileMetadata.id, id)]
+ 
+   if (scopeCondition) {
+-    conditions.push(scopeCondition);
++    conditions.push(scopeCondition)
+   }
+ 
+-  const whereClause = conditions.length === 1 ? conditions[0] : and(...conditions);
++  const whereClause =
++    conditions.length === 1 ? conditions[0] : and(...conditions)
+ 
+-  const [record] = await db.select().from(fileMetadata).where(whereClause).limit(1);
++  const [record] = await db
++    .select()
++    .from(fileMetadata)
++    .where(whereClause)
++    .limit(1)
+ 
+-  return record ?? null;
++  return record ?? null
+ }
+ 
+ /**
+  * Insert a new file metadata record.
+  */
+ export async function createFileMetadata(
+   values: InsertFileMetadataRecord,
+ ): Promise<FileMetadataRecord> {
+-  const [created] = await db.insert(fileMetadata).values(values).returning();
+-  return created;
++  const [created] = await db.insert(fileMetadata).values(values).returning()
++  return created
+ }
+ 
+ /**
+  * Update mutable fields on a file metadata row.
+  */
+ export async function updateFileMetadata(
+   query: { id?: string; filename?: string },
+   values: UpdateFileMetadataRecord,
+ ): Promise<FileMetadataRecord | null> {
+-  const { id, filename } = query;
++  const { id, filename } = query
+ 
+   if (!id && !filename) {
+-    throw new Error("Either id or filename must be provided");
++    throw new Error('Either id or filename must be provided')
+   }
+ 
+-  const updatePayload = buildUpdatePayload(values);
++  const updatePayload = buildUpdatePayload(values)
+ 
+   if (!updatePayload) {
+-    return id ? findFileById(id) : filename ? findFileByFilename(filename) : null;
++    return id
++      ? findFileById(id)
++      : filename
++        ? findFileByFilename(filename)
++        : null
+   }
+ 
+   const [updated] = await db
+     .update(fileMetadata)
+     .set(updatePayload)
+-    .where(or(eq(fileMetadata.id, id ?? ""), eq(fileMetadata.filename, filename ?? "")))
+-    .returning();
+-
+-  return updated ?? null;
++    .where(
++      or(
++        eq(fileMetadata.id, id ?? ''),
++        eq(fileMetadata.filename, filename ?? ''),
++      ),
++    )
++    .returning()
++
++  return updated ?? null
+ }
+ 
+ /**
+  * Delete a file metadata row and return the removed record.
+  */
+-export async function deleteFileMetadata(id: string): Promise<FileMetadataRecord | null> {
+-  const [deleted] = await db.delete(fileMetadata).where(eq(fileMetadata.id, id)).returning();
++export async function deleteFileMetadata(
++  id: string,
++): Promise<FileMetadataRecord | null> {
++  const [deleted] = await db
++    .delete(fileMetadata)
++    .where(eq(fileMetadata.id, id))
++    .returning()
+ 
+-  return deleted ?? null;
++  return deleted ?? null
+ }
+ 
+ /**
+  * Build a WHERE clause based on the provided filters.
+  */
+ function buildFileWhereClause(params: FileListParams): Condition | undefined {
+-  const conditions: Condition[] = [];
++  const conditions: Condition[] = []
+ 
+   if (params.onlyForUserId) {
+-    conditions.push(eq(fileMetadata.userId, params.onlyForUserId));
++    conditions.push(eq(fileMetadata.userId, params.onlyForUserId))
+   }
+ 
+   if (params.isPublic !== undefined) {
+-    conditions.push(eq(fileMetadata.isPublic, params.isPublic));
++    conditions.push(eq(fileMetadata.isPublic, params.isPublic))
+   }
+ 
+-  const searchCondition = buildSearchCondition(params.search);
++  const searchCondition = buildSearchCondition(params.search)
+   if (searchCondition) {
+-    conditions.push(searchCondition);
++    conditions.push(searchCondition)
+   }
+ 
+-  const scopeCondition = buildScopeCondition(params.scope);
++  const scopeCondition = buildScopeCondition(params.scope)
+   if (scopeCondition) {
+-    conditions.push(scopeCondition);
++    conditions.push(scopeCondition)
+   }
+ 
+   if (conditions.length === 0) {
+-    return undefined;
++    return undefined
+   }
+ 
+   if (conditions.length === 1) {
+-    return conditions[0];
++    return conditions[0]
+   }
+ 
+-  return and(...conditions);
++  return and(...conditions)
+ }
+ 
+ function buildScopeCondition(scope?: FileAccessScope): Condition | undefined {
+   if (!scope) {
+-    return undefined;
++    return undefined
+   }
+ 
+   const ownCondition =
+-    scope.allowOwnPrivate === false ? undefined : eq(fileMetadata.userId, scope.userId);
++    scope.allowOwnPrivate === false
++      ? undefined
++      : eq(fileMetadata.userId, scope.userId)
+ 
+   if (!ownCondition) {
+-    return eq(fileMetadata.isPublic, true);
++    return eq(fileMetadata.isPublic, true)
+   }
+ 
+-  return or(eq(fileMetadata.isPublic, true), ownCondition);
++  return or(eq(fileMetadata.isPublic, true), ownCondition)
+ }
+ 
+ function buildSearchCondition(search?: string): Condition | undefined {
+   if (!search?.trim()) {
+-    return undefined;
++    return undefined
+   }
+ 
+-  const sanitized = escapeForLike(search.trim());
+-  const pattern = `%${sanitized}%`;
++  const sanitized = escapeForLike(search.trim())
++  const pattern = `%${sanitized}%`
+ 
+-  return or(like(fileMetadata.displayName, pattern), like(fileMetadata.filename, pattern));
++  return or(
++    like(fileMetadata.displayName, pattern),
++    like(fileMetadata.filename, pattern),
++  )
+ }
+ 
+ function escapeForLike(value: string): string {
+-  return value.replace(/[%_]/g, "\\$&");
++  return value.replace(/[%_]/g, '\\$&')
+ }
+ 
+ async function countFiles(whereClause?: Condition): Promise<number> {
+-  let countQuery = db.select({ count: sql<number>`count(*)` }).from(fileMetadata);
++  let countQuery = db
++    .select({ count: sql<number>`count(*)` })
++    .from(fileMetadata)
+   if (whereClause) {
+-    countQuery = countQuery.where(whereClause);
++    countQuery = countQuery.where(whereClause)
+   }
+ 
+-  const [result] = await countQuery;
+-  return result?.count ?? 0;
++  const [result] = await countQuery
++  return result?.count ?? 0
+ }
+ 
+-function buildUpdatePayload(values: UpdateFileMetadataRecord): UpdateFileMetadataRecord | null {
+-  const entries = Object.entries(values).filter(([, value]) => value !== undefined);
++function buildUpdatePayload(
++  values: UpdateFileMetadataRecord,
++): UpdateFileMetadataRecord | null {
++  const entries = Object.entries(values).filter(
++    ([, value]) => value !== undefined,
++  )
+ 
+   if (entries.length === 0) {
+-    return null;
++    return null
+   }
+ 
+-  return Object.fromEntries(entries) as UpdateFileMetadataRecord;
++  return Object.fromEntries(entries) as UpdateFileMetadataRecord
+ }
+diff --git a/apps/web-app/src/lib/ai/agents.ts b/apps/web-app/src/lib/ai/agents.ts
+index 96a9021..9819e8d 100644
+--- a/apps/web-app/src/lib/ai/agents.ts
++++ b/apps/web-app/src/lib/ai/agents.ts
+@@ -12,33 +12,40 @@
+  *                          natural-language answer.
+  */
+ 
+-import { generateText, streamText, stepCountIs, type LanguageModel } from "ai";
+-import { searchTools } from "./tools";
+-import { getSystemPrompt } from "./prompts";
++import { generateText, streamText, stepCountIs, type LanguageModel } from 'ai'
++import { searchTools } from './tools'
++import { getSystemPrompt } from './prompts'
+ 
+ // ────────────────────────────────────────────────────────────────────
+ // Types
+ // ────────────────────────────────────────────────────────────────────
+ 
+ export interface QueryAgentResult {
+   /** The reformulated / corrected query */
+-  reformulatedQuery: string;
++  reformulatedQuery: string
+   /** Synonym variants of the query */
+-  synonymQueries: string[];
++  synonymQueries: string[]
+   /** Keywords extracted from the query */
+-  keywords: string[];
++  keywords: string[]
+ }
+ 
+ export interface SearchResult {
+-  faqResults: Array<{ content: string; faqId?: string; relevanceScore: number }>;
+-  documentResults: Array<{ content: string; source: string; relevanceScore: number }>;
++  faqResults: Array<{ content: string; faqId?: string; relevanceScore: number }>
++  documentResults: Array<{
++    content: string
++    source: string
++    relevanceScore: number
++  }>
+ }
+ 
+ export interface AgentPipelineOptions {
+   /** Custom system prompt (from chatbot config) */
+-  systemPrompt?: string | null;
++  systemPrompt?: string | null
+   /** Previous conversation messages for context */
+-  conversationMessages?: Array<{ role: "system" | "user" | "assistant"; content: string }>;
++  conversationMessages?: Array<{
++    role: 'system' | 'user' | 'assistant'
++    content: string
++  }>
+ }
+ 
+ // ────────────────────────────────────────────────────────────────────
+@@ -58,147 +65,172 @@ User: "how do i registr for clases?"
+ Output: {"reformulatedQuery":"How do I register for classes?","synonymQueries":["course registration process","how to enroll in classes","sign up for courses"],"keywords":["register","classes","enrollment","registration"]}
+ 
+ User: "whats the deadline for dropping a course"
+-Output: {"reformulatedQuery":"What is the deadline for dropping a course?","synonymQueries":["course drop deadline","when can I withdraw from a class","last day to drop courses"],"keywords":["deadline","drop","course","withdraw"]}`;
++Output: {"reformulatedQuery":"What is the deadline for dropping a course?","synonymQueries":["course drop deadline","when can I withdraw from a class","last day to drop courses"],"keywords":["deadline","drop","course","withdraw"]}`
+ 
+ /**
+  * Run the Query Agent to reformulate and enhance a user query.
+  *
+  * Uses a small/fast model (e.g. llama 3.2 1b-3b, granite micro) to keep
+  * latency low while still producing a useful reformulation.
+  */
+ export async function runQueryAgent(
+   model: LanguageModel,
+   userQuery: string,
+ ): Promise<QueryAgentResult> {
+-  const op = "runQueryAgent";
+-  console.log(`[lib.ai.agents.${op}] Processing query: "${userQuery.substring(0, 80)}..."`);
++  const op = 'runQueryAgent'
++  console.log(
++    `[lib.ai.agents.${op}] Processing query: "${userQuery.substring(0, 80)}..."`,
++  )
+ 
+   try {
+     const { text } = await generateText({
+       model,
+       messages: [
+-        { role: "system", content: QUERY_AGENT_PROMPT },
+-        { role: "user", content: userQuery },
++        { role: 'system', content: QUERY_AGENT_PROMPT },
++        { role: 'user', content: userQuery },
+       ],
+       temperature: 0.3,
+       maxOutputTokens: 512,
+-    });
++    })
+ 
+     // Parse the JSON response
+-    const cleaned = text.trim().replace(/^```json?\s*/i, "").replace(/\s*```$/i, "");
+-    const parsed = JSON.parse(cleaned) as QueryAgentResult;
++    const cleaned = text
++      .trim()
++      .replace(/^```json?\s*/i, '')
++      .replace(/\s*```$/i, '')
++    const parsed = JSON.parse(cleaned) as QueryAgentResult
+ 
+     console.log(
+       `[lib.ai.agents.${op}] Reformulated: "${parsed.reformulatedQuery}", ` +
+-      `synonyms: ${parsed.synonymQueries?.length ?? 0}, keywords: ${parsed.keywords?.length ?? 0}`,
+-    );
++        `synonyms: ${parsed.synonymQueries?.length ?? 0}, keywords: ${parsed.keywords?.length ?? 0}`,
++    )
+ 
+     return {
+       reformulatedQuery: parsed.reformulatedQuery || userQuery,
+-      synonymQueries: Array.isArray(parsed.synonymQueries) ? parsed.synonymQueries : [],
++      synonymQueries: Array.isArray(parsed.synonymQueries)
++        ? parsed.synonymQueries
++        : [],
+       keywords: Array.isArray(parsed.keywords) ? parsed.keywords : [],
+-    };
++    }
+   } catch (error) {
+-    const msg = error instanceof Error ? error.message : String(error);
+-    console.warn(`[lib.ai.agents.${op}] Failed to parse query agent output, using original query: ${msg}`);
++    const msg = error instanceof Error ? error.message : String(error)
++    console.warn(
++      `[lib.ai.agents.${op}] Failed to parse query agent output, using original query: ${msg}`,
++    )
+ 
+     // Graceful fallback – pass the original query through
+     return {
+       reformulatedQuery: userQuery,
+       synonymQueries: [],
+       keywords: [],
+-    };
++    }
+   }
+ }
+ 
+ // ────────────────────────────────────────────────────────────────────
+ // 2. Search Agent
+ // ────────────────────────────────────────────────────────────────────
+ 
+ const SEARCH_AGENT_PROMPT = `You are a search agent. Your ONLY job is to call the searchKnowledgeBase tool with the provided query.
+ 
+ You will receive a search query. Call the searchKnowledgeBase tool with it and return the results.
+ Do NOT generate any text response. Only call the tool.
+ 
+-If the primary search returns no results, try searchFaq or searchDocuments as fallbacks.`;
++If the primary search returns no results, try searchFaq or searchDocuments as fallbacks.`
+ 
+ /**
+  * Run the Search Agent to retrieve relevant documents and FAQs.
+  *
+  * Uses a function-calling optimised model (e.g. granite micro, gpt-5-nano)
+  * to invoke the search tools with the enhanced query from the Query Agent.
+  */
+ export async function runSearchAgent(
+   model: LanguageModel,
+   enhancedQuery: string,
+ ): Promise<SearchResult> {
+-  const op = "runSearchAgent";
+-  console.log(`[lib.ai.agents.${op}] Searching with query: "${enhancedQuery.substring(0, 80)}..."`);
+-
+-  const allFaqResults: SearchResult["faqResults"] = [];
+-  const allDocResults: SearchResult["documentResults"] = [];
++  const op = 'runSearchAgent'
++  console.log(
++    `[lib.ai.agents.${op}] Searching with query: "${enhancedQuery.substring(0, 80)}..."`,
++  )
+ 
+   try {
+     const result = await generateText({
+       model,
+       messages: [
+-        { role: "system", content: SEARCH_AGENT_PROMPT },
+-        { role: "user", content: `Search for: ${enhancedQuery}` },
++        { role: 'system', content: SEARCH_AGENT_PROMPT },
++        { role: 'user', content: `Search for: ${enhancedQuery}` },
+       ],
+       tools: searchTools,
+       stopWhen: stepCountIs(3),
+       temperature: 0,
+       maxOutputTokens: 1024,
+-    });
++    })
++
++    // Extract search results from tool call responses across all steps
++    const aggregated: SearchResult = { faqResults: [], documentResults: [] }
+ 
+-    // Extract tool results from steps
+     for (const step of result.steps) {
+-      if (step.toolResults && step.toolResults.length > 0) {
+-        for (const tr of step.toolResults) {
+-          // Tool results may have their output in `result` or directly on the object
+-          const output: Record<string, unknown> =
+-            typeof tr === "object" && tr !== null && "result" in tr
+-              ? (tr as { result: Record<string, unknown> }).result
+-              : (tr as Record<string, unknown>);
+-          if (output?.faqResults && Array.isArray(output.faqResults)) {
+-            allFaqResults.push(...(output.faqResults as SearchResult["faqResults"]));
+-          }
+-          if (output?.documentResults && Array.isArray(output.documentResults)) {
+-            allDocResults.push(...(output.documentResults as SearchResult["documentResults"]));
+-          }
+-          // Handle searchFaq results format
+-          if (output?.results && Array.isArray(output.results)) {
+-            for (const r of output.results as Array<Record<string, unknown>>) {
+-              if (r.question && r.answer) {
+-                allFaqResults.push({
+-                  content: `Q: ${r.question}\nA: ${r.answer}`,
+-                  relevanceScore: 1.0,
+-                });
+-              } else if (r.content) {
+-                allDocResults.push({
+-                  content: r.content as string,
+-                  source: (r.source as string) ?? "unknown",
+-                  relevanceScore: (r.relevanceScore as number) ?? 0.5,
+-                });
+-              }
++      for (const toolResult of step.toolResults) {
++        const res = toolResult.output as {
++          faqResults?: Array<{
++            content: string
++            faqId?: string
++            relevanceScore: number
++          }>
++          documentResults?: Array<{
++            content: string
++            source: string
++            relevanceScore: number
++          }>
++          results?: Array<{
++            question?: string
++            answer?: string
++            content?: string
++            source?: string
++            relevanceScore?: number
++          }>
++        }
++
++        if (res.faqResults) {
++          aggregated.faqResults.push(...res.faqResults)
++        }
++        if (res.documentResults) {
++          aggregated.documentResults.push(...res.documentResults)
++        }
++        // Handle searchFaq fallback which returns { results: [{ question, answer }] }
++        if (res.results && !res.faqResults && !res.documentResults) {
++          for (const r of res.results) {
++            if (r.question && r.answer) {
++              aggregated.faqResults.push({
++                content: `**Q:** ${r.question}\n**A:** ${r.answer}`,
++                relevanceScore: 1.0,
++              })
++            } else if (r.content) {
++              aggregated.documentResults.push({
++                content: r.content,
++                source: r.source ?? 'unknown',
++                relevanceScore: r.relevanceScore ?? 0.5,
++              })
+             }
+           }
+         }
+       }
+     }
+ 
+     console.log(
+-      `[lib.ai.agents.${op}] Found ${allFaqResults.length} FAQ result(s) and ${allDocResults.length} document result(s)`,
+-    );
++      `[lib.ai.agents.${op}] Found ${aggregated.faqResults.length} FAQ result(s) and ${aggregated.documentResults.length} document result(s)`,
++    )
++
++    return aggregated
+   } catch (error) {
+-    const msg = error instanceof Error ? error.message : String(error);
+-    console.error(`[lib.ai.agents.${op}] Search agent failed: ${msg}`);
+-  }
++    const msg = error instanceof Error ? error.message : String(error)
++    console.error(`[lib.ai.agents.${op}] Search agent failed: ${msg}`)
+ 
+-  return {
+-    faqResults: allFaqResults,
+-    documentResults: allDocResults,
+-  };
++    return {
++      faqResults: [],
++      documentResults: [],
++    }
++  }
+ }
+ 
+ // ────────────────────────────────────────────────────────────────────
+@@ -220,144 +252,159 @@ Guidelines:
+ - If results are not relevant or empty, say so honestly and offer to help further
+ - Do NOT include raw JSON, tool call metadata, relevance scores, or internal field names
+ - Be concise but thorough
+-- Use markdown formatting when it improves readability`;
++- Use markdown formatting when it improves readability`
+ }
+ 
+ function formatSearchResultsForContext(searchResults: SearchResult): string {
+-  const parts: string[] = [];
++  const parts: string[] = []
+ 
+   if (searchResults.faqResults.length > 0) {
+-    parts.push("### FAQ Results");
++    parts.push('### FAQ Results')
+     for (const faq of searchResults.faqResults) {
+-      parts.push(faq.content);
+-      parts.push("---");
++      parts.push(faq.content)
++      parts.push('---')
+     }
+   }
+ 
+   if (searchResults.documentResults.length > 0) {
+-    parts.push("### Document Results");
++    parts.push('### Document Results')
+     for (const doc of searchResults.documentResults) {
+-      parts.push(`Source: ${doc.source}`);
+-      parts.push(doc.content);
+-      parts.push("---");
++      parts.push(`Source: ${doc.source}`)
++      parts.push(doc.content)
++      parts.push('---')
+     }
+   }
+ 
+   if (parts.length === 0) {
+-    return "No relevant results were found in the knowledge base.";
++    return 'No relevant results were found in the knowledge base.'
+   }
+ 
+-  return parts.join("\n");
++  return parts.join('\n')
+ }
+ 
+ /**
+  * Run the Summarizing Agent to produce the final user-facing answer.
+  *
+  * Uses a medium-to-large model (e.g. llama 3.3 70b) for higher quality
+  * synthesis of the retrieved knowledge base content.
+  *
+  * Returns a streamText result so the caller can stream tokens to the client.
+  */
+ export function runSummarizingAgent(
+   model: LanguageModel,
+   userQuery: string,
+   searchResults: SearchResult,
+   options?: AgentPipelineOptions,
+ ) {
+-  const op = "runSummarizingAgent";
++  const op = 'runSummarizingAgent'
+   console.log(
+     `[lib.ai.agents.${op}] Summarizing ${searchResults.faqResults.length} FAQ(s) ` +
+-    `and ${searchResults.documentResults.length} document(s)`,
+-  );
++      `and ${searchResults.documentResults.length} document(s)`,
++  )
+ 
+-  const systemPrompt = getSystemPrompt(options?.systemPrompt);
+-  const summarizationPrompt = buildSummarizationPrompt(systemPrompt);
+-  const formattedResults = formatSearchResultsForContext(searchResults);
++  const systemPrompt = getSystemPrompt(options?.systemPrompt)
++  const summarizationPrompt = buildSummarizationPrompt(systemPrompt)
++  const formattedResults = formatSearchResultsForContext(searchResults)
+ 
+   // Build the messages array including conversation history
+-  const messages: Array<{ role: "system" | "user" | "assistant"; content: string }> = [
+-    { role: "system", content: summarizationPrompt },
+-  ];
++  const messages: Array<{
++    role: 'system' | 'user' | 'assistant'
++    content: string
++  }> = [{ role: 'system', content: summarizationPrompt }]
+ 
+   // Add conversation history if provided
+   if (options?.conversationMessages) {
+     for (const msg of options.conversationMessages) {
+-      if (msg.role !== "system") {
+-        messages.push(msg);
++      if (msg.role !== 'system') {
++        messages.push(msg)
+       }
+     }
+   }
+ 
+   // Add the current query with search context
+   messages.push({
+-    role: "user",
++    role: 'user',
+     content: `User Question: ${userQuery}\n\nSearch Results:\n${formattedResults}`,
+-  });
++  })
+ 
+   return streamText({
+     model,
+     messages,
+     temperature: 0.7,
+     maxOutputTokens: 2048,
+-  });
++  })
+ }
+ 
+ // ────────────────────────────────────────────────────────────────────
+ // Pipeline Orchestrator
+ // ────────────────────────────────────────────────────────────────────
+ 
+ export interface AgentPipelineModels {
+   /** Small/fast model for query understanding (e.g. llama 3.2 1b, granite micro) */
+-  queryModel: LanguageModel;
++  queryModel: LanguageModel
+   /** Function-calling model for search (e.g. granite micro, llama 3.2 3b) */
+-  searchModel: LanguageModel;
++  searchModel: LanguageModel
+   /** Bigger model for summarization (e.g. llama 3.3 70b) */
+-  summarizeModel: LanguageModel;
++  summarizeModel: LanguageModel
+ }
+ 
+ /**
+  * Run the full 3-agent pipeline: Query → Search → Summarize.
+  *
+  * Returns the streamText result from the summarizing agent so the caller
+  * can stream tokens directly to the client.
+  */
+ export async function runAgentPipeline(
+   models: AgentPipelineModels,
+   userQuery: string,
+   options?: AgentPipelineOptions,
+ ) {
+-  const op = "runAgentPipeline";
+-  console.log(`[lib.ai.agents.${op}] Starting pipeline for: "${userQuery.substring(0, 80)}..."`);
++  const op = 'runAgentPipeline'
++  console.log(
++    `[lib.ai.agents.${op}] Starting pipeline for: "${userQuery.substring(0, 80)}..."`,
++  )
+ 
+   // Step 1: Query Agent – reformulate and enhance the query
+-  const queryResult = await runQueryAgent(models.queryModel, userQuery);
++  const queryResult = await runQueryAgent(models.queryModel, userQuery)
+ 
+   // Step 2: Search Agent – search with enhanced query + synonym queries
+   // Combine the reformulated query with keywords for a richer search
+-  const searchQuery = queryResult.keywords.length > 0
+-    ? `${queryResult.reformulatedQuery} ${queryResult.keywords.join(" ")}`
+-    : queryResult.reformulatedQuery;
++  const searchQuery =
++    queryResult.keywords.length > 0
++      ? `${queryResult.reformulatedQuery} ${queryResult.keywords.join(' ')}`
++      : queryResult.reformulatedQuery
+ 
+-  const searchResults = await runSearchAgent(models.searchModel, searchQuery);
++  const searchResults = await runSearchAgent(models.searchModel, searchQuery)
+ 
+   // If primary search found nothing, try synonym queries
+-  if (searchResults.faqResults.length === 0 && searchResults.documentResults.length === 0) {
++  if (
++    searchResults.faqResults.length === 0 &&
++    searchResults.documentResults.length === 0
++  ) {
+     for (const synonym of queryResult.synonymQueries) {
+-      console.log(`[lib.ai.agents.${op}] Trying synonym query: "${synonym}"`);
+-      const synonymResults = await runSearchAgent(models.searchModel, synonym);
+-      searchResults.faqResults.push(...synonymResults.faqResults);
+-      searchResults.documentResults.push(...synonymResults.documentResults);
+-      if (searchResults.faqResults.length > 0 || searchResults.documentResults.length > 0) {
+-        break; // Found results, stop trying synonyms
++      console.log(`[lib.ai.agents.${op}] Trying synonym query: "${synonym}"`)
++      const synonymResults = await runSearchAgent(models.searchModel, synonym)
++      searchResults.faqResults.push(...synonymResults.faqResults)
++      searchResults.documentResults.push(...synonymResults.documentResults)
++      if (
++        searchResults.faqResults.length > 0 ||
++        searchResults.documentResults.length > 0
++      ) {
++        break // Found results, stop trying synonyms
+       }
+     }
+   }
+ 
+   console.log(
+     `[lib.ai.agents.${op}] Pipeline search complete: ${searchResults.faqResults.length} FAQ(s), ` +
+-    `${searchResults.documentResults.length} document(s)`,
+-  );
++      `${searchResults.documentResults.length} document(s)`,
++  )
+ 
+   // Step 3: Summarizing Agent – produce the final answer
+-  return runSummarizingAgent(models.summarizeModel, userQuery, searchResults, options);
++  return runSummarizingAgent(
++    models.summarizeModel,
++    userQuery,
++    searchResults,
++    options,
++  )
+ }
+diff --git a/apps/web-app/src/routes/dashboard/documents.tsx b/apps/web-app/src/routes/dashboard/documents.tsx
+index 4a8c14c..ef9fe3b 100644
+--- a/apps/web-app/src/routes/dashboard/documents.tsx
++++ b/apps/web-app/src/routes/dashboard/documents.tsx
+@@ -1,256 +1,369 @@
+-import { createFileRoute } from "@tanstack/react-router";
+-import { useState, useRef, useMemo } from "react";
+-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+-import { Button } from "@/components/ui/button";
+-import { Input } from "@/components/ui/input";
++import { createFileRoute } from '@tanstack/react-router'
++import { useState, useRef, useMemo } from 'react'
++import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
++import {
++  Card,
++  CardContent,
++  CardDescription,
++  CardHeader,
++  CardTitle,
++} from '@/components/ui/card'
++import { Button } from '@/components/ui/button'
++import { Input } from '@/components/ui/input'
+ import {
+   FileText,
+   Upload,
+   Search,
+   MoreVertical,
+   Download,
+   Trash2,
+   Eye,
+   Clock,
+   CheckCircle2,
+   AlertCircle,
+   Loader2,
+   ScanLine,
+   X,
+-} from "lucide-react";
++  RefreshCw,
++  Edit,
++} from 'lucide-react'
+ import {
+   DropdownMenu,
+   DropdownMenuContent,
+   DropdownMenuItem,
+   DropdownMenuSeparator,
+   DropdownMenuTrigger,
+-} from "@/components/ui/dropdown-menu";
++} from '@/components/ui/dropdown-menu'
+ import {
+   Dialog,
+   DialogContent,
+   DialogDescription,
+   DialogFooter,
+   DialogHeader,
+   DialogTitle,
+-} from "@/components/ui/dialog";
+-import { Label } from "@/components/ui/label";
++} from '@/components/ui/dialog'
++import {
++  AlertDialog,
++  AlertDialogAction,
++  AlertDialogCancel,
++  AlertDialogContent,
++  AlertDialogDescription,
++  AlertDialogFooter,
++  AlertDialogHeader,
++  AlertDialogTitle,
++} from '@/components/ui/alert-dialog'
++import { Label } from '@/components/ui/label'
++import { Textarea } from '@/components/ui/textarea'
+ import {
+   getFilesServerFn,
+   uploadFileServerFn,
+   deleteFileServerFn,
+   getFileDownloadUrlServerFn,
++  updateFileServerFn,
+   type FileMetadata,
+-} from "@/server/functions/files";
+-import { indexDocumentServerFn } from "@/server/functions/embeddings";
+-import { getActiveWorkflowsServerFn } from "@/server/functions/workflow-status";
+-import type { WorkflowStatusResult } from "@/server/services/workflow-tracker";
+-import { tryCatchAsync } from "@/lib/error";
+-import { authMiddleware } from "@/server/middleware";
+-import { useServerFn } from "@tanstack/react-start";
++} from '@/server/functions/files'
++import {
++  indexDocumentServerFn,
++  reindexAllDocumentsServerFn,
++} from '@/server/functions/embeddings'
++import { getActiveWorkflowsServerFn } from '@/server/functions/workflow-status'
++import type { WorkflowStatusResult } from '@/server/services/workflow-tracker'
++import { tryCatchAsync } from '@/lib/error'
++import { authMiddleware } from '@/server/middleware'
++import { useServerFn } from '@tanstack/react-start'
+ 
+ // Type-safe wrapper functions for server functions with data parameters
+ async function deleteFile(id: string) {
+   // @ts-expect-error - Server function types with middleware are complex
+-  return deleteFileServerFn({ data: { id } });
++  return deleteFileServerFn({ data: { id } })
+ }
+ 
+ async function getFileDownloadUrl(id: string) {
+   // @ts-expect-error - Server function types with middleware are complex
+-  return getFileDownloadUrlServerFn({ data: { id } });
++  return getFileDownloadUrlServerFn({ data: { id } })
+ }
+ 
+ async function uploadFile(fileData: {
+-  filename: string;
+-  displayName: string;
+-  description?: string;
+-  keywords?: string;
+-  mimeType?: string;
+-  isPublic: boolean;
+-  fileData: string;
++  filename: string
++  displayName: string
++  description?: string
++  keywords?: string
++  mimeType?: string
++  isPublic: boolean
++  fileData: string
+ }) {
+   // @ts-expect-error - Server function types with middleware are complex
+-  return uploadFileServerFn({ data: fileData });
++  return uploadFileServerFn({ data: fileData })
+ }
+ 
++async function updateFile(data: {
++  id: string
++  displayName?: string
++  description?: string
++  keywords?: string
++  isPublic?: boolean
++}) {
++  // @ts-expect-error - Server function types with middleware are complex
++  return updateFileServerFn({ data })
++}
+ 
++async function reindexAllDocuments() {
++  return reindexAllDocumentsServerFn() as Promise<{
++    success: boolean
++    queued: number
++    errors: Array<{ fileId: string; error: string }>
++  }>
++}
+ 
+-export const Route = createFileRoute("/dashboard/documents")({
++export const Route = createFileRoute('/dashboard/documents')({
+   server: {
+     middleware: [authMiddleware],
+   },
+   component: DocumentsPage,
+-});
++})
+ 
+ function DocumentsPage() {
+-  const queryClient = useQueryClient();
+-  const [searchQuery, setSearchQuery] = useState("");
+-  const [uploadDialogOpen, setUploadDialogOpen] = useState(false);
+-  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+-  const [selectedFile, setSelectedFile] = useState<FileMetadata | null>(null);
+-  const [indexingFileId, setIndexingFileId] = useState<string | null>(null);
+-  const [indexingError, setIndexingError] = useState<string | null>(null);
++  const queryClient = useQueryClient()
++  const [searchQuery, setSearchQuery] = useState('')
++  const [uploadDialogOpen, setUploadDialogOpen] = useState(false)
++  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
++  const [selectedFile, setSelectedFile] = useState<FileMetadata | null>(null)
++  const [indexingFileId, setIndexingFileId] = useState<string | null>(null)
++  const [indexingError, setIndexingError] = useState<string | null>(null)
++  const [reindexDialogOpen, setReindexDialogOpen] = useState(false)
++  const [editDialogOpen, setEditDialogOpen] = useState(false)
++  const [editFile, setEditFile] = useState<FileMetadata | null>(null)
++  const [editDisplayName, setEditDisplayName] = useState('')
++  const [editDescription, setEditDescription] = useState('')
++  const [editKeywords, setEditKeywords] = useState('')
++  const [editIsPublic, setEditIsPublic] = useState(false)
+   const [toasts, setToasts] = useState<
+-    Array<{ id: string; message: string; variant: "success" | "error" }>
+-  >([]);
++    Array<{ id: string; message: string; variant: 'success' | 'error' }>
++  >([])
+ 
+-  const indexDocument = useServerFn(indexDocumentServerFn);
++  const indexDocument = useServerFn(indexDocumentServerFn)
+ 
+-  const addToast = (message: string, variant: "success" | "error") => {
+-    const id = `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+-    setToasts((prev) => [...prev, { id, message, variant }]);
++  const addToast = (message: string, variant: 'success' | 'error') => {
++    const id = `${Date.now()}-${Math.random().toString(16).slice(2)}`
++    setToasts((prev) => [...prev, { id, message, variant }])
+     setTimeout(() => {
+-      setToasts((prev) => prev.filter((toast) => toast.id !== id));
+-    }, 4000);
+-  };
++      setToasts((prev) => prev.filter((toast) => toast.id !== id))
++    }, 4000)
++  }
+ 
+   // ─── Workflow status polling via React Query ───────────────────────────────
+   const { data: workflowsData } = useQuery({
+-    queryKey: ["workflow-statuses"],
++    queryKey: ['workflow-statuses'],
+     queryFn: async () => {
+-      const [data, err] = await tryCatchAsync(getActiveWorkflowsServerFn);
++      const [data, err] = await tryCatchAsync(getActiveWorkflowsServerFn)
+       if (err) {
+-        console.error("[documents] Failed to fetch workflow statuses:", err);
+-        return { workflows: [] as WorkflowStatusResult[] };
++        console.error('[documents] Failed to fetch workflow statuses:', err)
++        return { workflows: [] as WorkflowStatusResult[] }
+       }
+-      return data;
++      return data
+     },
+     // Poll every 5 seconds while any workflow is active
+     refetchInterval: (query) => {
+-      const workflows = query.state.data?.workflows ?? [];
++      const workflows = query.state.data?.workflows ?? []
+       const hasActive = workflows.some(
+-        (w) => !["complete", "errored", "terminated"].includes(w.status),
+-      );
+-      return hasActive ? 5_000 : false;
++        (w) => !['complete', 'errored', 'terminated'].includes(w.status),
++      )
++      return hasActive ? 5_000 : false
+     },
+     // Keep polling in background when tab is not focused
+     refetchIntervalInBackground: true,
+-  });
++  })
+ 
+   // Build a fileId → WorkflowStatusResult map for easy lookup
+   const workflowStatuses = useMemo(() => {
+-    const map: Record<string, WorkflowStatusResult> = {};
++    const map: Record<string, WorkflowStatusResult> = {}
+     for (const wf of workflowsData?.workflows ?? []) {
+-      map[wf.fileId] = wf;
++      map[wf.fileId] = wf
+     }
+-    return map;
+-  }, [workflowsData]);
++    return map
++  }, [workflowsData])
+ 
+   // Fetch files
+   const {
+     data: filesData,
+     isLoading,
+     error,
+   } = useQuery({
+-    queryKey: ["files", searchQuery],
++    queryKey: ['files', searchQuery],
+     queryFn: async () => {
+-      const [data, err] = await tryCatchAsync(getFilesServerFn);
+-      if (err) throw err;
+-      return data;
++      const [data, err] = await tryCatchAsync(getFilesServerFn)
++      if (err) throw err
++      return data
+     },
+-  });
++  })
+ 
+-  const files = useMemo(() => filesData?.data ?? [], [filesData]);
+-  const totalCount = filesData?.pagination?.totalCount ?? 0;
++  const files = useMemo(() => filesData?.data ?? [], [filesData])
++  const totalCount = filesData?.pagination?.totalCount ?? 0
+ 
+   // Delete mutation
+   const deleteMutation = useMutation({
+     mutationFn: async (id: string) => {
+-      const [result, err] = await tryCatchAsync(() => deleteFile(id));
+-      if (err) throw err;
+-      return result;
++      const [result, err] = await tryCatchAsync(() => deleteFile(id))
++      if (err) throw err
++      return result
+     },
+     onSuccess: () => {
+-      queryClient.invalidateQueries({ queryKey: ["files"] });
+-      setDeleteDialogOpen(false);
+-      setSelectedFile(null);
++      queryClient.invalidateQueries({ queryKey: ['files'] })
++      setDeleteDialogOpen(false)
++      setSelectedFile(null)
+     },
+-  });
++  })
+ 
+   const indexMutation = useMutation({
+     mutationFn: async (id: string) => {
+-      const [result, err] = await tryCatchAsync(() => indexDocument({ data: { fileId: id } }));
+-      if (err) throw err;
+-      return result;
++      const [result, err] = await tryCatchAsync(() =>
++        indexDocument({ data: { fileId: id } }),
++      )
++      if (err) throw err
++      return result
+     },
+     onMutate: (id) => {
+-      setIndexingError(null);
+-      setIndexingFileId(id);
++      setIndexingError(null)
++      setIndexingFileId(id)
+     },
+     onSuccess: (_data, _id) => {
+-      addToast("Indexing workflow started.", "success");
++      addToast('Indexing workflow started.', 'success')
+       // Start polling for workflow statuses
+-      queryClient.invalidateQueries({ queryKey: ["workflow-statuses"] });
+-      queryClient.invalidateQueries({ queryKey: ["files"] });
+-      setIndexingFileId(null);
++      queryClient.invalidateQueries({ queryKey: ['workflow-statuses'] })
++      queryClient.invalidateQueries({ queryKey: ['files'] })
++      setIndexingFileId(null)
+     },
+     onError: (err: unknown, _id) => {
+-      setIndexingFileId(null);
+-      const message = err instanceof Error ? err.message : "Failed to index document";
+-      setIndexingError(message);
+-      addToast(message, "error");
++      setIndexingFileId(null)
++      const message =
++        err instanceof Error ? err.message : 'Failed to index document'
++      setIndexingError(message)
++      addToast(message, 'error')
++    },
++  })
++
++  // Reindex all documents mutation
++  const reindexAllMutation = useMutation({
++    mutationFn: reindexAllDocuments,
++    onSuccess: (data) => {
++      const msg = `Reindexing started for ${data?.queued ?? 0} document(s).`
++      addToast(msg, 'success')
++      queryClient.invalidateQueries({ queryKey: ['workflow-statuses'] })
++      queryClient.invalidateQueries({ queryKey: ['files'] })
++      setReindexDialogOpen(false)
+     },
+-  });
++    onError: (err: unknown) => {
++      const message =
++        err instanceof Error ? err.message : 'Failed to reindex documents'
++      addToast(message, 'error')
++    },
++  })
++
++  // Update file metadata mutation
++  const updateFileMutation = useMutation({
++    mutationFn: updateFile,
++    onSuccess: () => {
++      queryClient.invalidateQueries({ queryKey: ['files'] })
++      addToast('Document updated.', 'success')
++      setEditDialogOpen(false)
++      setEditFile(null)
++    },
++    onError: (err: unknown) => {
++      const message =
++        err instanceof Error ? err.message : 'Failed to update document'
++      addToast(message, 'error')
++    },
++  })
+ 
+   // Download handler
+   const handleDownload = async (file: FileMetadata) => {
+-    const [result, err] = await tryCatchAsync(() => getFileDownloadUrl(file.id));
++    const [result, err] = await tryCatchAsync(() => getFileDownloadUrl(file.id))
+     if (err) {
+-      console.error("Download error:", err);
+-      return;
++      console.error('Download error:', err)
++      return
+     }
+     // In a real implementation, you would use the r2Key to construct the download URL
+     // or stream the file content
+-    console.log("Download URL:", result);
+-  };
++    console.log('Download URL:', result)
++  }
+ 
+   const handleDeleteClick = (file: FileMetadata) => {
+-    setSelectedFile(file);
+-    setDeleteDialogOpen(true);
+-  };
++    setSelectedFile(file)
++    setDeleteDialogOpen(true)
++  }
+ 
+   const handleIndexClick = (file: FileMetadata) => {
+-    if (indexMutation.isPending) return;
+-    indexMutation.mutate(file.id);
+-  };
++    if (indexMutation.isPending) return
++    indexMutation.mutate(file.id)
++  }
++
++  const handleEditClick = (file: FileMetadata) => {
++    setEditFile(file)
++    setEditDisplayName(file.displayName)
++    setEditDescription(file.description ?? '')
++    setEditKeywords(file.keywords ?? '')
++    setEditIsPublic(file.isPublic)
++    setEditDialogOpen(true)
++  }
++
++  const handleEditSubmit = () => {
++    if (!editFile || !editDisplayName.trim()) return
++    updateFileMutation.mutate({
++      id: editFile.id,
++      displayName: editDisplayName.trim(),
++      description: editDescription.trim() || undefined,
++      keywords: editKeywords.trim() || undefined,
++      isPublic: editIsPublic,
++    })
++  }
+ 
+   const confirmDelete = () => {
+     if (selectedFile) {
+-      deleteMutation.mutate(selectedFile.id);
++      deleteMutation.mutate(selectedFile.id)
+     }
+-  };
++  }
+ 
+   // Calculate stats
+-  const indexedCount = files.filter((f) => f.indexedAt != null).length;
+-  const pendingCount = files.filter((f) => f.indexedAt == null).length;
++  const indexedCount = files.filter((f) => f.indexedAt != null).length
++  const pendingCount = files.filter((f) => f.indexedAt == null).length
+ 
+   return (
+     <div className="space-y-6">
+       <div className="fixed right-6 top-6 z-50 space-y-2">
+         {toasts.map((toast) => (
+-          <div
++          <output
+             key={toast.id}
+-            role="status"
+-            className={`rounded-md border px-4 py-2 text-sm shadow-sm ${toast.variant === "success"
+-              ? "border-emerald-200 bg-emerald-50 text-emerald-900"
+-              : "border-destructive/40 bg-destructive/10 text-destructive"
+-              }`}
++            className={`block rounded-md border px-4 py-2 text-sm shadow-sm ${
++              toast.variant === 'success'
++                ? 'border-emerald-200 bg-emerald-50 text-emerald-900'
++                : 'border-destructive/40 bg-destructive/10 text-destructive'
++            }`}
+           >
+             {toast.message}
+-          </div>
++          </output>
+         ))}
+       </div>
+       <div className="flex items-center justify-between">
+         <div>
+           <h1 className="text-3xl font-bold tracking-tight">Documents</h1>
+           <p className="text-muted-foreground">
+             Manage documents that provide context for the chatbot
+           </p>
+         </div>
+-        <Button onClick={() => setUploadDialogOpen(true)}>
+-          <Upload className="mr-2 h-4 w-4" />
+-          Upload Document
+-        </Button>
++        <div className="flex items-center gap-2">
++          <Button
++            variant="outline"
++            onClick={() => setReindexDialogOpen(true)}
++            disabled={isLoading || files.length === 0}
++          >
++            <RefreshCw className="mr-2 h-4 w-4" />
++            Reindex All
++          </Button>
++          <Button onClick={() => setUploadDialogOpen(true)}>
++            <Upload className="mr-2 h-4 w-4" />
++            Upload Document
++          </Button>
++        </div>
+       </div>
+ 
+       {/* Search and Filters */}
+@@ -275,224 +388,377 @@ function DocumentsPage() {
+       <div className="grid gap-4 md:grid-cols-3">
+         <Card>
+           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+-            <CardTitle className="text-sm font-medium">Total Documents</CardTitle>
++            <CardTitle className="text-sm font-medium">
++              Total Documents
++            </CardTitle>
+             <FileText className="h-4 w-4 text-muted-foreground" />
+           </CardHeader>
+           <CardContent>
+             <div className="text-2xl font-bold">
+-              {isLoading ? <Loader2 className="h-6 w-6 animate-spin" /> : totalCount}
++              {isLoading ? (
++                <Loader2 className="h-6 w-6 animate-spin" />
++              ) : (
++                totalCount
++              )}
+             </div>
+           </CardContent>
+         </Card>
+         <Card>
+           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+             <CardTitle className="text-sm font-medium">Indexed</CardTitle>
+             <CheckCircle2 className="h-4 w-4 text-green-600" />
+           </CardHeader>
+           <CardContent>
+             <div className="text-2xl font-bold">
+-              {isLoading ? <Loader2 className="h-6 w-6 animate-spin" /> : indexedCount}
++              {isLoading ? (
++                <Loader2 className="h-6 w-6 animate-spin" />
++              ) : (
++                indexedCount
++              )}
+             </div>
+           </CardContent>
+         </Card>
+         <Card>
+           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+             <CardTitle className="text-sm font-medium">Pending</CardTitle>
+             <Clock className="h-4 w-4 text-yellow-600" />
+           </CardHeader>
+           <CardContent>
+             <div className="text-2xl font-bold">
+-              {isLoading ? <Loader2 className="h-6 w-6 animate-spin" /> : pendingCount}
++              {isLoading ? (
++                <Loader2 className="h-6 w-6 animate-spin" />
++              ) : (
++                pendingCount
++              )}
+             </div>
+           </CardContent>
+         </Card>
+       </div>
+ 
+       {/* Documents List */}
+       <Card>
+         <CardHeader>
+           <CardTitle>All Documents</CardTitle>
+-          <CardDescription>Documents uploaded for chatbot knowledge base</CardDescription>
++          <CardDescription>
++            Documents uploaded for chatbot knowledge base
++          </CardDescription>
+         </CardHeader>
+         <CardContent>
+           {isLoading ? (
+             <div className="flex items-center justify-center py-12">
+               <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+             </div>
+           ) : error ? (
+             <div className="flex flex-col items-center justify-center py-12 text-center">
+               <AlertCircle className="h-12 w-12 text-destructive" />
+-              <h3 className="mt-4 text-lg font-semibold">Error loading documents</h3>
+-              <p className="text-muted-foreground">Please try again or contact support</p>
++              <h3 className="mt-4 text-lg font-semibold">
++                Error loading documents
++              </h3>
++              <p className="text-muted-foreground">
++                Please try again or contact support
++              </p>
+             </div>
+           ) : files.length === 0 ? (
+             <div className="flex flex-col items-center justify-center py-12 text-center">
+               <FileText className="h-12 w-12 text-muted-foreground/50" />
+               <h3 className="mt-4 text-lg font-semibold">No documents found</h3>
+               <p className="text-muted-foreground">
+                 {searchQuery
+-                  ? "Try adjusting your search query"
+-                  : "Upload your first document to get started"}
++                  ? 'Try adjusting your search query'
++                  : 'Upload your first document to get started'}
+               </p>
+             </div>
+           ) : (
+             <div className="space-y-4">
+               {indexingError && (
+                 <div className="rounded-md border border-destructive/40 bg-destructive/5 px-4 py-2 text-sm text-destructive">
+                   {indexingError}
+                 </div>
+               )}
+               {files.map((doc) => (
+                 <DocumentRow
+                   key={doc.id}
+                   document={doc}
+                   onDownload={handleDownload}
+                   onDelete={handleDeleteClick}
++                  onEdit={handleEditClick}
+                   onIndex={handleIndexClick}
+                   isIndexing={indexingFileId === doc.id}
+                   workflowStatus={workflowStatuses[doc.id] ?? null}
+                   onWorkflowComplete={() => {
+-                    queryClient.invalidateQueries({ queryKey: ["files"] });
++                    queryClient.invalidateQueries({ queryKey: ['files'] })
+                   }}
+                 />
+               ))}
+             </div>
+           )}
+         </CardContent>
+       </Card>
+ 
+       {/* Upload Dialog */}
+       <UploadDialog
+         open={uploadDialogOpen}
+         onOpenChange={setUploadDialogOpen}
+         onSuccess={() => {
+-          queryClient.invalidateQueries({ queryKey: ["files"] });
++          queryClient.invalidateQueries({ queryKey: ['files'] })
+         }}
+       />
+ 
+       {/* Delete Confirmation Dialog */}
+       <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+         <DialogContent>
+           <DialogHeader>
+             <DialogTitle>Delete Document</DialogTitle>
+             <DialogDescription>
+-              Are you sure you want to delete "{selectedFile?.displayName}"? This action cannot be
+-              undone.
++              Are you sure you want to delete "{selectedFile?.displayName}"?
++              This action cannot be undone.
+             </DialogDescription>
+           </DialogHeader>
+           <DialogFooter>
+-            <Button variant="outline" onClick={() => setDeleteDialogOpen(false)}>
++            <Button
++              variant="outline"
++              onClick={() => setDeleteDialogOpen(false)}
++            >
+               Cancel
+             </Button>
+             <Button
+               variant="destructive"
+               onClick={confirmDelete}
+               disabled={deleteMutation.isPending}
+             >
+               {deleteMutation.isPending ? (
+                 <>
+                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                   Deleting...
+                 </>
+               ) : (
+-                "Delete"
++                'Delete'
+               )}
+             </Button>
+           </DialogFooter>
+         </DialogContent>
+       </Dialog>
++
++      {/* Edit Document Dialog */}
++      <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
++        <DialogContent className="sm:max-w-[525px]">
++          <DialogHeader>
++            <DialogTitle>Edit Document</DialogTitle>
++            <DialogDescription>
++              Update the document properties.
++            </DialogDescription>
++          </DialogHeader>
++          <div className="grid gap-4 py-4">
++            <div className="space-y-2">
++              <Label htmlFor="edit-displayName">Display Name</Label>
++              <Input
++                id="edit-displayName"
++                placeholder="Enter a display name"
++                value={editDisplayName}
++                onChange={(e) => setEditDisplayName(e.target.value)}
++              />
++            </div>
++            <div className="space-y-2">
++              <Label htmlFor="edit-description">Description</Label>
++              <Textarea
++                id="edit-description"
++                placeholder="Brief description of the document"
++                value={editDescription}
++                onChange={(e) => setEditDescription(e.target.value)}
++                rows={3}
++              />
++            </div>
++            <div className="space-y-2">
++              <Label htmlFor="edit-keywords">Keywords</Label>
++              <Input
++                id="edit-keywords"
++                placeholder="comma, separated, keywords"
++                value={editKeywords}
++                onChange={(e) => setEditKeywords(e.target.value)}
++              />
++              <p className="text-xs text-muted-foreground">
++                Optional comma-separated keywords to improve search indexing
++              </p>
++            </div>
++            <div className="flex items-center gap-2">
++              <input
++                type="checkbox"
++                id="edit-isPublic"
++                checked={editIsPublic}
++                onChange={(e) => setEditIsPublic(e.target.checked)}
++                className="h-4 w-4"
++              />
++              <Label htmlFor="edit-isPublic" className="text-sm font-normal">
++                Make this document public
++              </Label>
++            </div>
++          </div>
++          <DialogFooter>
++            <Button variant="outline" onClick={() => setEditDialogOpen(false)}>
++              Cancel
++            </Button>
++            <Button
++              onClick={handleEditSubmit}
++              disabled={updateFileMutation.isPending || !editDisplayName.trim()}
++            >
++              {updateFileMutation.isPending && (
++                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
++              )}
++              Save Changes
++            </Button>
++          </DialogFooter>
++        </DialogContent>
++      </Dialog>
++
++      {/* Reindex All Confirmation */}
++      <AlertDialog
++        open={reindexDialogOpen}
++        onOpenChange={(open) => {
++          if (!reindexAllMutation.isPending) setReindexDialogOpen(open)
++        }}
++      >
++        <AlertDialogContent>
++          <AlertDialogHeader>
++            <AlertDialogTitle>Reindex all documents?</AlertDialogTitle>
++            <AlertDialogDescription>
++              This will start embedding workflows for all {files.length}{' '}
++              document{files.length !== 1 ? 's' : ''}. Each document will be
++              processed and indexed into the vector store for semantic search.
++              This operation is safe to run repeatedly.
++            </AlertDialogDescription>
++          </AlertDialogHeader>
++          {reindexAllMutation.isSuccess && (
++            <p className="text-sm text-green-600">
++              Successfully queued {reindexAllMutation.data?.queued ?? 0}{' '}
++              document(s) for reindexing.
++            </p>
++          )}
++          {reindexAllMutation.isError && (
++            <p className="text-sm text-destructive">
++              Reindexing failed:{' '}
++              {reindexAllMutation.error instanceof Error
++                ? reindexAllMutation.error.message
++                : 'Unknown error'}
++            </p>
++          )}
++          <AlertDialogFooter>
++            <AlertDialogCancel disabled={reindexAllMutation.isPending}>
++              Cancel
++            </AlertDialogCancel>
++            <AlertDialogAction
++              onClick={(e) => {
++                e.preventDefault()
++                reindexAllMutation.mutate()
++              }}
++              disabled={reindexAllMutation.isPending}
++            >
++              {reindexAllMutation.isPending && (
++                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
++              )}
++              {reindexAllMutation.isPending ? 'Reindexing...' : 'Reindex All'}
++            </AlertDialogAction>
++          </AlertDialogFooter>
++        </AlertDialogContent>
++      </AlertDialog>
+     </div>
+-  );
++  )
+ }
+ 
+ interface DocumentRowProps {
+-  document: FileMetadata;
+-  onDownload: (doc: FileMetadata) => void;
+-  onDelete: (doc: FileMetadata) => void;
+-  onIndex: (doc: FileMetadata) => void;
+-  isIndexing: boolean;
+-  workflowStatus: WorkflowStatusResult | null;
+-  onWorkflowComplete?: () => void;
++  document: FileMetadata
++  onDownload: (doc: FileMetadata) => void
++  onDelete: (doc: FileMetadata) => void
++  onEdit: (doc: FileMetadata) => void
++  onIndex: (doc: FileMetadata) => void
++  isIndexing: boolean
++  workflowStatus: WorkflowStatusResult | null
++  onWorkflowComplete?: () => void
+ }
+ 
+ function DocumentRow({
+   document,
+   onDownload,
+   onDelete,
++  onEdit,
+   onIndex,
+   isIndexing,
+   workflowStatus,
+   onWorkflowComplete: _onWorkflowComplete,
+ }: DocumentRowProps) {
+-  const wfStatus = workflowStatus?.status;
+-  const isWfActive = wfStatus != null && !["complete", "errored", "terminated"].includes(wfStatus);
+-  const isWfErrored = wfStatus === "errored" || wfStatus === "terminated";
+-  const isWfComplete = wfStatus === "complete";
+-
+-  const statusConfig = document.indexedAt != null
+-    ? {
+-      icon: CheckCircle2,
+-      label: "Indexed",
+-      className: "bg-green-100 text-green-800",
+-    }
+-    : {
+-      icon: Clock,
+-      label: "Not indexed",
+-      className: "bg-yellow-100 text-yellow-800",
+-    };
++  const wfStatus = workflowStatus?.status
++  const isWfActive =
++    wfStatus != null &&
++    !['complete', 'errored', 'terminated'].includes(wfStatus)
++  const isWfErrored = wfStatus === 'errored' || wfStatus === 'terminated'
++  const isWfComplete = wfStatus === 'complete'
++
++  const statusConfig =
++    document.indexedAt != null
++      ? {
++          icon: CheckCircle2,
++          label: 'Indexed',
++          className: 'bg-green-100 text-green-800',
++        }
++      : {
++          icon: Clock,
++          label: 'Not indexed',
++          className: 'bg-yellow-100 text-yellow-800',
++        }
+ 
+-  const StatusIcon = statusConfig.icon;
++  const StatusIcon = statusConfig.icon
+ 
+   // Workflow badge: show live status when a workflow is tracked
+   const workflowLabel = isWfActive
+     ? `Workflow: ${wfStatus}`
+     : isWfErrored
+       ? `Failed: ${workflowStatus?.error?.message ?? wfStatus}`
+       : isWfComplete
+-        ? "Workflow: complete"
++        ? 'Workflow: complete'
+         : document.indexedAt != null
+-          ? "Indexed"
+-          : "Not indexed";
++          ? 'Indexed'
++          : 'Not indexed'
+ 
+   const workflowClass = isWfActive
+-    ? "bg-blue-100 text-blue-800"
++    ? 'bg-blue-100 text-blue-800'
+     : isWfErrored
+-      ? "bg-red-100 text-red-800"
++      ? 'bg-red-100 text-red-800'
+       : isWfComplete
+-        ? "bg-emerald-100 text-emerald-800"
++        ? 'bg-emerald-100 text-emerald-800'
+         : document.indexedAt != null
+-          ? "bg-emerald-100 text-emerald-800"
+-          : "bg-gray-100 text-gray-700";
++          ? 'bg-emerald-100 text-emerald-800'
++          : 'bg-gray-100 text-gray-700'
+ 
+   const formatFileSize = (bytes: number | null) => {
+-    if (!bytes) return "Unknown";
+-    if (bytes < 1024) return `${bytes} B`;
+-    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+-    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+-  };
++    if (!bytes) return 'Unknown'
++    if (bytes < 1024) return `${bytes} B`
++    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`
++    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
++  }
+ 
+   const formatDate = (timestamp: number | null) => {
+-    if (!timestamp) return "Unknown";
+-    const date = new Date(timestamp);
+-    const now = new Date();
+-    const diffMs = now.getTime() - date.getTime();
+-    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+-    const diffDays = Math.floor(diffHours / 24);
+-
+-    if (diffHours < 1) return "Just now";
+-    if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? "s" : ""} ago`;
+-    if (diffDays < 7) return `${diffDays} day${diffDays > 1 ? "s" : ""} ago`;
+-    return date.toLocaleDateString();
+-  };
++    if (!timestamp) return 'Unknown'
++    const date = new Date(timestamp)
++    const now = new Date()
++    const diffMs = now.getTime() - date.getTime()
++    const diffHours = Math.floor(diffMs / (1000 * 60 * 60))
++    const diffDays = Math.floor(diffHours / 24)
++
++    if (diffHours < 1) return 'Just now'
++    if (diffHours < 24)
++      return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`
++    if (diffDays < 7) return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`
++    return date.toLocaleDateString()
++  }
+ 
+   const getFileType = (mimeType: string | null) => {
+-    if (!mimeType) return "FILE";
+-    if (mimeType.includes("pdf")) return "PDF";
+-    if (mimeType.includes("word") || mimeType.includes("document")) return "DOCX";
+-    if (mimeType.includes("image")) return "IMAGE";
+-    if (mimeType.includes("text")) return "TXT";
+-    return mimeType.split("/")[1]?.toUpperCase() ?? "FILE";
+-  };
++    if (!mimeType) return 'FILE'
++    if (mimeType.includes('pdf')) return 'PDF'
++    if (mimeType.includes('word') || mimeType.includes('document'))
++      return 'DOCX'
++    if (mimeType.includes('image')) return 'IMAGE'
++    if (mimeType.includes('text')) return 'TXT'
++    return mimeType.split('/')[1]?.toUpperCase() ?? 'FILE'
++  }
+ 
+   return (
+     <div className="flex items-center justify-between rounded-lg border p-4">
+@@ -510,7 +776,9 @@ function DocumentRow({
+             <span>Uploaded {formatDate(document.uploadedAt)}</span>
+           </div>
+           {document.description && (
+-            <p className="mt-1 text-xs text-muted-foreground">{document.description}</p>
++            <p className="mt-1 text-xs text-muted-foreground">
++              {document.description}
++            </p>
+           )}
+         </div>
+       </div>
+@@ -538,98 +806,111 @@ function DocumentRow({
+               <Eye className="mr-2 h-4 w-4" />
+               Preview
+             </DropdownMenuItem>
+-            <DropdownMenuItem onClick={() => onIndex(document)} disabled={isIndexing}>
++            <DropdownMenuItem onClick={() => onEdit(document)}>
++              <Edit className="mr-2 h-4 w-4" />
++              Edit
++            </DropdownMenuItem>
++            <DropdownMenuItem
++              onClick={() => onIndex(document)}
++              disabled={isIndexing}
++            >
+               {isIndexing ? (
+                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+               ) : (
+                 <ScanLine className="mr-2 h-4 w-4" />
+               )}
+-              {isIndexing ? "Indexing..." : "Index"}
++              {isIndexing ? 'Indexing...' : 'Index'}
+             </DropdownMenuItem>
+             <DropdownMenuItem onClick={() => onDownload(document)}>
+               <Download className="mr-2 h-4 w-4" />
+               Download
+             </DropdownMenuItem>
+             <DropdownMenuSeparator />
+-            <DropdownMenuItem className="text-destructive" onClick={() => onDelete(document)}>
++            <DropdownMenuItem
++              className="text-destructive"
++              onClick={() => onDelete(document)}
++            >
+               <Trash2 className="mr-2 h-4 w-4" />
+               Delete
+             </DropdownMenuItem>
+           </DropdownMenuContent>
+         </DropdownMenu>
+       </div>
+     </div>
+-  );
++  )
+ }
+ 
+ interface UploadDialogProps {
+-  open: boolean;
+-  onOpenChange: (open: boolean) => void;
+-  onSuccess: () => void;
++  open: boolean
++  onOpenChange: (open: boolean) => void
++  onSuccess: () => void
+ }
+ 
+ function UploadDialog({ open, onOpenChange, onSuccess }: UploadDialogProps) {
+-  const [file, setFile] = useState<File | null>(null);
+-  const [displayName, setDisplayName] = useState("");
+-  const [description, setDescription] = useState("");
+-  const [keywords, setKeywords] = useState("");
+-  const [isPublic, setIsPublic] = useState(false);
+-  const fileInputRef = useRef<HTMLInputElement>(null);
++  const [file, setFile] = useState<File | null>(null)
++  const [displayName, setDisplayName] = useState('')
++  const [description, setDescription] = useState('')
++  const [keywords, setKeywords] = useState('')
++  const [isPublic, setIsPublic] = useState(false)
++  const fileInputRef = useRef<HTMLInputElement>(null)
+ 
+   const uploadMutation = useMutation({
+     mutationFn: async () => {
+-      if (!file) throw new Error("No file selected");
++      if (!file) throw new Error('No file selected')
+ 
+       // Convert file to base64
+-      const buffer = await file.arrayBuffer();
++      const buffer = await file.arrayBuffer()
+       const base64 = btoa(
+-        new Uint8Array(buffer).reduce((data, byte) => data + String.fromCharCode(byte), ""),
+-      );
++        new Uint8Array(buffer).reduce(
++          (data, byte) => data + String.fromCharCode(byte),
++          '',
++        ),
++      )
+ 
+       const [result, err] = await tryCatchAsync(() =>
+         uploadFile({
+           filename: file.name,
+           displayName: displayName || file.name,
+           description: description || undefined,
+           keywords: keywords.trim() || undefined,
+-          mimeType: file.type || "application/octet-stream",
++          mimeType: file.type || 'application/octet-stream',
+           isPublic,
+           fileData: base64,
+         }),
+-      );
++      )
+ 
+-      if (err) throw err;
+-      return result;
++      if (err) throw err
++      return result
+     },
+     onSuccess: () => {
+-      onSuccess();
+-      handleClose();
++      onSuccess()
++      handleClose()
+     },
+-  });
++  })
+ 
+   const handleClose = () => {
+-    setFile(null);
+-    setDisplayName("");
+-    setDescription("");
+-    setKeywords("");
+-    setIsPublic(false);
+-    onOpenChange(false);
+-  };
++    setFile(null)
++    setDisplayName('')
++    setDescription('')
++    setKeywords('')
++    setIsPublic(false)
++    onOpenChange(false)
++  }
+ 
+   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+-    const selectedFile = e.target.files?.[0];
++    const selectedFile = e.target.files?.[0]
+     if (selectedFile) {
+-      setFile(selectedFile);
++      setFile(selectedFile)
+       if (!displayName) {
+-        setDisplayName(selectedFile.name);
++        setDisplayName(selectedFile.name)
+       }
+     }
+-  };
++  }
+ 
+   const handleSubmit = (e: React.FormEvent) => {
+-    e.preventDefault();
+-    uploadMutation.mutate();
+-  };
++    e.preventDefault()
++    uploadMutation.mutate()
++  }
+ 
+   return (
+     <Dialog open={open} onOpenChange={onOpenChange}>
+@@ -647,17 +928,24 @@ function UploadDialog({ open, onOpenChange, onSuccess }: UploadDialogProps) {
+               <div className="flex items-center gap-2 rounded-lg border p-3">
+                 <FileText className="h-5 w-5 text-primary" />
+                 <span className="flex-1 truncate text-sm">{file.name}</span>
+-                <Button type="button" variant="ghost" size="icon" onClick={() => setFile(null)}>
++                <Button
++                  type="button"
++                  variant="ghost"
++                  size="icon"
++                  onClick={() => setFile(null)}
++                >
+                   <X className="h-4 w-4" />
+                 </Button>
+               </div>
+             ) : (
+               <div
+                 className="flex cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed p-6 transition-colors hover:border-primary"
+                 onClick={() => fileInputRef.current?.click()}
+               >
+                 <Upload className="h-8 w-8 text-muted-foreground" />
+-                <p className="mt-2 text-sm text-muted-foreground">Click to select a file</p>
++                <p className="mt-2 text-sm text-muted-foreground">
++                  Click to select a file
++                </p>
+               </div>
+             )}
+             <input
+@@ -719,22 +1007,25 @@ function UploadDialog({ open, onOpenChange, onSuccess }: UploadDialogProps) {
+             <Button type="button" variant="outline" onClick={handleClose}>
+               Cancel
+             </Button>
+-            <Button type="submit" disabled={!file || !displayName || uploadMutation.isPending}>
++            <Button
++              type="submit"
++              disabled={!file || !displayName || uploadMutation.isPending}
++            >
+               {uploadMutation.isPending ? (
+                 <>
+                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                   Uploading...
+                 </>
+               ) : (
+                 <>
+                   <Upload className="mr-2 h-4 w-4" />
+                   Upload
+                 </>
+               )}
+             </Button>
+           </DialogFooter>
+         </form>
+       </DialogContent>
+     </Dialog>
+-  );
++  )
+ }
+diff --git a/apps/web-app/src/server/functions/embeddings.ts b/apps/web-app/src/server/functions/embeddings.ts
+index d0d0afb..5517e3e 100644
+--- a/apps/web-app/src/server/functions/embeddings.ts
++++ b/apps/web-app/src/server/functions/embeddings.ts
+@@ -1,90 +1,176 @@
+-import { createServerFn } from "@tanstack/react-start";
+-import { z } from "zod";
+-import { env } from "cloudflare:workers";
+-import { tryCatchAsync } from "@/lib/error";
+-import { findFileById } from "@/db/queries";
+-import { adminMiddleware, type AdminContext } from "../middleware";
+-import { trackWorkflow } from "@/server/services/workflow-tracker";
++import { createServerFn } from '@tanstack/react-start'
++import { z } from 'zod'
++import { env } from 'cloudflare:workers'
++import { tryCatchAsync } from '@/lib/error'
++import { findFileById, listFiles } from '@/db/queries'
++import { adminMiddleware, type AdminContext } from '../middleware'
++import { trackWorkflow } from '@/server/services/workflow-tracker'
+ 
+ const indexDocumentSchema = z.object({
+-  fileId: z.string().min(1, "File id is required"),
+-});
++  fileId: z.string().min(1, 'File id is required'),
++})
+ 
+ type LoggerContext = {
+   logger?: {
+-    error: (msg: string, meta?: Record<string, unknown>) => void;
+-    info: (msg: string, meta?: Record<string, unknown>) => void;
+-  };
+-};
++    error: (msg: string, meta?: Record<string, unknown>) => void
++    info: (msg: string, meta?: Record<string, unknown>) => void
++  }
++}
+ 
+-export const indexDocumentServerFn = createServerFn({ method: "POST" })
++export const indexDocumentServerFn = createServerFn({ method: 'POST' })
+   .inputValidator(indexDocumentSchema)
+   .middleware([adminMiddleware])
+   .handler(async ({ context, data }) => {
+-    const { logger } = context as AdminContext & LoggerContext;
+-    const { fileId } = indexDocumentSchema.parse(data);
++    const { logger } = context as AdminContext & LoggerContext
++    const { fileId } = indexDocumentSchema.parse(data)
+ 
+-    const [file, fileError] = await tryCatchAsync(() => findFileById(fileId));
++    const [file, fileError] = await tryCatchAsync(() => findFileById(fileId))
+ 
+     if (fileError) {
+-      logger?.error("[server.embeddings] Failed to load file metadata", {
++      logger?.error('[server.embeddings] Failed to load file metadata', {
+         fileId,
+         error: fileError.message,
+-      });
+-      throw fileError;
++      })
++      throw fileError
+     }
+ 
+     if (!file) {
+-      logger?.error("[server.embeddings] File not found", { fileId });
+-      throw new Error("File not found");
++      logger?.error('[server.embeddings] File not found', { fileId })
++      throw new Error('File not found')
+     }
+ 
+-    const workflowId = `${fileId}-${Date.now()}`;
+-    const workflow = env.DOCUMENT_EMBEDDING_WORKFLOW;
++    const workflowId = `${fileId}-${Date.now()}`
++    const workflow = env.DOCUMENT_EMBEDDING_WORKFLOW
+ 
+     const instance = await workflow.create({
+       id: workflowId,
+       params: {
+         filename: file.filename,
+         fileId,
+       },
+-    });
++    })
+ 
+     // Track the workflow in KV for status polling
+     const [, trackError] = await tryCatchAsync(() =>
+       trackWorkflow({
+         workflowId: instance.id,
+         fileId,
+         filename: file.filename,
+       }),
+-    );
++    )
+ 
+     if (trackError) {
+       // Non-fatal: workflow is already running, just log the tracking failure
+-      logger?.error("[server.embeddings] Failed to track workflow in KV", {
++      logger?.error('[server.embeddings] Failed to track workflow in KV', {
+         fileId,
+         workflowId: instance.id,
+         error: trackError.message,
+-      });
++      })
+     }
+ 
+-    logger?.info("[server.embeddings] Started embedding workflow", {
++    logger?.info('[server.embeddings] Started embedding workflow', {
+       fileId,
+       workflowId: instance.id,
+-    });
++    })
+ 
+-    const instanceStatus = await instance.status();
++    const instanceStatus = await instance.status()
+ 
+     // Return simplified status to avoid complex type inference issues
+     return {
+       instanceId: instance.id,
+       fileId,
+       status: {
+         status: instanceStatus.status,
+         error: instanceStatus.error
+-          ? { name: instanceStatus.error.name, message: instanceStatus.error.message }
++          ? {
++              name: instanceStatus.error.name,
++              message: instanceStatus.error.message,
++            }
+           : undefined,
+-        output: instanceStatus.output as { [key: string]: NonNullable<unknown> } | undefined,
++        output: instanceStatus.output as
++          | { [key: string]: NonNullable<unknown> }
++          | undefined,
+       },
+-    };
+-  });
++    }
++  })
++
++/**
++ * Reindex all documents by triggering embedding workflows for every file.
++ * Each file gets its own workflow instance so they can run concurrently.
++ */
++export const reindexAllDocumentsServerFn = createServerFn({ method: 'POST' })
++  .middleware([adminMiddleware])
++  .handler(async ({ context }) => {
++    const { logger } = context as AdminContext & LoggerContext
++
++    // Fetch all files (use a large limit to get everything)
++    const [filesResult, listError] = await tryCatchAsync(() =>
++      listFiles({ limit: 100, offset: 0 }),
++    )
++
++    if (listError) {
++      logger?.error('[server.embeddings] Failed to list files for reindex', {
++        error: listError.message,
++      })
++      throw listError
++    }
++
++    const files = filesResult?.data ?? []
++    if (files.length === 0) {
++      return {
++        success: true,
++        queued: 0,
++        errors: [] as Array<{ fileId: string; error: string }>,
++      }
++    }
++
++    const workflow = env.DOCUMENT_EMBEDDING_WORKFLOW
++    const results: Array<{ fileId: string; workflowId: string }> = []
++    const errors: Array<{ fileId: string; error: string }> = []
++
++    for (const file of files) {
++      const workflowId = `${file.id}-${Date.now()}`
++
++      const [instance, createError] = await tryCatchAsync(() =>
++        workflow.create({
++          id: workflowId,
++          params: {
++            filename: file.filename,
++            fileId: file.id,
++          },
++        }),
++      )
++
++      if (createError || !instance) {
++        const msg = createError?.message ?? 'Unknown error'
++        logger?.error('[server.embeddings] Failed to start workflow for file', {
++          fileId: file.id,
++          error: msg,
++        })
++        errors.push({ fileId: file.id, error: msg })
++        continue
++      }
++
++      // Track the workflow in KV (non-fatal if it fails)
++      await tryCatchAsync(() =>
++        trackWorkflow({
++          workflowId: instance.id,
++          fileId: file.id,
++          filename: file.filename,
++        }),
++      )
++
++      results.push({ fileId: file.id, workflowId: instance.id })
++    }
++
++    logger?.info('[server.embeddings] Reindex all complete', {
++      queued: results.length,
++      errors: errors.length,
++    })
++
++    return {
++      success: true,
++      queued: results.length,
++      errors,
++    }
++  })
+diff --git a/apps/web-app/src/server/functions/files.ts b/apps/web-app/src/server/functions/files.ts
+index 4e56a68..281c1ef 100644
+--- a/apps/web-app/src/server/functions/files.ts
++++ b/apps/web-app/src/server/functions/files.ts
+@@ -1,417 +1,477 @@
+-import { type FileMetadata, type NewFileMetadata } from "@/db/schema/file-schema";
++import {
++  type FileMetadata,
++  type NewFileMetadata,
++} from '@/db/schema/file-schema'
+ import {
+   createFileMetadata,
+   deleteFileMetadata,
+   findFileById,
+   findFileForScope,
+   listFiles,
+   listFilesForUser,
+   updateFileMetadata,
+   type FileAccessScope,
+-} from "@/db/queries";
+-import { tryCatchAsync } from "@/lib/error";
+-import { createServerFn } from "@tanstack/react-start";
+-import { z } from "zod";
++} from '@/db/queries'
++import { tryCatchAsync } from '@/lib/error'
++import { createServerFn } from '@tanstack/react-start'
++import { z } from 'zod'
+ import {
+   adminMiddleware,
+   authMiddleware,
+   type AuthenticatedContext,
+   type AdminContext,
+-} from "../middleware";
+-import { nanoid } from "nanoid";
++} from '../middleware'
++import { nanoid } from 'nanoid'
+ // @ts-ignore - Cloudflare workers env import
+-import { env } from "cloudflare:workers";
++import { env } from 'cloudflare:workers'
+ 
+ type LoggerContext = {
+   logger?: {
+-    error: (msg: string) => void;
+-    debug: (msg: string) => void;
+-    warn: (msg: string) => void;
+-    info: (msg: string) => void;
+-  };
+-};
++    error: (msg: string) => void
++    debug: (msg: string) => void
++    warn: (msg: string) => void
++    info: (msg: string) => void
++  }
++}
+ 
+ const uploadFileSchema = z.object({
+   filename: z.string().min(1),
+   displayName: z.string().min(1),
+   description: z.string().optional(),
+   mimeType: z.string().optional(),
+   tags: z.array(z.string()).optional(),
+   keywords: z.string().optional(), // Optional comma-separated keywords
+   isPublic: z.boolean().default(false),
+   fileData: z.string(),
+-});
++})
+ 
+ const getFileSchema = z.object({
+   id: z.string(),
+-});
++})
+ 
+ const getFilesSchema = z.object({
+   limit: z.number().min(1).max(100).default(20),
+   offset: z.number().min(0).default(0),
+   search: z.string().optional(),
+   isPublic: z.boolean().optional(),
+-});
++})
+ 
+ const updateFileSchema = z.object({
+   id: z.string(),
+   displayName: z.string().optional(),
+   description: z.string().optional(),
++  keywords: z.string().optional(),
+   tags: z.array(z.string()).optional(),
+   isPublic: z.boolean().optional(),
+-});
++})
+ 
+ const deleteFileSchema = z.object({
+   id: z.string(),
+-});
++})
+ 
+ const getPresignedUrlSchema = z.object({
+   filename: z.string().min(1),
+   mimeType: z.string().optional(),
+-});
++})
+ 
+ const completeUploadSchema = z.object({
+   filename: z.string().min(1),
+   displayName: z.string().min(1),
+   description: z.string().optional(),
+   mimeType: z.string().optional(),
+   tags: z.array(z.string()).optional(),
+   keywords: z.string().optional(), // Optional comma-separated keywords
+   isPublic: z.boolean().default(false),
+   r2Key: z.string(),
+   size: z.number(),
+-});
++})
+ 
+ const getUserFilesSchema = z.object({
+   userId: z.string(),
+   limit: z.number().min(1).max(100).default(20),
+   offset: z.number().min(0).default(0),
+   search: z.string().optional(),
+-});
++})
+ 
+ function getR2Bucket(): R2Bucket {
+-  return env.R2_BUCKET;
++  return env.R2_BUCKET
+ }
+ 
+ function generateR2Key(userId: string, filename: string): string {
+-  const timestamp = Date.now();
+-  const uniqueId = nanoid(8);
+-  const sanitizedFilename = filename.replace(/[^a-zA-Z0-9.-]/g, "_");
+-  return `uploads/${userId}/${timestamp}-${uniqueId}-${sanitizedFilename}`;
++  const timestamp = Date.now()
++  const uniqueId = nanoid(8)
++  const sanitizedFilename = filename.replace(/[^a-zA-Z0-9.-]/g, '_')
++  return `uploads/${userId}/${timestamp}-${uniqueId}-${sanitizedFilename}`
+ }
+ 
+ function parseTagsRow<T extends { tags: string | null }>(row: T) {
+   return {
+     ...row,
+     tags: row.tags ? JSON.parse(row.tags) : [],
+-  };
++  }
+ }
+ 
+ function buildScope(userId: string, role: string): FileAccessScope | undefined {
+-  if (role === "admin") return undefined;
+-  return { userId, allowOwnPrivate: true };
++  if (role === 'admin') return undefined
++  return { userId, allowOwnPrivate: true }
+ }
+ 
+-export const uploadFileServerFn = createServerFn({ method: "POST" })
++export const uploadFileServerFn = createServerFn({ method: 'POST' })
+   .middleware([adminMiddleware])
+   .handler(async ({ context, data }) => {
+-    const { user, logger } = context as AdminContext & LoggerContext;
++    const { user, logger } = context as AdminContext & LoggerContext
+ 
+-    const parsed = uploadFileSchema.parse(data);
+-    const { filename, displayName, description, mimeType, tags, keywords, isPublic, fileData } = parsed;
++    const parsed = uploadFileSchema.parse(data)
++    const {
++      filename,
++      displayName,
++      description,
++      mimeType,
++      tags,
++      keywords,
++      isPublic,
++      fileData,
++    } = parsed
+ 
+-    const binaryData = Uint8Array.from(atob(fileData), (c) => c.charCodeAt(0));
+-    const size = binaryData.length;
+-    const r2Key = generateR2Key(user.id, filename);
+-    const bucket = getR2Bucket();
++    const binaryData = Uint8Array.from(atob(fileData), (c) => c.charCodeAt(0))
++    const size = binaryData.length
++    const r2Key = generateR2Key(user.id, filename)
++    const bucket = getR2Bucket()
+ 
+     const [, uploadError] = await tryCatchAsync(() =>
+       bucket.put(r2Key, binaryData, {
+-        httpMetadata: { contentType: mimeType ?? "application/octet-stream" },
++        httpMetadata: { contentType: mimeType ?? 'application/octet-stream' },
+         customMetadata: {
+           uploadedBy: user.id,
+           originalFilename: filename,
+         },
+       }),
+-    );
++    )
+ 
+     if (uploadError) {
+-      logger?.error(`[server.files] Error uploading file to R2: ${uploadError.message}`);
+-      throw new Error("Failed to upload file to storage");
++      logger?.error(
++        `[server.files] Error uploading file to R2: ${uploadError.message}`,
++      )
++      throw new Error('Failed to upload file to storage')
+     }
+ 
+     const newFile: NewFileMetadata = {
+       userId: user.id,
+       filename,
+       displayName,
+       description: description ?? null,
+       mimeType: mimeType ?? null,
+       size,
+       tags: tags ? JSON.stringify(tags) : null,
+       keywords: keywords ?? null,
+       r2Key,
+       isPublic,
+-    };
++    }
+ 
+-    const [savedFile, dbError] = await tryCatchAsync(() => createFileMetadata(newFile));
++    const [savedFile, dbError] = await tryCatchAsync(() =>
++      createFileMetadata(newFile),
++    )
+ 
+     if (dbError || !savedFile) {
+-      await tryCatchAsync(() => bucket.delete(r2Key));
+-      logger?.error(`[server.files] Error saving file metadata: ${dbError?.message}`);
+-      throw new Error("Failed to save file metadata");
++      await tryCatchAsync(() => bucket.delete(r2Key))
++      logger?.error(
++        `[server.files] Error saving file metadata: ${dbError?.message}`,
++      )
++      throw new Error('Failed to save file metadata')
+     }
+ 
+-    logger?.info(`[server.files] Admin ${user.id} uploaded file ${savedFile.id} (${filename})`);
++    logger?.info(
++      `[server.files] Admin ${user.id} uploaded file ${savedFile.id} (${filename})`,
++    )
+ 
+-    return parseTagsRow(savedFile);
+-  });
++    return parseTagsRow(savedFile)
++  })
+ 
+-export const getUploadUrlServerFn = createServerFn({ method: "POST" })
++export const getUploadUrlServerFn = createServerFn({ method: 'POST' })
+   .middleware([adminMiddleware])
+   .handler(async ({ context, data }) => {
+-    const { user, logger } = context as AdminContext & LoggerContext;
+-    const parsed = getPresignedUrlSchema.parse(data);
+-    const { filename, mimeType } = parsed;
++    const { user, logger } = context as AdminContext & LoggerContext
++    const parsed = getPresignedUrlSchema.parse(data)
++    const { filename, mimeType } = parsed
+ 
+-    const r2Key = generateR2Key(user.id, filename);
+-    logger?.info(`[server.files] Generated upload key for admin ${user.id}: ${r2Key}`);
++    const r2Key = generateR2Key(user.id, filename)
++    logger?.info(
++      `[server.files] Generated upload key for admin ${user.id}: ${r2Key}`,
++    )
+ 
+     return {
+       r2Key,
+       filename,
+-      mimeType: mimeType ?? "application/octet-stream",
+-    };
+-  });
++      mimeType: mimeType ?? 'application/octet-stream',
++    }
++  })
+ 
+-export const completeUploadServerFn = createServerFn({ method: "POST" })
++export const completeUploadServerFn = createServerFn({ method: 'POST' })
+   .middleware([adminMiddleware])
+   .handler(async ({ context, data }) => {
+-    const { user, logger } = context as AdminContext & LoggerContext;
+-    const parsed = completeUploadSchema.parse(data);
+-    const { r2Key, filename, displayName, description, mimeType, size, tags, keywords, isPublic } = parsed;
++    const { user, logger } = context as AdminContext & LoggerContext
++    const parsed = completeUploadSchema.parse(data)
++    const {
++      r2Key,
++      filename,
++      displayName,
++      description,
++      mimeType,
++      size,
++      tags,
++      keywords,
++      isPublic,
++    } = parsed
+ 
+-    const bucket = getR2Bucket();
+-    const [r2Object, r2Error] = await tryCatchAsync(() => bucket.head(r2Key));
++    const bucket = getR2Bucket()
++    const [r2Object, r2Error] = await tryCatchAsync(() => bucket.head(r2Key))
+ 
+     if (r2Error || !r2Object) {
+-      logger?.error(`[server.files] File not found in R2: ${r2Key}`);
+-      throw new Error("File not found in storage");
++      logger?.error(`[server.files] File not found in R2: ${r2Key}`)
++      throw new Error('File not found in storage')
+     }
+ 
+     const newFile: NewFileMetadata = {
+       userId: user.id,
+       filename,
+       displayName,
+       description: description ?? null,
+       mimeType: mimeType ?? null,
+       size,
+       tags: tags ? JSON.stringify(tags) : null,
+       keywords: keywords ?? null,
+       r2Key,
+       isPublic,
+-    };
++    }
+ 
+-    const [savedFile, dbError] = await tryCatchAsync(() => createFileMetadata(newFile));
++    const [savedFile, dbError] = await tryCatchAsync(() =>
++      createFileMetadata(newFile),
++    )
+ 
+     if (dbError || !savedFile) {
+-      logger?.error(`[server.files] Error saving file metadata: ${dbError?.message}`);
+-      throw new Error("Failed to save file metadata");
++      logger?.error(
++        `[server.files] Error saving file metadata: ${dbError?.message}`,
++      )
++      throw new Error('Failed to save file metadata')
+     }
+ 
+-    logger?.info(`[server.files] Admin ${user.id} completed upload for file ${savedFile.id}`);
++    logger?.info(
++      `[server.files] Admin ${user.id} completed upload for file ${savedFile.id}`,
++    )
+ 
+-    return parseTagsRow(savedFile);
+-  });
++    return parseTagsRow(savedFile)
++  })
+ 
+-export const getFilesServerFn = createServerFn({ method: "GET" })
++export const getFilesServerFn = createServerFn({ method: 'GET' })
+   .middleware([authMiddleware])
+   .handler(async ({ context, data }) => {
+-    const { user, logger } = context as AuthenticatedContext & LoggerContext;
+-    const parsed = getFilesSchema.parse(data ?? {});
+-    const { limit, offset, search, isPublic } = parsed;
++    const { user, logger } = context as AuthenticatedContext & LoggerContext
++    const parsed = getFilesSchema.parse(data ?? {})
++    const { limit, offset, search, isPublic } = parsed
+ 
+     const [result, error] = await tryCatchAsync(() =>
+       listFiles({
+         limit,
+         offset,
+         search,
+         isPublic,
+         scope: buildScope(user.id, user.role!),
+       }),
+-    );
++    )
+ 
+     if (error || !result) {
+-      logger?.error(`[server.files] Error fetching files: ${error?.message}`);
+-      throw error ?? new Error("Failed to fetch files");
++      logger?.error(`[server.files] Error fetching files: ${error?.message}`)
++      throw error ?? new Error('Failed to fetch files')
+     }
+ 
+     logger?.debug(
+       `[server.files] Fetched ${result.data.length} files (total: ${result.pagination.totalCount})`,
+-    );
++    )
+ 
+     return {
+       data: result.data.map(parseTagsRow),
+       pagination: result.pagination,
+-    };
+-  });
++    }
++  })
+ 
+-export const getFileServerFn = createServerFn({ method: "GET" })
++export const getFileServerFn = createServerFn({ method: 'GET' })
+   .middleware([authMiddleware])
+   .handler(async ({ context, data }) => {
+-    const { user, logger } = context as AuthenticatedContext & LoggerContext;
+-    const parsed = getFileSchema.parse(data);
+-    const { id } = parsed;
++    const { user, logger } = context as AuthenticatedContext & LoggerContext
++    const parsed = getFileSchema.parse(data)
++    const { id } = parsed
+ 
+     const [file, error] = await tryCatchAsync(() =>
+       findFileForScope(id, buildScope(user.id, user.role!)),
+-    );
++    )
+ 
+     if (error) {
+-      logger?.error(`[server.files] Error fetching file ${id}: ${error.message}`);
+-      throw error;
++      logger?.error(
++        `[server.files] Error fetching file ${id}: ${error.message}`,
++      )
++      throw error
+     }
+ 
+     if (!file) {
+-      logger?.warn(`[server.files] File ${id} not found`);
+-      throw new Error("File not found");
++      logger?.warn(`[server.files] File ${id} not found`)
++      throw new Error('File not found')
+     }
+ 
+-    logger?.debug(`[server.files] Fetched file ${id}`);
++    logger?.debug(`[server.files] Fetched file ${id}`)
+ 
+-    return parseTagsRow(file);
+-  });
++    return parseTagsRow(file)
++  })
+ 
+-export const getFileDownloadUrlServerFn = createServerFn({ method: "GET" })
++export const getFileDownloadUrlServerFn = createServerFn({ method: 'GET' })
+   .middleware([authMiddleware])
+   .handler(async ({ context, data }) => {
+-    const { user, logger } = context as AuthenticatedContext & LoggerContext;
+-    const parsed = getFileSchema.parse(data);
+-    const { id } = parsed;
++    const { user, logger } = context as AuthenticatedContext & LoggerContext
++    const parsed = getFileSchema.parse(data)
++    const { id } = parsed
+ 
+     const [file, error] = await tryCatchAsync(() =>
+       findFileForScope(id, buildScope(user.id, user.role!)),
+-    );
++    )
+ 
+     if (error) {
+-      logger?.error(`[server.files] Error fetching file ${id}: ${error.message}`);
+-      throw error;
++      logger?.error(
++        `[server.files] Error fetching file ${id}: ${error.message}`,
++      )
++      throw error
+     }
+ 
+     if (!file) {
+-      throw new Error("File not found");
++      throw new Error('File not found')
+     }
+ 
+-    const bucket = getR2Bucket();
+-    const [r2Object, r2Error] = await tryCatchAsync(() => bucket.get(file.r2Key));
++    const bucket = getR2Bucket()
++    const [r2Object, r2Error] = await tryCatchAsync(() =>
++      bucket.get(file.r2Key),
++    )
+ 
+     if (r2Error || !r2Object) {
+-      logger?.error(`[server.files] File not found in R2: ${file.r2Key}`);
+-      throw new Error("File not found in storage");
++      logger?.error(`[server.files] File not found in R2: ${file.r2Key}`)
++      throw new Error('File not found in storage')
+     }
+ 
+-    logger?.debug(`[server.files] Generated download URL for file ${id}`);
++    logger?.debug(`[server.files] Generated download URL for file ${id}`)
+ 
+     return {
+       r2Key: file.r2Key,
+       filename: file.filename,
+       mimeType: file.mimeType,
+       size: file.size,
+-    };
+-  });
++    }
++  })
+ 
+-export const updateFileServerFn = createServerFn({ method: "POST" })
++export const updateFileServerFn = createServerFn({ method: 'POST' })
+   .middleware([adminMiddleware])
+   .handler(async ({ context, data }) => {
+-    const { user, logger } = context as AdminContext & LoggerContext;
+-    const parsed = updateFileSchema.parse(data);
+-    const { id, displayName, description, tags, isPublic } = parsed;
++    const { user, logger } = context as AdminContext & LoggerContext
++    const parsed = updateFileSchema.parse(data)
++    const { id, displayName, description, keywords, tags, isPublic } = parsed
+ 
+-    const updatePayload: Parameters<typeof updateFileMetadata>[1] = {};
++    const updatePayload: Parameters<typeof updateFileMetadata>[1] = {}
+ 
+-    if (displayName !== undefined) updatePayload.displayName = displayName;
+-    if (description !== undefined) updatePayload.description = description;
+-    if (tags !== undefined) updatePayload.tags = JSON.stringify(tags);
+-    if (isPublic !== undefined) updatePayload.isPublic = isPublic;
++    if (displayName !== undefined) updatePayload.displayName = displayName
++    if (description !== undefined) updatePayload.description = description
++    if (keywords !== undefined) updatePayload.keywords = keywords
++    if (tags !== undefined) updatePayload.tags = JSON.stringify(tags)
++    if (isPublic !== undefined) updatePayload.isPublic = isPublic
+ 
+     const [updatedFile, error] = await tryCatchAsync(() =>
+       updateFileMetadata({ id }, updatePayload),
+-    );
++    )
+ 
+     if (error) {
+-      logger?.error(`[server.files] Error updating file ${id}: ${error.message}`);
+-      throw error;
++      logger?.error(
++        `[server.files] Error updating file ${id}: ${error.message}`,
++      )
++      throw error
+     }
+ 
+     if (!updatedFile) {
+-      logger?.warn(`[server.files] File ${id} not found for update`);
+-      throw new Error("File not found");
++      logger?.warn(`[server.files] File ${id} not found for update`)
++      throw new Error('File not found')
+     }
+ 
+-    logger?.info(`[server.files] Admin ${user.id} updated file ${id}`);
++    logger?.info(`[server.files] Admin ${user.id} updated file ${id}`)
+ 
+-    return parseTagsRow(updatedFile);
+-  });
++    return parseTagsRow(updatedFile)
++  })
+ 
+-export const deleteFileServerFn = createServerFn({ method: "POST" })
++export const deleteFileServerFn = createServerFn({ method: 'POST' })
+   .middleware([adminMiddleware])
+   .handler(async ({ context, data }) => {
+-    const { user, logger } = context as AdminContext & LoggerContext;
+-    const parsed = deleteFileSchema.parse(data);
+-    const { id } = parsed;
++    const { user, logger } = context as AdminContext & LoggerContext
++    const parsed = deleteFileSchema.parse(data)
++    const { id } = parsed
+ 
+-    const [existing, existingError] = await tryCatchAsync(() => findFileById(id));
++    const [existing, existingError] = await tryCatchAsync(() =>
++      findFileById(id),
++    )
+ 
+     if (existingError) {
+-      logger?.error(`[server.files] Error fetching file ${id}: ${existingError.message}`);
+-      throw existingError;
++      logger?.error(
++        `[server.files] Error fetching file ${id}: ${existingError.message}`,
++      )
++      throw existingError
+     }
+ 
+     if (!existing) {
+-      logger?.warn(`[server.files] File ${id} not found for deletion`);
+-      throw new Error("File not found");
++      logger?.warn(`[server.files] File ${id} not found for deletion`)
++      throw new Error('File not found')
+     }
+ 
+-    const bucket = getR2Bucket();
+-    await tryCatchAsync(() => bucket.delete(existing.r2Key));
++    const bucket = getR2Bucket()
++    await tryCatchAsync(() => bucket.delete(existing.r2Key))
+ 
+-    const [deletedFile, dbError] = await tryCatchAsync(() => deleteFileMetadata(id));
++    const [deletedFile, dbError] = await tryCatchAsync(() =>
++      deleteFileMetadata(id),
++    )
+ 
+     if (dbError) {
+-      logger?.error(`[server.files] Error deleting file from DB: ${dbError.message}`);
+-      throw dbError;
++      logger?.error(
++        `[server.files] Error deleting file from DB: ${dbError.message}`,
++      )
++      throw dbError
+     }
+ 
+     if (!deletedFile) {
+-      throw new Error("File not found");
++      throw new Error('File not found')
+     }
+ 
+-    logger?.info(`[server.files] Admin ${user.id} deleted file ${id}`);
++    logger?.info(`[server.files] Admin ${user.id} deleted file ${id}`)
+ 
+-    return { success: true, id };
+-  });
++    return { success: true, id }
++  })
+ 
+-export const getUserFilesServerFn = createServerFn({ method: "GET" })
++export const getUserFilesServerFn = createServerFn({ method: 'GET' })
+   .middleware([adminMiddleware])
+   .handler(async ({ context, data }) => {
+-    const { logger } = context as AdminContext & LoggerContext;
+-    const parsed = getUserFilesSchema.parse(data);
+-    const { userId, limit, offset, search } = parsed;
++    const { logger } = context as AdminContext & LoggerContext
++    const parsed = getUserFilesSchema.parse(data)
++    const { userId, limit, offset, search } = parsed
+ 
+     const [result, error] = await tryCatchAsync(() =>
+       listFilesForUser({ userId, limit, offset, search }),
+-    );
++    )
+ 
+     if (error || !result) {
+-      logger?.error(`[server.files] Error fetching user files: ${error?.message}`);
+-      throw error ?? new Error("Failed to fetch files");
++      logger?.error(
++        `[server.files] Error fetching user files: ${error?.message}`,
++      )
++      throw error ?? new Error('Failed to fetch files')
+     }
+ 
+-    logger?.debug(`[server.files] Fetched ${result.data.length} files for user ${userId}`);
++    logger?.debug(
++      `[server.files] Fetched ${result.data.length} files for user ${userId}`,
++    )
+ 
+     return {
+       data: result.data.map(parseTagsRow),
+       pagination: result.pagination,
+-    };
+-  });
++    }
++  })
+ 
+-export type { FileMetadata, NewFileMetadata };
++export type { FileMetadata, NewFileMetadata }
+'''
 
 [[messages]]
 role = "assistant"
-content = """
-feat: implement new features and schema changes
-
-* Add new controllers for admin, client, product, SLA, team, and ticket management
-* Introduce new services for task, ticket, and user management
-* Update existing services for core, feedback, and resource management
-* Implement new entity models for issue, priority, and status
-* Add new migration for schema changes
-* Update dependencies and README.md
-* Implement new views for client, product, SLA, team, and ticket management in the web application
-* Update existing views for task and ticket management
-* Introduce new schemas for issue, product, SLA, task, and ticket validation
-* Update existing components for assigned tasks, assigned tickets, my tasks, and my tickets lists
-* Implement new utility functions for date handling and type definitions
-
-Co-authored-by: Git Master <git-master@example.com>"""
+content = '''
+diff --git a/apps/web-app/drizzle/meta/_journal.json b/apps/web-app/drizzle/meta/_journal.json
+index abebc57..d65d083 100644
+--- a/apps/web-app/drizzle/meta/_journal.json
++++ b/apps/web-app/drizzle/meta/_journal.json
+@@ -36,6 +36,13 @@
+       "when": 1770197394856,
+       "tag": "0004_dizzy_psynapse",
+       "breakpoints": true
++    },
++    {
++      "idx": 5,
++      "version": "6",
++      "when": 1770897168133,
++      "tag": "0005_premium_payback",
++      "breakpoints": true
+     }
+   ]
+-}
++}
+\ No newline at end of file
+diff --git a/apps/web-app/src/db/queries/files.ts b/apps/web-app/src/db/queries/files.ts
+index c86bc6c..aa84999 100644
+--- a/apps/web-app/src/db/queries/files.ts
++++ b/apps/web-app/src/db/queries/files.ts
+@@ -1,261 +1,314 @@
+-import { and, desc, eq, like, or, sql } from "drizzle-orm";
++import { and, desc, eq, like, or, sql } from 'drizzle-orm'
+ 
+-import { db } from "@/db";
++import { db } from '@/db'
+ import {
+   fileMetadata,
+   type FileMetadata as FileMetadataRow,
+   type NewFileMetadata,
+-} from "../schema/file-schema";
++} from '../schema/file-schema'
+ 
+-export type FileMetadataRecord = FileMetadataRow;
+-export type InsertFileMetadataRecord = NewFileMetadata;
++export type FileMetadataRecord = FileMetadataRow
++export type InsertFileMetadataRecord = NewFileMetadata
+ export type UpdateFileMetadataRecord = Partial<
+-  Pick<NewFileMetadata, "displayName" | "description" | "tags" | "isPublic" | "indexedAt">
+->;
++  Pick<
++    NewFileMetadata,
++    | 'displayName'
++    | 'description'
++    | 'tags'
++    | 'keywords'
++    | 'isPublic'
++    | 'indexedAt'
++  >
++>
+ 
+ export interface FileListParams {
+-  limit: number;
+-  offset: number;
+-  search?: string;
+-  isPublic?: boolean;
+-  scope?: FileAccessScope;
+-  onlyForUserId?: string;
++  limit: number
++  offset: number
++  search?: string
++  isPublic?: boolean
++  scope?: FileAccessScope
++  onlyForUserId?: string
+ }
+ 
+ export interface FileAccessScope {
+-  userId: string;
++  userId: string
+   /**
+    * When true (default), include private files owned by the user alongside public ones.
+    * When false, only public files are returned for the scope.
+    */
+-  allowOwnPrivate?: boolean;
++  allowOwnPrivate?: boolean
+ }
+ 
+ export interface PaginatedFilesResult {
+-  data: FileMetadataRecord[];
++  data: FileMetadataRecord[]
+   pagination: {
+-    limit: number;
+-    offset: number;
+-    totalCount: number;
+-    hasMore: boolean;
+-  };
++    limit: number
++    offset: number
++    totalCount: number
++    hasMore: boolean
++  }
+ }
+ 
+ export interface UserFileListParams {
+-  userId: string;
+-  limit: number;
+-  offset: number;
+-  search?: string;
++  userId: string
++  limit: number
++  offset: number
++  search?: string
+ }
+ 
+-type Condition = Parameters<typeof and>[number];
++type Condition = Parameters<typeof and>[number]
+ 
+ /**
+  * List files with the provided filters and privacy scope.
+  */
+-export async function listFiles(params: FileListParams): Promise<PaginatedFilesResult> {
+-  const { limit, offset } = params;
+-  const whereClause = buildFileWhereClause(params);
++export async function listFiles(
++  params: FileListParams,
++): Promise<PaginatedFilesResult> {
++  const { limit, offset } = params
++  const whereClause = buildFileWhereClause(params)
+ 
+-  let dataQuery = db.select().from(fileMetadata);
++  let dataQuery = db.select().from(fileMetadata)
+   if (whereClause) {
+-    dataQuery = dataQuery.where(whereClause);
++    dataQuery = dataQuery.where(whereClause)
+   }
+ 
+-  const data = await dataQuery.orderBy(desc(fileMetadata.uploadedAt)).limit(limit).offset(offset);
++  const data = await dataQuery
++    .orderBy(desc(fileMetadata.uploadedAt))
++    .limit(limit)
++    .offset(offset)
+ 
+-  const totalCount = await countFiles(whereClause);
++  const totalCount = await countFiles(whereClause)
+ 
+   return {
+     data,
+     pagination: {
+       limit,
+       offset,
+       totalCount,
+       hasMore: offset + data.length < totalCount,
+     },
+-  };
++  }
+ }
+ 
+ /**
+  * Convenience helper dedicated to admin views targeting a specific user.
+  */
+-export function listFilesForUser(params: UserFileListParams): Promise<PaginatedFilesResult> {
+-  const { userId, ...rest } = params;
++export function listFilesForUser(
++  params: UserFileListParams,
++): Promise<PaginatedFilesResult> {
++  const { userId, ...rest } = params
+   return listFiles({
+     ...rest,
+     onlyForUserId: userId,
+-  });
++  })
+ }
+ 
+ /**
+  * Fetch a single file without applying any privacy rules.
+  */
+-export async function findFileById(id: string): Promise<FileMetadataRecord | null> {
+-  const [record] = await db.select().from(fileMetadata).where(eq(fileMetadata.id, id)).limit(1);
++export async function findFileById(
++  id: string,
++): Promise<FileMetadataRecord | null> {
++  const [record] = await db
++    .select()
++    .from(fileMetadata)
++    .where(eq(fileMetadata.id, id))
++    .limit(1)
+ 
+-  return record ?? null;
++  return record ?? null
+ }
+ 
+-export async function findFileByFilename(filename: string): Promise<FileMetadataRecord | null> {
++export async function findFileByFilename(
++  filename: string,
++): Promise<FileMetadataRecord | null> {
+   const [record] = await db
+     .select()
+     .from(fileMetadata)
+     .where(eq(fileMetadata.filename, filename))
+-    .limit(1);
++    .limit(1)
+ 
+-  return record ?? null;
++  return record ?? null
+ }
+ 
+ /**
+  * Fetch a single file while enforcing the provided privacy scope.
+  */
+ export async function findFileForScope(
+   id: string,
+   scope?: FileAccessScope,
+ ): Promise<FileMetadataRecord | null> {
+-  const scopeCondition = buildScopeCondition(scope);
+-  const conditions: Condition[] = [eq(fileMetadata.id, id)];
++  const scopeCondition = buildScopeCondition(scope)
++  const conditions: Condition[] = [eq(fileMetadata.id, id)]
+ 
+   if (scopeCondition) {
+-    conditions.push(scopeCondition);
++    conditions.push(scopeCondition)
+   }
+ 
+-  const whereClause = conditions.length === 1 ? conditions[0] : and(...conditions);
++  const whereClause =
++    conditions.length === 1 ? conditions[0] : and(...conditions)
+ 
+-  const [record] = await db.select().from(fileMetadata).where(whereClause).limit(1);
++  const [record] = await db
++    .select()
++    .from(fileMetadata)
++    .where(whereClause)
++    .limit(1)
+ 
+-  return record ?? null;
++  return record ?? null
+ }
+ 
+ /**
+  * Insert a new file metadata record.
+  */
+ export async function createFileMetadata(
+   values: InsertFileMetadataRecord,
+ ): Promise<FileMetadataRecord> {
+-  const [created] = await db.insert(fileMetadata).values(values).returning();
+-  return created;
++  const [created] = await db.insert(fileMetadata).values(values).returning()
++  return created
+ }
+ 
+ /**
+  * Update mutable fields on a file metadata row.
+  */
+ export async function updateFileMetadata(
+   query: { id?: string; filename?: string },
+   values: UpdateFileMetadataRecord,
+ ): Promise<FileMetadataRecord | null> {
+-  const { id, filename } = query;
++  const { id, filename } = query
+ 
+   if (!id && !filename) {
+-    throw new Error("Either id or filename must be provided");
++    throw new Error('Either id or filename must be provided')
+   }
+ 
+-  const updatePayload = buildUpdatePayload(values);
++  const updatePayload = buildUpdatePayload(values)
+ 
+   if (!updatePayload) {
+-    return id ? findFileById(id) : filename ? findFileByFilename(filename) : null;
++    return id
++      ? findFileById(id)
++      : filename
++        ? findFileByFilename(filename)
++        : null
+   }
+ 
+   const [updated] = await db
+     .update(fileMetadata)
+     .set(updatePayload)
+-    .where(or(eq(fileMetadata.id, id ?? ""), eq(fileMetadata.filename, filename ?? "")))
+-    .returning();
+-
+-  return updated ?? null;
++    .where(
++      or(
++        eq(fileMetadata.id, id ?? ''),
++        eq(fileMetadata.filename, filename ?? ''),
++      ),
++    )
++    .returning()
++
++  return updated ?? null
+ }
+ 
+ /**
+  * Delete a file metadata row and return the removed record.
+  */
+-export async function deleteFileMetadata(id: string): Promise<FileMetadataRecord | null> {
+-  const [deleted] = await db.delete(fileMetadata).where(eq(fileMetadata.id, id)).returning();
++export async function deleteFileMetadata(
++  id: string,
++): Promise<FileMetadataRecord | null> {
++  const [deleted] = await db
++    .delete(fileMetadata)
++    .where(eq(fileMetadata.id, id))
++    .returning()
+ 
+-  return deleted ?? null;
++  return deleted ?? null
+ }
+ 
+ /**
+  * Build a WHERE clause based on the provided filters.
+  */
+ function buildFileWhereClause(params: FileListParams): Condition | undefined {
+-  const conditions: Condition[] = [];
++  const conditions: Condition[] = []
+ 
+   if (params.onlyForUserId) {
+-    conditions.push(eq(fileMetadata.userId, params.onlyForUserId));
++    conditions.push(eq(fileMetadata.userId, params.onlyForUserId))
+   }
+ 
+   if (params.isPublic !== undefined) {
+-    conditions.push(eq(fileMetadata.isPublic, params.isPublic));
++    conditions.push(eq(fileMetadata.isPublic, params.isPublic))
+   }
+ 
+-  const searchCondition = buildSearchCondition(params.search);
++  const searchCondition = buildSearchCondition(params.search)
+   if (searchCondition) {
+-    conditions.push(searchCondition);
++    conditions.push(searchCondition)
+   }
+ 
+-  const scopeCondition = buildScopeCondition(params.scope);
++  const scopeCondition = buildScopeCondition(params.scope)
+   if (scopeCondition) {
+-    conditions.push(scopeCondition);
++    conditions.push(scopeCondition)
+   }
+ 
+   if (conditions.length === 0) {
+-    return undefined;
++    return undefined
+   }
+ 
+   if (conditions.length === 1) {
+-    return conditions[0];
++    return conditions[0]
+   }
+ 
+-  return and(...conditions);
++  return and(...conditions)
+ }
+ 
+ function buildScopeCondition(scope?: FileAccessScope): Condition | undefined {
+   if (!scope) {
+-    return undefined;
++    return undefined
+   }
+ 
+   const ownCondition =
+-    scope.allowOwnPrivate === false ? undefined : eq(fileMetadata.userId, scope.userId);
++    scope.allowOwnPrivate === false
++      ? undefined
++      : eq(fileMetadata.userId, scope.userId)
+ 
+   if (!ownCondition) {
+-    return eq(fileMetadata.isPublic, true);
++    return eq(fileMetadata.isPublic, true)
+   }
+ 
+-  return or(eq(fileMetadata.isPublic, true), ownCondition);
++  return or(eq(fileMetadata.isPublic, true), ownCondition)
+ }
+ 
+ function buildSearchCondition(search?: string): Condition | undefined {
+   if (!search?.trim()) {
+-    return undefined;
++    return undefined
+   }
+ 
+-  const sanitized = escapeForLike(search.trim());
+-  const pattern = `%${sanitized}%`;
++  const sanitized = escapeForLike(search.trim())
++  const pattern = `%${sanitized}%`
+ 
+-  return or(like(fileMetadata.displayName, pattern), like(fileMetadata.filename, pattern));
++  return or(
++    like(fileMetadata.displayName, pattern),
++    like(fileMetadata.filename, pattern),
++  )
+ }
+ 
+ function escapeForLike(value: string): string {
+-  return value.replace(/[%_]/g, "\\$&");
++  return value.replace(/[%_]/g, '\\$&')
+ }
+ 
+ async function countFiles(whereClause?: Condition): Promise<number> {
+-  let countQuery = db.select({ count: sql<number>`count(*)` }).from(fileMetadata);
++  let countQuery = db
++    .select({ count: sql<number>`count(*)` })
++    .from(fileMetadata)
+   if (whereClause) {
+-    countQuery = countQuery.where(whereClause);
++    countQuery = countQuery.where(whereClause)
+   }
+ 
+-  const [result] = await countQuery;
+-  return result?.count ?? 0;
++  const [result] = await countQuery
++  return result?.count ?? 0
+ }
+ 
+-function buildUpdatePayload(values: UpdateFileMetadataRecord): UpdateFileMetadataRecord | null {
+-  const entries = Object.entries(values).filter(([, value]) => value !== undefined);
++function buildUpdatePayload(
++  values: UpdateFileMetadataRecord,
++): UpdateFileMetadataRecord | null {
++  const entries = Object.entries(values).filter(
++    ([, value]) => value !== undefined,
++  )
+ 
+   if (entries.length === 0) {
+-    return null;
++    return null
+   }
+ 
+-  return Object.fromEntries(entries) as UpdateFileMetadataRecord;
++  return Object.fromEntries(entries) as UpdateFileMetadataRecord
+ }
+diff --git a/apps/web-app/src/lib/ai/agents.ts b/apps/web-app/src/lib/ai/agents.ts
+index 96a9021..9819e8d 100644
+--- a/apps/web-app/src/lib/ai/agents.ts
++++ b/apps/web-app/src/lib/ai/agents.ts
+@@ -12,33 +12,40 @@
+  *                          natural-language answer.
+  */
+ 
+-import { generateText, streamText, stepCountIs, type LanguageModel } from "ai";
+-import { searchTools } from "./tools";
+-import { getSystemPrompt } from "./prompts";
++import { generateText, streamText, stepCountIs, type LanguageModel } from 'ai'
++import { searchTools } from './tools'
++import { getSystemPrompt } from './prompts'
+ 
+ // ────────────────────────────────────────────────────────────────────
+ // Types
+ // ────────────────────────────────────────────────────────────────────
+ 
+ export interface QueryAgentResult {
+   /** The reformulated / corrected query */
+-  reformulatedQuery: string;
++  reformulatedQuery: string
+   /** Synonym variants of the query */
+-  synonymQueries: string[];
++  synonymQueries: string[]
+   /** Keywords extracted from the query */
+-  keywords: string[];
++  keywords: string[]
+ }
+ 
+ export interface SearchResult {
+-  faqResults: Array<{ content: string; faqId?: string; relevanceScore: number }>;
+-  documentResults: Array<{ content: string; source: string; relevanceScore: number }>;
++  faqResults: Array<{ content: string; faqId?: string; relevanceScore: number }>
++  documentResults: Array<{
++    content: string
++    source: string
++    relevanceScore: number
++  }>
+ }
+ 
+ export interface AgentPipelineOptions {
+   /** Custom system prompt (from chatbot config) */
+-  systemPrompt?: string | null;
++  systemPrompt?: string | null
+   /** Previous conversation messages for context */
+-  conversationMessages?: Array<{ role: "system" | "user" | "assistant"; content: string }>;
++  conversationMessages?: Array<{
++    role: 'system' | 'user' | 'assistant'
++    content: string
++  }>
+ }
+ 
+ // ────────────────────────────────────────────────────────────────────
+@@ -58,147 +65,172 @@ User: "how do i registr for clases?"
+ Output: {"reformulatedQuery":"How do I register for classes?","synonymQueries":["course registration process","how to enroll in classes","sign up for courses"],"keywords":["register","classes","enrollment","registration"]}
+ 
+ User: "whats the deadline for dropping a course"
+-Output: {"reformulatedQuery":"What is the deadline for dropping a course?","synonymQueries":["course drop deadline","when can I withdraw from a class","last day to drop courses"],"keywords":["deadline","drop","course","withdraw"]}`;
++Output: {"reformulatedQuery":"What is the deadline for dropping a course?","synonymQueries":["course drop deadline","when can I withdraw from a class","last day to drop courses"],"keywords":["deadline","drop","course","withdraw"]}`
+ 
+ /**
+  * Run the Query Agent to reformulate and enhance a user query.
+  *
+  * Uses a small/fast model (e.g. llama 3.2 1b-3b, granite micro) to keep
+  * latency low while still producing a useful reformulation.
+  */
+ export async function runQueryAgent(
+   model: LanguageModel,
+   userQuery: string,
+ ): Promise<QueryAgentResult> {
+-  const op = "runQueryAgent";
+-  console.log(`[lib.ai.agents.${op}] Processing query: "${userQuery.substring(0, 80)}..."`);
++  const op = 'runQueryAgent'
++  console.log(
++    `[lib.ai.agents.${op}] Processing query: "${userQuery.substring(0, 80)}..."`,
++  )
+ 
+   try {
+     const { text } = await generateText({
+       model,
+       messages: [
+-        { role: "system", content: QUERY_AGENT_PROMPT },
+-        { role: "user", content: userQuery },
++        { role: 'system', content: QUERY_AGENT_PROMPT },
++        { role: 'user', content: userQuery },
+       ],
+       temperature: 0.3,
+       maxOutputTokens: 512,
+-    });
++    })
+ 
+     // Parse the JSON response
+-    const cleaned = text.trim().replace(/^```json?\s*/i, "").replace(/\s*```$/i, "");
+-    const parsed = JSON.parse(cleaned) as QueryAgentResult;
++    const cleaned = text
++      .trim()
++      .replace(/^```json?\s*/i, '')
++      .replace(/\s*```$/i, '')
++    const parsed = JSON.parse(cleaned) as QueryAgentResult
+ 
+     console.log(
+       `[lib.ai.agents.${op}] Reformulated: "${parsed.reformulatedQuery}", ` +
+-      `synonyms: ${parsed.synonymQueries?.length ?? 0}, keywords: ${parsed.keywords?.length ?? 0}`,
+-    );
++        `synonyms: ${parsed.synonymQueries?.length ?? 0}, keywords: ${parsed.keywords?.length ?? 0}`,
++    )
+ 
+     return {
+       reformulatedQuery: parsed.reformulatedQuery || userQuery,
+-      synonymQueries: Array.isArray(parsed.synonymQueries) ? parsed.synonymQueries : [],
++      synonymQueries: Array.isArray(parsed.synonymQueries)
++        ? parsed.synonymQueries
++        : [],
+       keywords: Array.isArray(parsed.keywords) ? parsed.keywords : [],
+-    };
++    }
+   } catch (error) {
+-    const msg = error instanceof Error ? error.message : String(error);
+-    console.warn(`[lib.ai.agents.${op}] Failed to parse query agent output, using original query: ${msg}`);
++    const msg = error instanceof Error ? error.message : String(error)
++    console.warn(
++      `[lib.ai.agents.${op}] Failed to parse query agent output, using original query: ${msg}`,
++    )
+ 
+     // Graceful fallback – pass the original query through
+     return {
+       reformulatedQuery: userQuery,
+       synonymQueries: [],
+       keywords: [],
+-    };
++    }
+   }
+ }
+ 
+ // ────────────────────────────────────────────────────────────────────
+ // 2. Search Agent
+ // ────────────────────────────────────────────────────────────────────
+ 
+ const SEARCH_AGENT_PROMPT = `You are a search agent. Your ONLY job is to call the searchKnowledgeBase tool with the provided query.
+ 
+ You will receive a search query. Call the searchKnowledgeBase tool with it and return the results.
+ Do NOT generate any text response. Only call the tool.
+ 
+-If the primary search returns no results, try searchFaq or searchDocuments as fallbacks.`;
++If the primary search returns no results, try searchFaq or searchDocuments as fallbacks.`
+ 
+ /**
+  * Run the Search Agent to retrieve relevant documents and FAQs.
+  *
+  * Uses a function-calling optimised model (e.g. granite micro, gpt-5-nano)
+  * to invoke the search tools with the enhanced query from the Query Agent.
+  */
+ export async function runSearchAgent(
+   model: LanguageModel,
+   enhancedQuery: string,
+ ): Promise<SearchResult> {
+-  const op = "runSearchAgent";
+-  console.log(`[lib.ai.agents.${op}] Searching with query: "${enhancedQuery.substring(0, 80)}..."`);
+-
+-  const allFaqResults: SearchResult["faqResults"] = [];
+-  const allDocResults: SearchResult["documentResults"] = [];
++  const op = 'runSearchAgent'
++  console.log(
++    `[lib.ai.agents.${op}] Searching with query: "${enhancedQuery.substring(0, 80)}..."`,
++  )
+ 
+   try {
+     const result = await generateText({
+       model,
+       messages: [
+-        { role: "system", content: SEARCH_AGENT_PROMPT },
+-        { role: "user", content: `Search for: ${enhancedQuery}` },
++        { role: 'system', content: SEARCH_AGENT_PROMPT },
++        { role: 'user', content: `Search for: ${enhancedQuery}` },
+       ],
+       tools: searchTools,
+       stopWhen: stepCountIs(3),
+       temperature: 0,
+       maxOutputTokens: 1024,
+-    });
++    })
++
++    // Extract search results from tool call responses across all steps
++    const aggregated: SearchResult = { faqResults: [], documentResults: [] }
+ 
+-    // Extract tool results from steps
+     for (const step of result.steps) {
+-      if (step.toolResults && step.toolResults.length > 0) {
+-        for (const tr of step.toolResults) {
+-          // Tool results may have their output in `result` or directly on the object
+-          const output: Record<string, unknown> =
+-            typeof tr === "object" && tr !== null && "result" in tr
+-              ? (tr as { result: Record<string, unknown> }).result
+-              : (tr as Record<string, unknown>);
+-          if (output?.faqResults && Array.isArray(output.faqResults)) {
+-            allFaqResults.push(...(output.faqResults as SearchResult["faqResults"]));
+-          }
+-          if (output?.documentResults && Array.isArray(output.documentResults)) {
+-            allDocResults.push(...(output.documentResults as SearchResult["documentResults"]));
+-          }
+-          // Handle searchFaq results format
+-          if (output?.results && Array.isArray(output.results)) {
+-            for (const r of output.results as Array<Record<string, unknown>>) {
+-              if (r.question && r.answer) {
+-                allFaqResults.push({
+-                  content: `Q: ${r.question}\nA: ${r.answer}`,
+-                  relevanceScore: 1.0,
+-                });
+-              } else if (r.content) {
+-                allDocResults.push({
+-                  content: r.content as string,
+-                  source: (r.source as string) ?? "unknown",
+-                  relevanceScore: (r.relevanceScore as number) ?? 0.5,
+-                });
+-              }
+-            }
+-          }
+-        }
+-      }
++      for (const toolResult of step.toolResults) {
++        const res = toolResult.output as {
++          faqResults?: Array<{
++            content: string
++            faqId?: string
++            relevanceScore: number
++          }>
++          documentResults?: Array<{
++            content: string
++            source: string
++            relevanceScore: number
++          }>
++          results?: Array<{
++            question?: string
++            answer?: string
++            content?: string
++            source?: string
++            relevanceScore?: number
++          }>
++        }
++
++        if (res.faqResults) {
++          aggregated.faqResults.push(...res.faqResults)
++        }
++        if (res.documentResults) {
++          aggregated.documentResults.push(...res.documentResults)
++        }
++        // Handle searchFaq fallback which returns { results: [{ question, answer }] }
++        if (res.results && !res.faqResults && !res.documentResults) {
++          for (const r of res.results) {
++            if (r.question && r.answer) {
++              aggregated.faqResults.push({
++                content: `**Q:** ${r.question}\n**A:** ${r.answer}`,
++                relevanceScore: 1.0,
++              })
++            } else if (r.content) {
++              aggregated.documentResults.push({
++                content: r.content,
++                source: r.source ?? 'unknown',
++                relevanceScore: r.relevanceScore ?? 0.5,
++              })
++            }
++          }
++        }
++      }
+     }
+ 
+     console.log(
+-      `[lib.ai.agents.${op}] Found ${allFaqResults.length} FAQ result(s) and ${allDocResults.length} document result(s)`,
+-    );
++      `[lib.ai.agents.${op}] Found ${aggregated.faqResults.length} FAQ result(s) and ${aggregated.documentResults.length} document result(s)`,
++    )
++
++    return aggregated
+   } catch (error) {
+-    const msg = error instanceof Error ? error.message : String(error);
+-    console.error(`[lib.ai.agents.${op}] Search agent failed: ${msg}`);
+-  }
++    const msg = error instanceof Error ? error.message : String(error)
++    console.error(`[lib.ai.agents.${op}] Search agent failed: ${msg}`)
+ 
+-  return {
+-    faqResults: allFaqResults,
+-    documentResults: allDocResults,
+-  };
++    return {
++      faqResults: [],
++      documentResults: [],
++    }
++  }
+ }
+ 
+ // ────────────────────────────────────────────────────────────────────
+@@ -220,144 +252,159 @@ Guidelines:
+ - If results are not relevant or empty, say so honestly and offer to help further
+ - Do NOT include raw JSON, tool call metadata, relevance scores, or internal field names
+ - Be concise but thorough
+-- Use markdown formatting when it improves readability`;
++- Use markdown formatting when it improves readability`
+ }
+ 
+ function formatSearchResultsForContext(searchResults: SearchResult): string {
+-  const parts: string[] = [];
++  const parts: string[] = []
+ 
+   if (searchResults.faqResults.length > 0) {
+-    parts.push("### FAQ Results");
++    parts.push('### FAQ Results')
+     for (const faq of searchResults.faqResults) {
+-      parts.push(faq.content);
+-      parts.push("---");
++      parts.push(faq.content)
++      parts.push('---')
+     }
+   }
+ 
+   if (searchResults.documentResults.length > 0) {
+-    parts.push("### Document Results");
++    parts.push('### Document Results')
+     for (const doc of searchResults.documentResults) {
+-      parts.push(`Source: ${doc.source}`);
+-      parts.push(doc.content);
+-      parts.push("---");
++      parts.push(`Source: ${doc.source}`)
++      parts.push(doc.content)
++      parts.push('---')
+     }
+   }
+ 
+   if (parts.length === 0) {
+-    return "No relevant results were found in the knowledge base.";
++    return 'No relevant results were found in the knowledge base.'
+   }
+ 
+-  return parts.join("\n");
++  return parts.join('\n')
+ }
+ 
+ /**
+  * Run the Summarizing Agent to produce the final user-facing answer.
+  *
+  * Uses a medium-to-large model (e.g. llama 3.3 70b) for higher quality
+  * synthesis of the retrieved knowledge base content.
+  *
+  * Returns a streamText result so the caller can stream tokens to the client.
+  */
+ export function runSummarizingAgent(
+   model: LanguageModel,
+   userQuery: string,
+   searchResults: SearchResult,
+   options?: AgentPipelineOptions,
+ ) {
+-  const op = "runSummarizingAgent";
++  const op = 'runSummarizingAgent'
+   console.log(
+     `[lib.ai.agents.${op}] Summarizing ${searchResults.faqResults.length} FAQ(s) ` +
+-    `and ${searchResults.documentResults.length} document(s)`,
+-  );
++      `and ${searchResults.documentResults.length} document(s)`,
++  )
+ 
+-  const systemPrompt = getSystemPrompt(options?.systemPrompt);
+-  const summarizationPrompt = buildSummarizationPrompt(systemPrompt);
+-  const formattedResults = formatSearchResultsForContext(searchResults);
++  const systemPrompt = getSystemPrompt(options?.systemPrompt)
++  const summarizationPrompt = buildSummarizationPrompt(systemPrompt)
++  const formattedResults = formatSearchResultsForContext(searchResults)
+ 
+   // Build the messages array including conversation history
+-  const messages: Array<{ role: "system" | "user" | "assistant"; content: string }> = [
+-    { role: "system", content: summarizationPrompt },
+-  ];
++  const messages: Array<{
++    role: 'system' | 'user' | 'assistant'
++    content: string
++  }> = [{ role: 'system', content: summarizationPrompt }]
+ 
+   // Add conversation history if provided
+   if (options?.conversationMessages) {
+     for (const msg of options.conversationMessages) {
+-      if (msg.role !== "system") {
+-        messages.push(msg);
++      if (msg.role !== 'system') {
++        messages.push(msg)
+       }
+     }
+   }
+ 
+   // Add the current query with search context
+   messages.push({
+-    role: "user",
++    role: 'user',
+     content: `User Question: ${userQuery}\n\nSearch Results:\n${formattedResults}`,
+-  });
++  })
+ 
+   return streamText({
+     model,
+     messages,
+     temperature: 0.7,
+     maxOutputTokens: 2048,
+-  });
++  })
+ }
+ 
+ // ────────────────────────────────────────────────────────────────────
+ // Pipeline Orchestrator
+ // ────────────────────────────────────────────────────────────────────
+ 
+ export interface AgentPipelineModels {
+   /** Small/fast model for query understanding (e.g. llama 3.2 1b, granite micro) */
+-  queryModel: LanguageModel;
++  queryModel: LanguageModel
+   /** Function-calling model for search (e.g. granite micro, llama 3.2 3b) */
+-  searchModel: LanguageModel;
++  searchModel: LanguageModel
+   /** Bigger model for summarization (e.g. llama 3.3 70b) */
+-  summarizeModel: LanguageModel;
++  summarizeModel: LanguageModel
+ }
+ 
+ /**
+  * Run the full 3-agent pipeline: Query → Search → Summarize.
+  *
+  * Returns the streamText result from the summarizing agent so the caller
+  * can stream tokens directly to the client.
+  */
+ export async function runAgentPipeline(
+   models: AgentPipelineModels,
+   userQuery: string,
+   options?: AgentPipelineOptions,
+ ) {
+-  const op = "runAgentPipeline";
+-  console.log(`[lib.ai.agents.${op}] Starting pipeline for: "${userQuery.substring(0, 80)}..."`);
++  const op = 'runAgentPipeline'
++  console.log(
++    `[lib.ai.agents.${op}] Starting pipeline for: "${userQuery.substring(0, 80)}..."`,
++  )
+ 
+   // Step 1: Query Agent – reformulate and enhance the query
+-  const queryResult = await runQueryAgent(models.queryModel, userQuery);
++  const queryResult = await runQueryAgent(models.queryModel, userQuery)
+ 
+   // Step 2: Search Agent – search with enhanced query + synonym queries
+   // Combine the reformulated query with keywords for a richer search
+-  const searchQuery = queryResult.keywords.length > 0
+-    ? `${queryResult.reformulatedQuery} ${queryResult.keywords.join(" ")}`
+-    : queryResult.reformulatedQuery;
++  const searchQuery =
++    queryResult.keywords.length > 0
++      ? `${queryResult.reformulatedQuery} ${queryResult.keywords.join(' ')}`
++      : queryResult.reformulatedQuery
+ 
+-  const searchResults = await runSearchAgent(models.searchModel, searchQuery);
++  const searchResults = await runSearchAgent(models.searchModel, searchQuery)
+ 
+   // If primary search found nothing, try synonym queries
+-  if (searchResults.faqResults.length === 0 && searchResults.documentResults.length === 0) {
++  if (
++    searchResults.faqResults.length === 0 &&
++    searchResults.documentResults.length === 0
++  ) {
+     for (const synonym of queryResult.synonymQueries) {
+-      console.log(`[lib.ai.agents.${op}] Trying synonym query: "${synonym}"`);
+-      const synonymResults = await runSearchAgent(models.searchModel, synonym);
+-      searchResults.faqResults.push(...synonymResults.faqResults);
+-      searchResults.documentResults.push(...synonymResults.documentResults);
+-      if (searchResults.faqResults.length > 0 || searchResults.documentResults.length > 0) {
+-        break; // Found results, stop trying synonyms
++      console.log(`[lib.ai.agents.${op}] Trying synonym query: "${synonym}"`)
++      const synonymResults = await runSearchAgent(models.searchModel, synonym)
++      searchResults.faqResults.push(...synonymResults.faqResults)
++      searchResults.documentResults.push(...synonymResults.documentResults)
++      if (
++        searchResults.faqResults.length > 0 ||
++        searchResults.documentResults.length > 0
++      ) {
++        break // Found results, stop trying synonyms
+       }
+     }
+   }
+ 
+   console.log(
+     `[lib.ai.agents.${op}] Pipeline search complete: ${searchResults.faqResults.length} FAQ(s), ` +
+-    `${searchResults.documentResults.length} document(s)`,
+-  );
++      `${searchResults.documentResults.length} document(s)`,
++  )
+ 
+   // Step 3: Summarizing Agent – produce the final answer
+-  return runSummarizingAgent(models.summarizeModel, userQuery, searchResults, options);
++  return runSummarizingAgent(
++    models.summarizeModel,
++    userQuery,
++    searchResults,
++    options,
++  )
+ }
+diff --git a/apps/web-app/src/routes/dashboard/documents.tsx b/apps/web-app/src/routes/dashboard/documents.tsx
+index 4a8c14c..ef9fe3b 100644
+--- a/apps/web-app/src/routes/dashboard/documents.tsx
++++ b/apps/web-app/src/routes/dashboard/documents.tsx
+@@ -1,256 +1,369 @@
+-import { createFileRoute } from "@tanstack/react-router";
+-import { useState, useRef, useMemo } from "react";
+-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+-import { Button } from "@/components/ui/button";
+-import { Input } from "@/components/ui/input";
++import { createFileRoute } from '@tanstack/react-router'
++import { useState, useRef, useMemo } from 'react'
++import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
++import {
++  Card,
++  CardContent,
++  CardDescription,
++  CardHeader,
++  CardTitle,
++} from '@/components/ui/card'
++import { Button } from '@/components/ui/button'
++import { Input } from '@/components/ui/input'
+ import {
+   FileText,
+   Upload,
+   Search,
+   MoreVertical,
+   Download,
+   Trash2,
+   Eye,
+   Clock,
+   CheckCircle2,
+   AlertCircle,
+   Loader2,
+   ScanLine,
+   X,
+-} from "lucide-react";
++  RefreshCw,
++  Edit,
++} from 'lucide-react'
+ import {
+   DropdownMenu,
+   DropdownMenuContent,
+   DropdownMenuItem,
+   DropdownMenuSeparator,
+   DropdownMenuTrigger,
+-} from "@/components/ui/dropdown-menu";
++} from '@/components/ui/dropdown-menu'
+ import {
+   Dialog,
+   DialogContent,
+   DialogDescription,
+   DialogFooter,
+   DialogHeader,
+   DialogTitle,
+-} from "@/components/ui/dialog";
+-import { Label } from "@/components/ui/label";
++} from '@/components/ui/dialog'
++import {
++  AlertDialog,
++  AlertDialogAction,
++  AlertDialogCancel,
++  AlertDialogContent,
++  AlertDialogDescription,
++  AlertDialogFooter,
++  AlertDialogHeader,
++  AlertDialogTitle,
++} from '@/components/ui/alert-dialog'
++import { Label } from '@/components/ui/label'
++import { Textarea } from '@/components/ui/textarea'
+ import {
+   getFilesServerFn,
+   uploadFileServerFn,
+   deleteFileServerFn,
+   getFileDownloadUrlServerFn,
++  updateFileServerFn,
+   type FileMetadata,
+-} from "@/server/functions/files";
+-import { indexDocumentServerFn } from "@/server/functions/embeddings";
+-import { getActiveWorkflowsServerFn } from "@/server/functions/workflow-status";
+-import type { WorkflowStatusResult } from "@/server/services/workflow-tracker";
+-import { tryCatchAsync } from "@/lib/error";
+-import { authMiddleware } from "@/server/middleware";
+-import { useServerFn } from "@tanstack/react-start";
++} from '@/server/functions/files'
++import {
++  indexDocumentServerFn,
++  reindexAllDocumentsServerFn,
++} from '@/server/functions/embeddings'
++import { getActiveWorkflowsServerFn } from '@/server/functions/workflow-status'
++import type { WorkflowStatusResult } from '@/server/services/workflow-tracker'
++import { tryCatchAsync } from '@/lib/error'
++import { authMiddleware } from '@/server/middleware'
++import { useServerFn } from '@tanstack/react-start'
+ 
+ // Type-safe wrapper functions for server functions with data parameters
+ async function deleteFile(id: string) {
+   // @ts-expect-error - Server function types with middleware are complex
+-  return deleteFileServerFn({ data: { id } });
++  return deleteFileServerFn({ data: { id } })
+ }
+ 
+ async function getFileDownloadUrl(id: string) {
+   // @ts-expect-error - Server function types with middleware are complex
+-  return getFileDownloadUrlServerFn({ data: { id } });
++  return getFileDownloadUrlServerFn({ data: { id } })
+ }
+ 
+ async function uploadFile(fileData: {
+-  filename: string;
+-  displayName: string;
+-  description?: string;
+-  keywords?: string;
+-  mimeType?: string;
+-  isPublic: boolean;
+-  fileData: string;
++  filename: string
++  displayName: string
++  description?: string
++  keywords?: string
++  mimeType?: string
++  isPublic: boolean
++  fileData: string
+ }) {
+   // @ts-expect-error - Server function types with middleware are complex
+-  return uploadFileServerFn({ data: fileData });
++  return uploadFileServerFn({ data: fileData })
+ }
+ 
++async function updateFile(data: {
++  id: string
++  displayName?: string
++  description?: string
++  keywords?: string
++  isPublic?: boolean
++}) {
++  // @ts-expect-error - Server function types with middleware are complex
++  return updateFileServerFn({ data })
++}
+ 
++async function reindexAllDocuments() {
++  return reindexAllDocumentsServerFn() as Promise<{
++    success: boolean
++    queued: number
++    errors: Array<{ fileId: string; error: string }>
++  }>
++}
+ 
+-export const Route = createFileRoute("/dashboard/documents")({
++export const Route = createFileRoute('/dashboard/documents')({
+   server: {
+     middleware: [authMiddleware],
+   },
+   component: DocumentsPage,
+-});
++})
+ 
+ function DocumentsPage() {
+-  const queryClient = useQueryClient();
+-  const [searchQuery, setSearchQuery] = useState("");
+-  const [uploadDialogOpen, setUploadDialogOpen] = useState(false);
+-  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+-  const [selectedFile, setSelectedFile] = useState<FileMetadata | null>(null);
+-  const [indexingFileId, setIndexingFileId] = useState<string | null>(null);
+-  const [indexingError, setIndexingError] = useState<string | null>(null);
++  const queryClient = useQueryClient()
++  const [searchQuery, setSearchQuery] = useState('')
++  const [uploadDialogOpen, setUploadDialogOpen] = useState(false)
++  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
++  const [selectedFile, setSelectedFile] = useState<FileMetadata | null>(null)
++  const [indexingFileId, setIndexingFileId] = useState<string | null>(null)
++  const [indexingError, setIndexingError] = useState<string | null>(null)
++  const [reindexDialogOpen, setReindexDialogOpen] = useState(false)
++  const [editDialogOpen, setEditDialogOpen] = useState(false)
++  const [editFile, setEditFile] = useState<FileMetadata | null>(null)
++  const [editDisplayName, setEditDisplayName] = useState('')
++  const [editDescription, setEditDescription] = useState('')
++  const [editKeywords, setEditKeywords] = useState('')
++  const [editIsPublic, setEditIsPublic] = useState(false)
+   const [toasts, setToasts] = useState<
+-    Array<{ id: string; message: string; variant: "success" | "error" }>
+-  >([]);
++    Array<{ id: string; message: string; variant: 'success' | 'error' }>
++  >([])
+ 
+-  const indexDocument = useServerFn(indexDocumentServerFn);
++  const indexDocument = useServerFn(indexDocumentServerFn)
+ 
+-  const addToast = (message: string, variant: "success" | "error") => {
+-    const id = `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+-    setToasts((prev) => [...prev, { id, message, variant }]);
++  const addToast = (message: string, variant: 'success' | 'error') => {
++    const id = `${Date.now()}-${Math.random().toString(16).slice(2)}`
++    setToasts((prev) => [...prev, { id, message, variant }])
+     setTimeout(() => {
+-      setToasts((prev) => prev.filter((toast) => toast.id !== id));
+-    }, 4000);
+-  };
++      setToasts((prev) => prev.filter((toast) => toast.id !== id))
++    }, 4000)
++  }
+ 
+   // ─── Workflow status polling via React Query ───────────────────────────────
+   const { data: workflowsData } = useQuery({
+-    queryKey: ["workflow-statuses"],
++    queryKey: ['workflow-statuses'],
+     queryFn: async () => {
+-      const [data, err] = await tryCatchAsync(getActiveWorkflowsServerFn);
++      const [data, err] = await tryCatchAsync(getActiveWorkflowsServerFn)
+       if (err) {
+-        console.error("[documents] Failed to fetch workflow statuses:", err);
+-        return { workflows: [] as WorkflowStatusResult[] };
++        console.error('[documents] Failed to fetch workflow statuses:', err)
++        return { workflows: [] as WorkflowStatusResult[] }
+       }
+-      return data;
++      return data
+     },
+     // Poll every 5 seconds while any workflow is active
+     refetchInterval: (query) => {
+-      const workflows = query.state.data?.workflows ?? [];
++      const workflows = query.state.data?.workflows ?? []
+       const hasActive = workflows.some(
+-        (w) => !["complete", "errored", "terminated"].includes(w.status),
+-      );
+-      return hasActive ? 5_000 : false;
++        (w) => !['complete', 'errored', 'terminated'].includes(w.status),
++      )
++      return hasActive ? 5_000 : false
+     },
+     // Keep polling in background when tab is not focused
+     refetchIntervalInBackground: true,
+-  });
++  })
+ 
+   // Build a fileId → WorkflowStatusResult map for easy lookup
+   const workflowStatuses = useMemo(() => {
+-    const map: Record<string, WorkflowStatusResult> = {};
++    const map: Record<string, WorkflowStatusResult> = {}
+     for (const wf of workflowsData?.workflows ?? []) {
+-      map[wf.fileId] = wf;
++      map[wf.fileId] = wf
+     }
+-    return map;
+-  }, [workflowsData]);
++    return map
++  }, [workflowsData])
+ 
+   // Fetch files
+   const {
+     data: filesData,
+     isLoading,
+     error,
+   } = useQuery({
+-    queryKey: ["files", searchQuery],
++    queryKey: ['files', searchQuery],
+     queryFn: async () => {
+-      const [data, err] = await tryCatchAsync(getFilesServerFn);
+-      if (err) throw err;
+-      return data;
++      const [data, err] = await tryCatchAsync(getFilesServerFn)
++      if (err) throw err
++      return data
+     },
+-  });
++  })
+ 
+-  const files = useMemo(() => filesData?.data ?? [], [filesData]);
+-  const totalCount = filesData?.pagination?.totalCount ?? 0;
++  const files = useMemo(() => filesData?.data ?? [], [filesData])
++  const totalCount = filesData?.pagination?.totalCount ?? 0
+ 
+   // Delete mutation
+   const deleteMutation = useMutation({
+     mutationFn: async (id: string) => {
+-      const [result, err] = await tryCatchAsync(() => deleteFile(id));
+-      if (err) throw err;
+-      return result;
++      const [result, err] = await tryCatchAsync(() => deleteFile(id))
++      if (err) throw err
++      return result
+     },
+     onSuccess: () => {
+-      queryClient.invalidateQueries({ queryKey: ["files"] });
+-      setDeleteDialogOpen(false);
+-      setSelectedFile(null);
++      queryClient.invalidateQueries({ queryKey: ['files'] })
++      setDeleteDialogOpen(false)
++      setSelectedFile(null)
+     },
+-  });
++  })
+ 
+   const indexMutation = useMutation({
+     mutationFn: async (id: string) => {
+-      const [result, err] = await tryCatchAsync(() => indexDocument({ data: { fileId: id } }));
+-      if (err) throw err;
+-      return result;
++      const [result, err] = await tryCatchAsync(() =>
++        indexDocument({ data: { fileId: id } }),
++      )
++      if (err) throw err
++      return result
+     },
+     onMutate: (id) => {
+-      setIndexingError(null);
+-      setIndexingFileId(id);
++      setIndexingError(null)
++      setIndexingFileId(id)
+     },
+     onSuccess: (_data, _id) => {
+-      addToast("Indexing workflow started.", "success");
++      addToast('Indexing workflow started.', 'success')
+       // Start polling for workflow statuses
+-      queryClient.invalidateQueries({ queryKey: ["workflow-statuses"] });
+-      queryClient.invalidateQueries({ queryKey: ["files"] });
+-      setIndexingFileId(null);
++      queryClient.invalidateQueries({ queryKey: ['workflow-statuses'] })
++      queryClient.invalidateQueries({ queryKey: ['files'] })
++      setIndexingFileId(null)
+     },
+     onError: (err: unknown, _id) => {
+-      setIndexingFileId(null);
+-      const message = err instanceof Error ? err.message : "Failed to index document";
+-      setIndexingError(message);
+-      addToast(message, "error");
++      setIndexingFileId(null)
++      const message =
++        err instanceof Error ? err.message : 'Failed to index document'
++      setIndexingError(message)
++      addToast(message, 'error')
++    },
++  })
++
++  // Reindex all documents mutation
++  const reindexAllMutation = useMutation({
++    mutationFn: reindexAllDocuments,
++    onSuccess: (data) => {
++      const msg = `Reindexing started for ${data?.queued ?? 0} document(s).`
++      addToast(msg, 'success')
++      queryClient.invalidateQueries({ queryKey: ['workflow-statuses'] })
++      queryClient.invalidateQueries({ queryKey: ['files'] })
++      setReindexDialogOpen(false)
+     },
+-  });
++    onError: (err: unknown) => {
++      const message =
++        err instanceof Error ? err.message : 'Failed to reindex documents'
++      addToast(message, 'error')
++    },
++  })
++
++  // Update file metadata mutation
++  const updateFileMutation = useMutation({
++    mutationFn: updateFile,
++    onSuccess: () => {
++      queryClient.invalidateQueries({ queryKey: ['files'] })
++      addToast('Document updated.', 'success')
++      setEditDialogOpen(false)
++      setEditFile(null)
++    },
++    onError: (err: unknown) => {
++      const message =
++        err instanceof Error ? err.message : 'Failed to update document'
++      addToast(message, 'error')
++    },
++  })
+ 
+   // Download handler
+   const handleDownload = async (file: FileMetadata) => {
+-    const [result, err] = await tryCatchAsync(() => getFileDownloadUrl(file.id));
++    const [result, err] = await tryCatchAsync(() => getFileDownloadUrl(file.id))
+     if (err) {
+-      console.error("Download error:", err);
+-      return;
++      console.error('Download error:', err)
++      return
+     }
+     // In a real implementation, you would use the r2Key to construct the download URL
+     // or stream the file content
+-    console.log("Download URL:", result);
+-  };
++    console.log('Download URL:', result)
++  }
+ 
+   const handleDeleteClick = (file: FileMetadata) => {
+-    setSelectedFile(file);
+-    setDeleteDialogOpen(true);
+-  };
++    setSelectedFile(file)
++    setDeleteDialogOpen(true)
++  }
+ 
+   const handleIndexClick = (file: FileMetadata) => {
+-    if (indexMutation.isPending) return;
+-    indexMutation.mutate(file.id);
+-  };
++    if (indexMutation.isPending) return
++    indexMutation.mutate(file.id)
++  }
++
++  const handleEditClick = (file: FileMetadata) => {
++    setEditFile(file)
++    setEditDisplayName(file.displayName)
++    setEditDescription(file.description ?? '')
++    setEditKeywords(file.keywords ?? '')
++    setEditIsPublic(file.isPublic)
++    setEditDialogOpen(true)
++  }
++
++  const handleEditSubmit = () => {
++    if (!editFile || !editDisplayName.trim()) return
++    updateFileMutation.mutate({
++      id: editFile.id,
++      displayName: editDisplayName.trim(),
++      description: editDescription.trim() || undefined,
++      keywords: editKeywords.trim() || undefined,
++      isPublic: editIsPublic,
++    })
++  }
+ 
+   const confirmDelete = () => {
+     if (selectedFile) {
+-      deleteMutation.mutate(selectedFile.id);
++      deleteMutation.mutate(selectedFile.id)
+     }
+-  };
++  }
+ 
+   // Calculate stats
+-  const indexedCount = files.filter((f) => f.indexedAt != null).length;
+-  const pendingCount = files.filter((f) => f.indexedAt == null).length;
++  const indexedCount = files.filter((f) => f.indexedAt != null).length
++  const pendingCount = files.filter((f) => f.indexedAt == null).length
+ 
+   return (
+     <div className="space-y-6">
+       <div className="fixed right-6 top-6 z-50 space-y-2">
+         {toasts.map((toast) => (
+-          <div
++          <output
+             key={toast.id}
+-            role="status"
+-            className={`rounded-md border px-4 py-2 text-sm shadow-sm ${toast.variant === "success"
+-              ? "border-emerald-200 bg-emerald-50 text-emerald-900"
+-              : "border-destructive/40 bg-destructive/10 text-destructive"
+-              }`}
++            className={`block rounded-md border px-4 py-2 text-sm shadow-sm ${
++              toast.variant === 'success'
++                ? 'border-emerald-200 bg-emerald-50 text-emerald-900'
++                : 'border-destructive/40 bg-destructive/10 text-destructive'
++            }`}
+           >
+             {toast.message}
+-          </div>
++          </output>
+         ))}
+       </div>
+       <div className="flex items-center justify-between">
+         <div>
+           <h1 className="text-3xl font-bold tracking-tight">Documents</h1>
+           <p className="text-muted-foreground">
+             Manage documents that provide context for the chatbot
+           </p>
+         </div>
+-        <Button onClick={() => setUploadDialogOpen(true)}>
+-          <Upload className="mr-2 h-4 w-4" />
+-          Upload Document
+-        </Button>
++        <div className="flex items-center gap-2">
++          <Button
++            variant="outline"
++            onClick={() => setReindexDialogOpen(true)}
++            disabled={isLoading || files.length === 0}
++          >
++            <RefreshCw className="mr-2 h-4 w-4" />
++            Reindex All
++          </Button>
++          <Button onClick={() => setUploadDialogOpen(true)}>
++            <Upload className="mr-2 h-4 w-4" />
++            Upload Document
++          </Button>
++        </div>
+       </div>
+ 
+       {/* Search and Filters */}
+@@ -275,224 +388,377 @@ function DocumentsPage() {
+       <div className="grid gap-4 md:grid-cols-3">
+         <Card>
+           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+-            <CardTitle className="text-sm font-medium">Total Documents</CardTitle>
++            <CardTitle className="text-sm font-medium">
++              Total Documents
++            </CardTitle>
+             <FileText className="h-4 w-4 text-muted-foreground" />
+           </CardHeader>
+           <CardContent>
+             <div className="text-2xl font-bold">
+-              {isLoading ? <Loader2 className="h-6 w-6 animate-spin" /> : totalCount}
++              {isLoading ? (
++                <Loader2 className="h-6 w-6 animate-spin" />
++              ) : (
++                totalCount
++              )}
+             </div>
+           </CardContent>
+         </Card>
+         <Card>
+           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+             <CardTitle className="text-sm font-medium">Indexed</CardTitle>
+             <CheckCircle2 className="h-4 w-4 text-green-600" />
+           </CardHeader>
+           <CardContent>
+             <div className="text-2xl font-bold">
+-              {isLoading ? <Loader2 className="h-6 w-6 animate-spin" /> : indexedCount}
++              {isLoading ? (
++                <Loader2 className="h-6 w-6 animate-spin" />
++              ) : (
++                indexedCount
++              )}
+             </div>
+           </CardContent>
+         </Card>
+         <Card>
+           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+             <CardTitle className="text-sm font-medium">Pending</CardTitle>
+             <Clock className="h-4 w-4 text-yellow-600" />
+           </CardHeader>
+           <CardContent>
+             <div className="text-2xl font-bold">
+-              {isLoading ? <Loader2 className="h-6 w-6 animate-spin" /> : pendingCount}
++              {isLoading ? (
++                <Loader2 className="h-6 w-6 animate-spin" />
++              ) : (
++                pendingCount
++              )}
+             </div>
+           </CardContent>
+         </Card>
+       </div>
+ 
+       {/* Documents List */}
+       <Card>
+         <CardHeader>
+           <CardTitle>All Documents</CardTitle>
+-          <CardDescription>Documents uploaded for chatbot knowledge base</CardDescription>
++          <CardDescription>
++            Documents uploaded for chatbot knowledge base
++          </CardDescription>
+         </CardHeader>
+         <CardContent>
+           {isLoading ? (
+             <div className="flex items-center justify-center py-12">
+               <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+             </div>
+           ) : error ? (
+             <div className="flex flex-col items-center justify-center py-12 text-center">
+               <AlertCircle className="h-12 w-12 text-destructive" />
+-              <h3 className="mt-4 text-lg font-semibold">Error loading documents</h3>
+-              <p className="text-muted-foreground">Please try again or contact support</p>
++              <h3 className="mt-4 text-lg font-semibold">
++                Error loading documents
++              </h3>
++              <p className="text-muted-foreground">
++                Please try again or contact support
++              </p>
+             </div>
+           ) : files.length === 0 ? (
+             <div className="flex flex-col items-center justify-center py-12 text-center">
+               <FileText className="h-12 w-12 text-muted-foreground/50" />
+               <h3 className="mt-4 text-lg font-semibold">No documents found</h3>
+               <p className="text-muted-foreground">
+                 {searchQuery
+-                  ? "Try adjusting your search query"
+-                  : "Upload your first document to get started"}
++                  ? 'Try adjusting your search query'
++                  : 'Upload your first document to get started'}
+               </p>
+             </div>
+           ) : (
+             <div className="space-y-4">
+               {indexingError && (
+                 <div className="rounded-md border border-destructive/40 bg-destructive/5 px-4 py-2 text-sm text-destructive">
+                   {indexingError}
+                 </div>
+               )}
+               {files.map((doc) => (
+                 <DocumentRow
+                   key={doc.id}
+                   document={doc}
+                   onDownload={handleDownload}
+                   onDelete={handleDeleteClick}
++                  onEdit={handleEditClick}
+                   onIndex={handleIndexClick}
+                   isIndexing={indexingFileId === doc.id}
+                   workflowStatus={workflowStatuses[doc.id] ?? null}
+                   onWorkflowComplete={() => {
+-                    queryClient.invalidateQueries({ queryKey: ["files"] });
++                    queryClient.invalidateQueries({ queryKey: ['files'] })
+                   }}
+                 />
+               ))}
+             </div>
+           )}
+         </CardContent>
+       </Card>
+ 
+       {/* Upload Dialog */}
+       <UploadDialog
+         open={uploadDialogOpen}
+         onOpenChange={setUploadDialogOpen}
+         onSuccess={() => {
+-          queryClient.invalidateQueries({ queryKey: ["files"] });
++          queryClient.invalidateQueries({ queryKey: ['files'] })
+         }}
+       />
+ 
+       {/* Delete Confirmation Dialog */}
+       <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+         <DialogContent>
+           <DialogHeader>
+             <DialogTitle>Delete Document</DialogTitle>
+             <DialogDescription>
+-              Are you sure you want to delete "{selectedFile?.displayName}"? This action cannot be
+-              undone.
++              Are you sure you want to delete "{selectedFile?.displayName}"?
++              This action cannot be undone.
+             </DialogDescription>
+           </DialogHeader>
+           <DialogFooter>
+-            <Button variant="outline" onClick={() => setDeleteDialogOpen(false)}>
++            <Button
++              variant="outline"
++              onClick={() => setDeleteDialogOpen(false)}
++            >
+               Cancel
+             </Button>
+             <Button
+               variant="destructive"
+               onClick={confirmDelete}
+               disabled={deleteMutation.isPending}
+             >
+               {deleteMutation.isPending ? (
+                 <>
+                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                   Deleting...
+                 </>
+               ) : (
+-                "Delete"
++                'Delete'
+               )}
+             </Button>
+           </DialogFooter>
+         </DialogContent>
+       </Dialog>
++
++      {/* Edit Document Dialog */}
++      <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
++        <DialogContent className="sm:max-w-[525px]">
++          <DialogHeader>
++            <DialogTitle>Edit Document</DialogTitle>
++            <DialogDescription>
++              Update the document properties.
++            </DialogDescription>
++          </DialogHeader>
++          <div className="grid gap-4 py-4">
++            <div className="space-y-2">
++              <Label htmlFor="edit-displayName">Display Name</Label>
++              <Input
++                id="edit-displayName"
++                placeholder="Enter a display name"
++                value={editDisplayName}
++                onChange={(e) => setEditDisplayName(e.target.value)}
++              />
++            </div>
++            <div className="space-y-2">
++              <Label htmlFor="edit-description">Description</Label>
++              <Textarea
++                id="edit-description"
++                placeholder="Brief description of the document"
++                value={editDescription}
++                onChange={(e) => setEditDescription(e.target.value)}
++                rows={3}
++              />
++            </div>
++            <div className="space-y-2">
++              <Label htmlFor="edit-keywords">Keywords</Label>
++              <Input
++                id="edit-keywords"
++                placeholder="comma, separated, keywords"
++                value={editKeywords}
++                onChange={(e) => setEditKeywords(e.target.value)}
++              />
++              <p className="text-xs text-muted-foreground">
++                Optional comma-separated keywords to improve search indexing
++              </p>
++            </div>
++            <div className="flex items-center gap-2">
++              <input
++                type="checkbox"
++                id="edit-isPublic"
++                checked={editIsPublic}
++                onChange={(e) => setEditIsPublic(e.target.checked)}
++                className="h-4 w-4"
++              />
++              <Label htmlFor="edit-isPublic" className="text-sm font-normal">
++                Make this document public
++              </Label>
++            </div>
++          </div>
++          <DialogFooter>
++            <Button variant="outline" onClick={() => setEditDialogOpen(false)}>
++              Cancel
++            </Button>
++            <Button
++              onClick={handleEditSubmit}
++              disabled={updateFileMutation.isPending || !editDisplayName.trim()}
++            >
++              {updateFileMutation.isPending && (
++                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
++              )}
++              Save Changes
++            </Button>
++          </DialogFooter>
++        </DialogContent>
++      </Dialog>
++
++      {/* Reindex All Confirmation */}
++      <AlertDialog
++        open={reindexDialogOpen}
++        onOpenChange={(open) => {
++          if (!reindexAllMutation.isPending) setReindexDialogOpen(open)
++        }}
++      >
++        <AlertDialogContent>
++          <AlertDialogHeader>
++            <AlertDialogTitle>Reindex all documents?</AlertDialogTitle>
++            <AlertDialogDescription>
++              This will start embedding workflows for all {files.length}{' '}
++              document{files.length !== 1 ? 's' : ''}. Each document will be
++              processed and indexed into the vector store for semantic search.
++              This operation is safe to run repeatedly.
++            </AlertDialogDescription>
++          </AlertDialogHeader>
++          {reindexAllMutation.isSuccess && (
++            <p className="text-sm text-green-600">
++              Successfully queued {reindexAllMutation.data?.queued ?? 0}{' '}
++              document(s) for reindexing.
++            </p>
++          )}
++          {reindexAllMutation.isError && (
++            <p className="text-sm text-destructive">
++              Reindexing failed:{' '}
++              {reindexAllMutation.error instanceof Error
++                ? reindexAllMutation.error.message
++                : 'Unknown error'}
++            </p>
++          )}
++          <AlertDialogFooter>
++            <AlertDialogCancel disabled={reindexAllMutation.isPending}>
++              Cancel
++            </AlertDialogCancel>
++            <AlertDialogAction
++              onClick={(e) => {
++                e.preventDefault()
++                reindexAllMutation.mutate()
++              }}
++              disabled={reindexAllMutation.isPending}
++            >
++              {reindexAllMutation.isPending && (
++                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
++              )}
++              {reindexAllMutation.isPending ? 'Reindexing...' : 'Reindex All'}
++            </AlertDialogAction>
++          </AlertDialogFooter>
++        </AlertDialogContent>
++      </AlertDialog>
+     </div>
+-  );
++  )
+ }
+ 
+ interface DocumentRowProps {
+-  document: FileMetadata;
+-  onDownload: (doc: FileMetadata) => void;
+-  onDelete: (doc: FileMetadata) => void;
+-  onIndex: (doc: FileMetadata) => void;
+-  isIndexing: boolean;
+-  workflowStatus: WorkflowStatusResult | null;
+-  onWorkflowComplete?: () => void;
++  document: FileMetadata
++  onDownload: (doc: FileMetadata) => void
++  onDelete: (doc: FileMetadata) => void
++  onEdit: (doc: FileMetadata) => void
++  onIndex: (doc: FileMetadata) => void
++  isIndexing: boolean
++  workflowStatus: WorkflowStatusResult | null
++  onWorkflowComplete?: () => void
+ }
+ 
+ function DocumentRow({
+   document,
+   onDownload,
+   onDelete,
++  onEdit,
+   onIndex,
+   isIndexing,
+   workflowStatus,
+   onWorkflowComplete: _onWorkflowComplete,
+ }: DocumentRowProps) {
+-  const wfStatus = workflowStatus?.status;
+-  const isWfActive = wfStatus != null && !["complete", "errored", "terminated"].includes(wfStatus);
+-  const isWfErrored = wfStatus === "errored" || wfStatus === "terminated";
+-  const isWfComplete = wfStatus === "complete";
+-
+-  const statusConfig = document.indexedAt != null
+-    ? {
+-      icon: CheckCircle2,
+-      label: "Indexed",
+-      className: "bg-green-100 text-green-800",
+-    }
+-    : {
+-      icon: Clock,
+-      label: "Not indexed",
+-      className: "bg-yellow-100 text-yellow-800",
+-    };
++  const wfStatus = workflowStatus?.status
++  const isWfActive =
++    wfStatus != null &&
++    !['complete', 'errored', 'terminated'].includes(wfStatus)
++  const isWfErrored = wfStatus === 'errored' || wfStatus === 'terminated'
++  const isWfComplete = wfStatus === 'complete'
++
++  const statusConfig =
++    document.indexedAt != null
++      ? {
++          icon: CheckCircle2,
++          label: 'Indexed',
++          className: 'bg-green-100 text-green-800',
++        }
++      : {
++          icon: Clock,
++          label: 'Not indexed',
++          className: 'bg-yellow-100 text-yellow-800',
++        }
+ 
+-  const StatusIcon = statusConfig.icon;
++  const StatusIcon = statusConfig.icon
+ 
+   // Workflow badge: show live status when a workflow is tracked
+   const workflowLabel = isWfActive
+     ? `Workflow: ${wfStatus}`
+     : isWfErrored
+       ? `Failed: ${workflowStatus?.error?.message ?? wfStatus}`
+       : isWfComplete
+-        ? "Workflow: complete"
++        ? 'Workflow: complete'
+         : document.indexedAt != null
+-          ? "Indexed"
+-          : "Not indexed";
++          ? 'Indexed'
++          : 'Not indexed'
+ 
+   const workflowClass = isWfActive
+-    ? "bg-blue-100 text-blue-800"
++    ? 'bg-blue-100 text-blue-800'
+     : isWfErrored
+-      ? "bg-red-100 text-red-800"
++      ? 'bg-red-100 text-red-800'
+       : isWfComplete
+-        ? "bg-emerald-100 text-emerald-800"
++        ? 'bg-emerald-100 text-emerald-800'
+         : document.indexedAt != null
+-          ? "bg-emerald-100 text-emerald-800"
+-          : "bg-gray-100 text-gray-700";
++          ? 'bg-emerald-100 text-emerald-800'
++          : 'bg-gray-100 text-gray-700'
+ 
+   const formatFileSize = (bytes: number | null) => {
+-    if (!bytes) return "Unknown";
+-    if (bytes < 1024) return `${bytes} B`;
+-    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+-    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+-  };
++    if (!bytes) return 'Unknown'
++    if (bytes < 1024) return `${bytes} B`
++    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`
++    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
++  }
+ 
+   const formatDate = (timestamp: number | null) => {
+-    if (!timestamp) return "Unknown";
+-    const date = new Date(timestamp);
+-    const now = new Date();
+-    const diffMs = now.getTime() - date.getTime();
+-    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+-    const diffDays = Math.floor(diffHours / 24);
+-
+-    if (diffHours < 1) return "Just now";
+-    if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? "s" : ""} ago`;
+-    if (diffDays < 7) return `${diffDays} day${diffDays > 1 ? "s" : ""} ago`;
+-    return date.toLocaleDateString();
+-  };
++    if (!timestamp) return 'Unknown'
++    const date = new Date(timestamp)
++    const now = new Date()
++    const diffMs = now.getTime() - date.getTime()
++    const diffHours = Math.floor(diffMs / (1000 * 60 * 60))
++    const diffDays = Math.floor(diffHours / 24)
++
++    if (diffHours < 1) return 'Just now'
++    if (diffHours < 24)
++      return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`
++    if (diffDays < 7) return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`
++    return date.toLocaleDateString()
++  }
+ 
+   const getFileType = (mimeType: string | null) => {
+-    if (!mimeType) return "FILE";
+-    if (mimeType.includes("pdf")) return "PDF";
+-    if ('''

@@ -24,15 +24,15 @@ glow = [{ run = 'glow "$@" -p && clear', block = true, desc = "Open Markdown" }]
 [open]
 prepend_rules = [
   # Multiple openers for a single rule
-  { name = "*.md", use = ["glow"] },
+  { url = "*.md", use = ["glow"] },
 ]
 
 append_rules = [
   { mime = "text/*", use = "edit" },
-  { name = "*", use = [
+  { url = "*", name = "*", use = [
     "open",
   ] },
 ]
 
 [plugin]
-prepend_previewers = [{ name = "*.md", run = "glow" }]
+prepend_previewers = [{ url = "*.md", run = "glow" }]

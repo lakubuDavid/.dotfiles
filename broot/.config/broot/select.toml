@@ -1,0 +1,12 @@
+initial_mode = "command"
+modal = true
+icon_theme = "nerdfont"
+[[verbs]]
+invocation = "ok"
+key = "enter"
+leave_broot = true
+execution = ":print_path"
+apply_to = "file"
+[[imports]]
+# file = "skins/catppuccin-mocha.hjson"
+file = "skins/native-16.hjson"

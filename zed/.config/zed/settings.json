@@ -1,7 +1,8 @@
 {
+  "cli_default_open_behavior": "existing_window",
   "semantic_tokens": "combined",
   "helix_mode": false,
-  "redact_private_values": true,
+  "redact_private_values": false,
   "agent_servers": {
     "github-copilot-cli": {
       "type": "registry",
@@ -30,11 +31,6 @@
       "headers": {
         "Authorization": "Bearer a796a7e6-8cb7-4248-ba5e-8ec1ebfbe26f",
       },
-    },
-    "bun-docs-mcp": {
-      "enabled": false,
-      "remote": false,
-      "settings": {},
     },
     "software-planning-tool": {
       "enabled": false,
@@ -107,15 +103,9 @@
       "args": ["@browsermcp/mcp@latest"],
     },
     "shadcn": {
-      "enabled": true,
+      "enabled": false,
       "command": "bunx",
       "args": ["shadcn@latest", "mcp"],
-    },
-    "mcp-server-context7": {
-      "enabled": false,
-      "settings": {
-        "default_minimum_tokens": "10000",
-      },
     },
   },
   "telemetry": {
@@ -131,11 +121,14 @@
     },
   },
   "edit_predictions": {
+    "open_ai_compatible_api": {
+      "api_url": ""
+    },
     "provider": "zed",
     "codestral": {
       "api_url": "https://codestral.mistral.ai",
     },
-    "mode": "eager",
+    "mode": "subtle",
     "copilot": {
       "proxy": null,
       "proxy_no_verify": null,
@@ -188,29 +181,39 @@
     "default_model": {
       "enable_thinking": false,
       "provider": "opencode",
-      "model": "minimax-m2.5-free",
+      "model": "go/minimax-m3",
     },
     "favorite_models": [
       {
         "provider": "copilot_chat",
         "model": "gemini-3-flash-preview",
+        "enable_thinking": false
       },
       {
         "provider": "copilot_chat",
         "model": "claude-opus-4.6",
+        "enable_thinking": false
       },
       {
         "provider": "copilot_chat",
         "model": "claude-opus-4.5",
+        "enable_thinking": false
       },
       {
         "provider": "copilot_chat",
         "model": "gemini-2.5-pro",
+        "enable_thinking": false
       },
       {
         "provider": "copilot_chat",
         "model": "claude-haiku-4.5",
+        "enable_thinking": false
       },
+      {
+        "provider": "opencode",
+        "model": "free/big-pickle",
+        "enable_thinking": false
+      }
     ],
     "model_parameters": [],
     "commit_message_model": {

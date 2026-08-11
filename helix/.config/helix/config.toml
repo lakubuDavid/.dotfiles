@@ -4,7 +4,7 @@ theme = "catppuccin_frappe_plus"
 [editor]
 line-number = "absolute"
 mouse = true
-color-modes = true
+color-modes = false
 bufferline = "always"
 undercurl = true
 shell = ["zsh", "-c"]

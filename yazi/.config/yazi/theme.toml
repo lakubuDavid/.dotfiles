@@ -17,7 +17,7 @@ marker_selected = { fg = "#8caaee", bg = "#8caaee" }
 # Tab
 tab_active = { fg = "#303446", bg = "#c6d0f5" }
 tab_inactive = { fg = "#c6d0f5", bg = "#51576d" }
-tab_width = 1
+# tab_width = 1
 
 # Count
 count_copied = { fg = "#303446", bg = "#a6d189" }
@@ -104,8 +104,8 @@ rules = [
   { mime = "application/x-rar", fg = "#f4b8e4" },
 
   # Fallback
-  { name = "*", fg = "#c6d0f5" },
-  { name = "*/", fg = "#8caaee" },
+  { url = "*", fg = "#c6d0f5" },
+  { url = "*/", fg = "#8caaee" },
 ]
 
 [icon]
