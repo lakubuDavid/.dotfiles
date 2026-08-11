@@ -1,7 +1,7 @@
 
 [window]
-opacity = 0.87
-blur = true
+opacity = 1
+blur = false
 decorations = "buttonless"
 padding = { x = 8, y = 0 }
 option_as_alt = "OnlyLeft"

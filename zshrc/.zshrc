@@ -1,186 +1,255 @@
-source ~/.zsh/catppuccin_frappe-zsh-syntax-highlighting.zsh
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-export TMPDIR=$(getconf DARWIN_USER_TEMP_DIR)
+# shellcheck shell=bash
+# ─────────────────────────────────────────────────────────────────────────────
+# .zshrc - Optimized with inheritance guards
+# ─────────────────────────────────────────────────────────────────────────────
 
+# PATH dedup helper to prevent duplicates
+add_to_path() {
+  case ":$PATH:" in
+    *":$1:"*) ;;
+    *) export PATH="$1:$PATH" ;;
+  esac
+}
 
+# ─────────────────────────────────────────────────────────────────────────────
+# 1. BREW & MISE FIRST (so their tools are on PATH for everything else)
+# ─────────────────────────────────────────────────────────────────────────────
+eval "$(brew shellenv)"
+eval "$(mise activate zsh)"
 
-# Uncomment the following line to use case-sensitive completion.
-CASE_SENSITIVE="true"
-COMPLETION_WAITING_DOTS="true"
-PAGER="moor"
+# ─────────────────────────────────────────────────────────────────────────────
+# 2. SYNTAX HIGHLIGHTING (load early for proper coloring)
+# ─────────────────────────────────────────────────────────────────────────────
+# shellcheck source=/dev/null
+source "$HOME/.zsh/catppuccin_frappe-zsh-syntax-highlighting.zsh"
 
-fpath+=~/.zfunc
+# ─────────────────────────────────────────────────────────────────────────────
+# 3. BASIC ENVIRONMENT
+# ─────────────────────────────────────────────────────────────────────────────
+# PATH already has $HOME/bin and /usr/local/bin from .zprofile, don't re-add
+TMPDIR="$(getconf DARWIN_USER_TEMP_DIR)"
+export TMPDIR
+CASE_SENSITIVE="true"  # Used by completion system
+COMPLETION_WAITING_DOTS="true"  # Used by completion system
+export PAGER="moor"
+fpath+=(~/.zfunc)
+MANPATH="/usr/local/man:${MANPATH:-}"
+export MANPATH
+LANG=en_US.UTF-8
+export LANG
+EDITOR=hx
+export EDITOR
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+# ─────────────────────────────────────────────────────────────────────────────
+# 4. TOOL ENV VARS & PATHS (no duplicates)
+# ─────────────────────────────────────────────────────────────────────────────
+# Node
+NODE_CERTS="$(mkcert -CAROOT)/rootCA.pem"
+export NODE_EXTRA_CA_CERTS="$NODE_CERTS"
 
-# User configuration
+# Deno
+EMSDK_QUIET=1
+export EMSDK_QUIET
+DENO_INSTALL="$HOME/.deno"
+export DENO_INSTALL
+add_to_path "$DENO_INSTALL/bin"
 
-export MANPATH="/usr/local/man:$MANPATH"
+# PSP
+PSPDEV=/usr/local/pspdev
+export PSPDEV
+add_to_path "$PSPDEV/bin"
 
-# You may need to manually set your language environment
-export LANG=en_US.UTF-8
+# Bun
+BUN_INSTALL="$HOME/.bun"
+export BUN_INSTALL
+add_to_path "$BUN_INSTALL/bin"
+add_to_path "$HOME/bun/bin"
 
-export NODE_EXTRA_CA_CERTS="$(mkcert -CAROOT)/rootCA.pem"
-export EMSDK_QUIET=1
-export DENO_INSTALL="/Users/davidlakubu/.deno"
-export GRADLE_INSTALL="/Users/davidlakubu/gradle-7.5"
-export PSPDEV=/usr/local/pspdev
-export PATH="$GRADLE_INSTALL/bin:$DENO_INSTALL/bin:$PSPDEV/bin:$PATH"
-# HELIX AS DEFAULT EDITOR FOR CLI TOOLS
-export EDITOR=hx
+# Android & Java
+ANDROID_HOME="$HOME/Library/Android/sdk"
+export ANDROID_HOME
+NDK_HOME="$ANDROID_HOME/ndk/29.0.13846066"
+export NDK_HOME
+add_to_path "$ANDROID_HOME/tools"
+add_to_path "$ANDROID_HOME/tools/bin"
+OPEN_JDK_HOME="/usr/local/opt/openjdk"
+export OPEN_JDK_HOME
+JAVA_HOME="$OPEN_JDK_HOME"
+export JAVA_HOME
+add_to_path "$OPEN_JDK_HOME/bin"
+CPPFLAGS="-I$OPEN_JDK_HOME/include"
+export CPPFLAGS
 
+# Misc tools
+add_to_path "$HOME/.console-ninja/.bin"
+add_to_path "$HOME/.composer/vendor/bin"
+add_to_path "/Applications/Docker.app/Contents/Resources/bin"
 
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
+# Go
+GOPATH="$HOME/go"
+export GOPATH
+add_to_path "$GOPATH/bin"
+ATAC_MAIN_DIR="$HOME/atac/http"
+export ATAC_MAIN_DIR
+
+# Dev tools
+add_to_path "$HOME/.config/v-analyzer/bin"
+add_to_path "$HOME/omnisharp"
+add_to_path "/usr/local/opt/llvm/bin"
+add_to_path "/opt/local/bin"
+add_to_path "$HOME/tools"
+add_to_path "$HOME/.config/scripts"
+add_to_path "$HOME/.spicetify"
+add_to_path "$HOME/.gem/ruby/2.6.0/bin"
+add_to_path "/usr/local/opt/ruby@3.3/bin"
+add_to_path "/Library/Frameworks/Python.framework/Versions/3.11/bin"
+add_to_path "$HOME/pmd-bin-7.13.0/bin"
+add_to_path "$HOME/.dotnet/tools"
+add_to_path "$HOME/.local/bin"
+
+# Dprint
+DPRINT_INSTALL="$HOME/.dprint"
+export DPRINT_INSTALL
+add_to_path "$DPRINT_INSTALL/bin"
+
+# pnpm
+PNPM_HOME="$HOME/Library/pnpm"
+export PNPM_HOME
+add_to_path "$PNPM_HOME"
+
+# libpq
+add_to_path "/usr/local/opt/libpq/bin"
+LDFLAGS="-L/usr/local/opt/libpq/lib"
+export LDFLAGS
+CPPFLAGS="$CPPFLAGS -I/usr/local/opt/libpq/include"
+export CPPFLAGS
+PKG_CONFIG_PATH="/usr/local/opt/libpq/lib/pkgconfig"
+export PKG_CONFIG_PATH
+
+# Tex
+MANTPATH="${MANTPATH:+$MANTPATH:}$HOME/2025/texmf-dist/doc/man"
+export MANTPATH
+INFOPATH="${INFOPATH:+$INFOPATH:}$HOME/2025/texmf-dist/doc/info"
+export INFOPATH
+
+# Piper
+PIPER_DATA="$HOME/piper_data"
+export PIPER_DATA
+alias piper="piper --data-dir $PIPER_DATA"
+
+# Helix
+HELIX_RUNTIME="$HOME/.config/helix/runtime"
+export HELIX_RUNTIME
+
+# Penpot
+PENPOT_DIR="penpot"
+export PENPOT_DIR
+
+# Walk
+WALK_EDITOR=hx
+export WALK_EDITOR
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 5. EVALS THAT DEFINE FUNCTIONS (must run per shell - NOT inherited)
+# ─────────────────────────────────────────────────────────────────────────────
+# fzf (defines key bindings + __fzf_* functions)
+eval "$(fzf --zsh)"
+
+# zoxide (defines z() function)
+eval "$(zoxide init zsh)"
+
+# oh-my-posh (defines prompt)
+eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/config.omp.toml)"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 6. ZINIT + PLUGINS (must run per shell - NOT inherited)
+# ─────────────────────────────────────────────────────────────────────────────
+ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.git"
+[ ! -d "$ZINIT_HOME" ] && mkdir -p "$(dirname "$ZINIT_HOME")"
+[ ! -d "$ZINIT_HOME/.git" ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+# shellcheck source=/dev/null
+source "${ZINIT_HOME}/zinit.zsh"
+
+zinit snippet OMZP::fzf
+zinit light zdharma-continuum/fast-syntax-highlighting
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-completions
+zinit light Aloxaf/fzf-tab
+
+# compinit - use cache if fresh (within 24h), otherwise rebuild
+autoload -U compinit
+if [[ -s "$HOME/.zcompdump" ]] && [[ $(find "$HOME/.zcompdump" -mmin -1440 2>/dev/null) ]]; then
+  compinit -C  # fast: use cache (~50ms)
+else
+  compinit     # slow: rebuild cache (~2.5s, but only once per day)
 fi
 
-export PATH="$PATH:/Users/davidlakubu/flutter/bin"
-# bun completions
-# [ -s "/Users/davidlakubu/.bun/_bun" ] && source "/Users/davidlakubu/.bun/_bun"
+zinit cdreplay -q
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-# bun apps
-export PATH="$HOME/bun/bin:$PATH"
-alias love-export=/Users/davidlakubu/love-export/main.sh
-alias love-export=/Users/davidlakubu/tools/love-export/main.sh
-
-#php
-# export PATH="/Applications/XAMPP/bin:$PATH"
-
-#zsh colors
-# autoload -Uz vcs_info
-# precmd() { vcs_info }
-
-# zstyle ':vcs_info:git:*' formats '(%b)'
-
-# setopt PROMPT_SUBST
-# PROMPT='%F{green}%*%f %F{blue}%~%f %F{red}${vcs_info_msg_0_}%f$ '
-# PROMPT=' %F{green}%n%f %F{magenta}%~%f %B%F{cyan}${vcs_info_msg_0_}%f%b %F{magenta}•%f '
-# PROMPT='%F{magenta}%~%f%B%F{cyan}${vcs_info_msg_0_}%f%b%F{cyan} ❯%f'
-
-
-# android
-# export JAVA_HOME="$HOME/Applications/Android Studio.app/Contents/jbr/Contents/Home"
-# export JAVA_HOME="/usr/local/opt/openjdk/bin"
-export ANDROID_HOME="$HOME/Library/Android/sdk"
-export NDK_HOME="$ANDROID_HOME/ndk/29.0.13846066"
-export PATH="$PATH:$ANDROID_HOME/tools"
-export PATH="$PATH:$ANDROID_HOME/tools/bin"
-
-export OPEN_JDK_HOME="/usr/local/opt/openjdk"
-export JAVA_HOME="$OPEN_JDK_HOME"
-export PATH="$OPEN_JDK_HOME/bin:$PATH"
-export CPPFLAGS="-I$OPEN_JDK_HOME/include"
-
-PATH="~/.console-ninja/.bin:$PATH"
-export PATH="$PATH:$HOME/.composer/vendor/bin"
-
-#Docker
-export PATH="$PATH:/usr/local/Cellar/docker/26.1.1/bin"
-
-# test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-# luarocks
-# export LUAROCKS="/usr/local/Cellar/luarocks/3.11.0/share/lua/5.4/luarocks"
-# torch
-# ./Users/davidlakubu/torch/install/bin/torch-activate
-
-# yazi
-
-function yaz() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
-}
-
-#STARTUP MESSAGE
-source ~/.config/startup.sh
-
-# Shell integration
-eval "$(brew shellenv)"
-eval "$(fzf --zsh)"
-eval "$(zoxide init zsh)"
-# eval "$(thefuck --alias)"
-# eval "$(chezmoi completion zsh)"
-# tere
-echo " • Loaded Shell integration"
-
-tere() {
-    local result=$(command tere "$@")
-    [ -n "$result" ] && cd -- "$result"
-}
-
-# glow custom command
-
-function gn() {
-    (cd "$~/Users/davidlakubu/ObsidianVault/David's Vault/David's Vault" && glow)
-}
-
-# walk
-
-function lk {
-	if [ -n "$@" ]; then
-    cd "$(walk --icons "$@")"
-	else
-    cd "$(walk "$@")"
-	fi
-  #cd "$(walk --icons "$@")"
-}
-
-export WALK_EDITOR=hx
-
-# Generated for envman. Do not edit.
+# ─────────────────────────────────────────────────────────────────────────────
+# 7. BROOT & ENVMAN
+# ─────────────────────────────────────────────────────────────────────────────
+# shellcheck source=/dev/null
+source "$HOME/.config/broot/launcher/bash/br"
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
-#zellij
+# ─────────────────────────────────────────────────────────────────────────────
+# 8. MOLE COMPLETION (guarded - only in fresh shells, saves 610ms)
+# ─────────────────────────────────────────────────────────────────────────────
+if [[ -z "$__ZSHRC_LOADED" ]]; then
+  if output="$(mole completion zsh 2>/dev/null)"; then eval "$output"; fi
+fi
 
-#eval "$(zellij setup --generate-auto-start zsh)"
+# ─────────────────────────────────────────────────────────────────────────────
+# 9. ALIASES & FUNCTIONS (not inherited, must redefine per shell)
+# ─────────────────────────────────────────────────────────────────────────────
+# shellcheck source=/dev/null
+source "$HOME/.config/aliases.zsh"
 
-#docker
-export PATH="/Applications/Docker.app/Contents/Resources/bin:$PATH"
-
-#penpot
-export PENPOT_DIR="penpot"
-
-function penpot_start {
-	z "${PENPOT_DIR}"
-
-	podman-compose -p penpot -f docker-compose.yaml up -d
+# Yazi wrapper
+yaz() {
+  local tmp cwd
+  tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+  yazi "$@" --cwd-file="$tmp"
+  if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+    cd -- "$cwd" || return
+  fi
+  rm -f -- "$tmp"
 }
 
-function penpot_stop {
-	z "${PENPOT_DIR}"
-
-	podman-compose -p penpot -f docker-compose.yaml down
+# tere wrapper
+tere() {
+  local result
+  result="$(command tere "$@")"
+  [ -n "$result" ] && cd -- "$result" || return
 }
 
-
-function dotconfigs() {
-	hx ~/.dotfiles
+# walk wrapper
+lk() {
+  if [ -n "$*" ]; then
+    cd "$(walk --icons "$*")" || return
+  else
+    cd "$(walk)" || return
+  fi
 }
 
-# For go apps
-export GOPATH=$HOME/go
-export PATH="$PATH:$GOPATH/bin"
+# glow in obsidian vault
+gn() {
+  (cd "$HOME/ObsidianVault/David's Vault" && glow) || return
+}
 
-# Atac : TUI Postman like HTTP client
-export ATAC_MAIN_DIR=$HOME/atac/http
+# penpot
+penpot_start() { z "$PENPOT_DIR" && podman-compose -p penpot -f docker-compose.yaml up -d; }
+penpot_stop() { z "$PENPOT_DIR" && podman-compose -p penpot -f docker-compose.yaml down; }
+dotconfigs() { hx ~/.dotfiles; }
 
-
-#Ollama status TUI icon
-function ollama-status() {
+# ollama status
+ollama-status() {
   if pgrep -x "ollama" > /dev/null; then
-    if [ $(ps aux | grep -c '[o]llama') -gt 1 ]; then
-      echo "running ($(ps aux | grep -c '[o]llama'))"
+    local count
+    count="$(pgrep -c ollama)"
+    if [ "$count" -gt 1 ]; then
+      echo "running ($count)"
     else
       echo "idle"
     fi
@@ -189,100 +258,33 @@ function ollama-status() {
   fi
 }
 
-# V lang config
-export PATH="$PATH:/Users/davidlakubu/.config/v-analyzer/bin/"
-
-# Omnisharp
-export PATH="$PATH:/Users/davidlakubu/omnisharp"
-
-# eval "$(oh-my-posh init zsh --config https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/tokyonight_storm.omp.json)"
-eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/config.omp.toml)"
-
-# #fastfetch
-# fastfetch
-
-#pipx
-# eval "$(register-python-argcomplete pipx)"
-export COPILOT_API_KEY="$(pass ApiKeys/Github/Copilot)"
-
-
-#netcoredbg
-export PATH="$HOME/netcoredbg/:$PATH"
-
-#llvm
-export PATH="/usr/local/opt/llvm/bin:$PATH"
-
-#macport
-export PATH="/opt/local/bin:$PATH"
-
-#piper tts alias
-export PIPER_DATA="~/piper_data"
-alias piper="piper --data-dir $PIPER_DATA"
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-# (( ! ${+functions[p10k]} )) || p10k finalize
-
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
-[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-source "${ZINIT_HOME}/zinit.zsh"
-
-# zinit snippet OMZP::ssh
-zinit snippet OMZP::fzf
-# zinit snippet OMZP::themes
-# zinit snippet OMZP::chezmoi
-
-zinit light zdharma-continuum/fast-syntax-highlighting
-zinit light zsh-users/zsh-autosuggestions
-zinit light zsh-users/zsh-completions
-# zinit light zsh-users/zsh-syntax-highlighting
-zinit light Aloxaf/fzf-tab
-### End of Zinit's installer chunk
-autoload -U compinit; compinit
-
-# For better performance: (check zinit documentation)
-zinit cdreplay -q
-
-
-#My tools
-export PATH="$PATH:/Users/davidlakubu/tools"
-export PATH="$PATH:$HOME/.config/scripts"
-
-source /Users/davidlakubu/.config/broot/launcher/bash/br
-
-#tere
-tere() {
-    local result=$(command tere "$@")
-    [ -n "$result" ] && cd -- "$result"
-}
-
-
-# Emacs keybind
+# ─────────────────────────────────────────────────────────────────────────────
+# 10. SHELL OPTIONS & BINDINGS (not inherited)
+# ─────────────────────────────────────────────────────────────────────────────
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 
-#history
 HISTSIZE=5000
 HISTFILE=~/.zsh_history
-SAVEHIST=$HISTSIZE
-HISTDUP=erase
-setopt appendhistory
-setopt sharehistory
-setopt hist_ignore_space
-setopt hist_ignore_all_dups
-setopt hist_find_no_dups
-setopt auto_cd
+SAVEHIST=$HISTSIZE  # Used by zsh history system
+HISTDUP=erase  # Used by zsh history system
+setopt appendhistory sharehistory hist_ignore_space hist_ignore_all_dups hist_find_no_dups auto_cd
 
-#completion styling
+# ─────────────────────────────────────────────────────────────────────────────
+# 11. COMPLETION STYLING (not inherited)
+# ─────────────────────────────────────────────────────────────────────────────
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+# shellcheck disable=SC2296
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
+# shellcheck disable=SC2016
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
-echo " • Intialized zsh plugins"
-#fzf
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 12. FZF OPTIONS
+# ─────────────────────────────────────────────────────────────────────────────
 export FZF_DEFAULT_OPTS=" \
 --color=bg+:#414559,bg:#303446,spinner:#f2d5cf,hl:#e78284 \
 --color=fg:#c6d0f5,header:#e78284,info:#ca9ee6,pointer:#f2d5cf \
@@ -290,64 +292,32 @@ export FZF_DEFAULT_OPTS=" \
 --color=selected-bg:#51576d \
 --multi"
 
-export PATH=$PATH:/Users/davidlakubu/.spicetify
-# source "$(gopass completion zsh)"
+# ─────────────────────────────────────────────────────────────────────────────
+# 13. EMAIL / MISC ENV
+# ─────────────────────────────────────────────────────────────────────────────
+POP_FROM=pop@lakubudavid.me
+export POP_FROM
+POP_SIGNATURE="Sent with [Pop](https://github.com/charmbracelet/pop)!"
+export POP_SIGNATURE
 
-# source "/Users/davidlakubu/.config/zellij_tab_name.zsh"
+# ─────────────────────────────────────────────────────────────────────────────
+# 14. API KEYS VIA PASS (commented out - too slow, ~7.3s)
+#     Uncomment if you need these API keys
+# ─────────────────────────────────────────────────────────────────────────────
+if [[ -z "$__ZSHRC_LOADED" ]]; then
+  RESEND_API_KEY="$(pass show ApiKeys/RESEND_API_KEY)"
+  export RESEND_API_KEY
+  OPENROUTER_API_KEY="$(pass show ApiKeys/OpenRouter)"
+  export OPENROUTER_API_KEY
+  OPENCODE_API_KEY="$(pass show ApiKeys/OpencodeZen)"
+  export OPENCODE_API_KEY
+  export __ZSHRC_LOADED=1
+fi
 
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-# echo " • Intialized nvm"
-
-export HELIX_RUNTIME=~/.config/helix/runtime
-
-source "/Users/davidlakubu/.config/aliases.zsh"
-
-echo " • Intialized aliases"
-
-# Python path
-export PATH="$PATH:/Library/Frameworks/Python.framework/Versions/3.11/bin"
-# alias tsgo="/Users/davidlakubu/Code/typescript-go/built/local/tsgo"
-
-# PMD
-export PATH="$PATH:$HOME/pmd-bin-7.13.0/bin"
-
-# dotnet ttools
-export PATH="$PATH:$HOME/.dotnet/tools"
-
-export POP_FROM=pop@lakubudavid.me
-export POP_SIGNATURE="Sent with [Pop](https://github.com/charmbracelet/pop)!"
-
-export RESEND_API_KEY=$(pass show ApiKeys/RESEND_API_KEY)
-export OPENROUTER_API_KEY=$(pass show ApiKeys/OpenRouter)
-export OPENCODE_API_KEY=$(pass show ApiKeys/OpencodeZen)
-
-export PATH="$PATH:$HOME/.local/bin"
-# tput cuu 4
-clear
-
-# Dprint
-
-export DPRINT_INSTALL="/Users/davidlakubu/.dprint"
-export PATH="$DPRINT_INSTALL/bin:$PATH"
-
-# pnpm
-export PNPM_HOME="/Users/davidlakubu/Library/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-# pnpm end
-
-PATH=~/.console-ninja/.bin:$PATH
-export PATH="$PATH:$HOME/.gem/ruby/2.6.0/bin"
-export PATH="/usr/local/opt/ruby@3.3/bin:$PATH"
-export PATH="/usr/local/opt/ruby@3.3/bin:$PATH"
-export OPENAI_API_KEY=$(pass show ApiKeys/OpenAI/PersonalAI/Intelibar)
-
-
-export PATH="$PATH:/Users/davidlakubu/Library/Application Support/pear/bin"
-export PATH="$PATH:/Users/davidlakubu/2025/bin/universal-darwin"
-export MANTPATH="$MANTPATH:/Users/davidlakubu/2025/texmf-dist/doc/man"
-export INFOPATH="$INFOPATH:/Users/davidlakubu/2025/texmf-dist/doc/info"
-
-eval "$(mise activate zsh)"
-eval $(luarocks path)
+# ─────────────────────────────────────────────────────────────────────────────
+# 15. STARTUP MESSAGE (only in fresh terminal windows, not zellij/tmux)
+# ─────────────────────────────────────────────────────────────────────────────
+if [[ -z "$ZELLIJ" && -z "$TMUX" ]]; then
+  # shellcheck source=/dev/null
+  source "$HOME/.config/startup.sh"
+fi

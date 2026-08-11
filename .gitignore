@@ -2,4 +2,10 @@ helix/.config/helix/runtime/*
 .jj/
 **/.DS_Store
 yabai_state.json
+yabai_state.json.log
 yazi/plugins/**
+# backups & editor junk
+*.bak
+*.swp
+# runtime databases (zed embeddings/prompts db locks)
+**/lock.mdb
