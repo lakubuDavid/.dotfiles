@@ -44,3 +44,22 @@ herdr = "latest"
 
 [settings]
 experimental = true
+
+# ─────────────────────────────────────────────────────────────────────────────
+# General environment (all platforms)
+# Migrated from ~/.zshrc sections 3/12/13 — phase 1 of zshrc→mise migration.
+# Platform-specific values live in config.macos.toml / config.linux.toml.
+# ─────────────────────────────────────────────────────────────────────────────
+[env]
+EDITOR = "hx"
+WALK_EDITOR = "hx"
+PAGER = "moor"
+LANG = "en_US.UTF-8"
+PENPOT_DIR = "penpot"
+ATAC_MAIN_DIR = "{{ env.HOME }}/atac/http"
+PIPER_DATA = "{{ env.HOME }}/piper_data"
+HELIX_RUNTIME = "{{ env.HOME }}/.config/helix/runtime"
+POP_FROM = "pop@lakubudavid.me"
+POP_SIGNATURE = "Sent with [Pop](https://github.com/charmbracelet/pop)!"
+# NOTE: byte-faithful copy of the original shell value incl. backslash continuations
+FZF_DEFAULT_OPTS = ' --color=bg+:#414559,bg:#303446,spinner:#f2d5cf,hl:#e78284 \ --color=fg:#c6d0f5,header:#e78284,info:#ca9ee6,pointer:#f2d5cf \ --color=marker:#babbf1,fg+:#c6d0f5,prompt:#ca9ee6,hl+:#e78284 \ --color=selected-bg:#51576d \ --multi'
