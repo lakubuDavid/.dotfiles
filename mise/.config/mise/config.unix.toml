@@ -1,0 +1,36 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Unix-common layer (macOS + Linux). Loaded via auto_env (see miserc.toml).
+# Precedence: config.toml < config.unix.toml < config.macos|linux.toml
+# [env._].path array order == PATH precedence order (first entry wins).
+# Migrated from ~/.zshrc section 4 — phase 1 of zshrc→mise migration.
+# ─────────────────────────────────────────────────────────────────────────────
+
+[env]
+EMSDK_QUIET = "1"
+
+DENO_INSTALL = "{{ env.HOME }}/.deno"
+BUN_INSTALL = "{{ env.HOME }}/.bun"
+GOPATH = "{{ env.HOME }}/go"
+DPRINT_INSTALL = "{{ env.HOME }}/.dprint"
+
+# man/info: append texmf docs to whatever the system already set
+MANTPATH = "{{ env.MANTPATH | default(value='') }}{{ env.HOME }}/2025/texmf-dist/doc/man"
+INFOPATH = "{{ env.INFOPATH | default(value='') }}{{ env.HOME }}/2025/texmf-dist/doc/info"
+
+[env._]
+path = [
+  "{{ env.HOME }}/.dprint/bin",
+  "{{ env.HOME }}/.dotnet/tools",
+  "{{ env.HOME }}/pmd-bin-7.13.0/bin",
+  "{{ env.HOME }}/.spicetify",
+  "{{ env.HOME }}/.config/scripts",
+  "{{ env.HOME }}/tools",
+  "{{ env.HOME }}/omnisharp",
+  "{{ env.HOME }}/.config/v-analyzer/bin",
+  "{{ env.HOME }}/go/bin",
+  "{{ env.HOME }}/.composer/vendor/bin",
+  "{{ env.HOME }}/.console-ninja/.bin",
+  "{{ env.HOME }}/bun/bin",
+  "{{ env.HOME }}/.bun/bin",
+  "{{ env.HOME }}/.deno/bin",
+]
