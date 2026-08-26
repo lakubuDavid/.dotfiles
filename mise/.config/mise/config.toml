@@ -41,6 +41,9 @@ bottom = "latest"
 d2 = "latest"
 amass = "latest"
 herdr = "latest"
+harper-cli = "latest"
+"npm:@playwright/cli" = "latest"
+yt-dlp = { version = "latest", rename_exe = "yt-dlp" }
 
 [settings]
 experimental = true
@@ -61,5 +64,6 @@ PIPER_DATA = "{{ env.HOME }}/piper_data"
 HELIX_RUNTIME = "{{ env.HOME }}/.config/helix/runtime"
 POP_FROM = "pop@lakubudavid.me"
 POP_SIGNATURE = "Sent with [Pop](https://github.com/charmbracelet/pop)!"
-# NOTE: byte-faithful copy of the original shell value incl. backslash continuations
-FZF_DEFAULT_OPTS = ' --color=bg+:#414559,bg:#303446,spinner:#f2d5cf,hl:#e78284 \ --color=fg:#c6d0f5,header:#e78284,info:#ca9ee6,pointer:#f2d5cf \ --color=marker:#babbf1,fg+:#c6d0f5,prompt:#ca9ee6,hl+:#e78284 \ --color=selected-bg:#51576d \ --multi'
+# Shell \-newline continuations from .zshrc intentionally dropped:
+# they were shell syntax, never part of the runtime value.
+FZF_DEFAULT_OPTS = "--color=bg+:#414559,bg:#303446,spinner:#f2d5cf,hl:#e78284 --color=fg:#c6d0f5,header:#e78284,info:#ca9ee6,pointer:#f2d5cf --color=marker:#babbf1,fg+:#c6d0f5,prompt:#ca9ee6,hl+:#e78284 --color=selected-bg:#51576d --multi"
