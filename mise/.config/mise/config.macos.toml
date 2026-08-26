@@ -1,0 +1,53 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# macOS-specific layer. Loaded via auto_env (see miserc.toml).
+# Precedence: config.toml < config.unix.toml < this file.
+# [env._].path array order == PATH precedence order (first entry wins).
+# Migrated from ~/.zshrc sections 1/3/4 — phase 1 of zshrc→mise migration.
+# ─────────────────────────────────────────────────────────────────────────────
+
+[env]
+# Darwin per-user temp dir (was: TMPDIR="$(getconf DARWIN_USER_TEMP_DIR)")
+TMPDIR = "{{ exec(command='getconf DARWIN_USER_TEMP_DIR') }}"
+
+# mkcert root CA for Node (hardcoded resolved CAROOT so config renders even
+# when mkcert isn't on PATH, e.g. IDE-spawned mise)
+NODE_EXTRA_CA_CERTS = "/Users/davidlakubu/Library/Application Support/mkcert/rootCA.pem"
+
+# Android SDK/NDK — single source of truth (.zprofile had ndk 26.x, .zshrc 29.x)
+ANDROID_HOME = "{{ env.HOME }}/Library/Android/sdk"
+NDK_HOME = "{{ env.HOME }}/Library/Android/sdk/ndk/29.0.13846066"
+
+# Java (brew openjdk) — resolves .zprofile(JBR) vs .zshrc(/usr/local/opt) conflict
+OPEN_JDK_HOME = "/usr/local/opt/openjdk"
+JAVA_HOME = "/usr/local/opt/openjdk"
+
+# PSP dev
+PSPDEV = "/usr/local/pspdev"
+
+# pnpm (macOS location; Linux uses a different PNPM_HOME in config.linux.toml)
+PNPM_HOME = "{{ env.HOME }}/Library/pnpm"
+
+# libpq (brew) build/link flags
+LDFLAGS = "-L/usr/local/opt/libpq/lib"
+CPPFLAGS = "-I/usr/local/opt/openjdk/include -I/usr/local/opt/libpq/include"
+PKG_CONFIG_PATH = "/usr/local/opt/libpq/lib/pkgconfig"
+
+# man: prepend brew man dir, keep any inherited MANPATH (original:
+# MANPATH="/usr/local/man:${MANPATH:-}")
+MANPATH = "/usr/local/man:{{ env.MANPATH | default(value='') }}"
+
+[env._]
+path = [
+  "/usr/local/opt/libpq/bin",
+  "{{ env.HOME }}/Library/pnpm",
+  "/Library/Frameworks/Python.framework/Versions/3.11/bin",
+  "/usr/local/opt/ruby@3.3/bin",
+  "{{ env.HOME }}/.gem/ruby/2.6.0/bin",
+  "/opt/local/bin",
+  "/usr/local/opt/llvm/bin",
+  "/Applications/Docker.app/Contents/Resources/bin",
+  "/usr/local/opt/openjdk/bin",
+  "{{ env.HOME }}/Library/Android/sdk/tools/bin",
+  "{{ env.HOME }}/Library/Android/sdk/tools",
+  "/usr/local/pspdev/bin",
+]
