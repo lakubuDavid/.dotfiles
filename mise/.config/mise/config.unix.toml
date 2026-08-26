@@ -12,10 +12,9 @@ DENO_INSTALL = "{{ env.HOME }}/.deno"
 BUN_INSTALL = "{{ env.HOME }}/.bun"
 GOPATH = "{{ env.HOME }}/go"
 DPRINT_INSTALL = "{{ env.HOME }}/.dprint"
-
-# man/info: append texmf docs to whatever the system already set
-MANTPATH = "{{ env.MANTPATH | default(value='') }}{{ env.HOME }}/2025/texmf-dist/doc/man"
-INFOPATH = "{{ env.INFOPATH | default(value='') }}{{ env.HOME }}/2025/texmf-dist/doc/info"
+# NOTE: MANTPATH / INFOPATH intentionally stay in ~/.zshrc — they need
+# "${VAR:+$VAR:}" conditional-colon appends, which TOML templates can't
+# express safely (unset-var lookups hard-error in mise templates).
 
 [env._]
 path = [
