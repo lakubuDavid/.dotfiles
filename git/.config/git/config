@@ -5,7 +5,6 @@
 [user]
 	email = lakubudavid@gmail.com
 	name = lakubuDavid
-	signingkey = GPG_SIGNING_KEY_REMOVED
 [commit]
 	gpgSign = true
 [filter "lfs"]

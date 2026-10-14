@@ -15,6 +15,11 @@ function ollama-status() {
   fi
 }
 
+# Set git signing key from env var (loaded via mise)
+if [ -n "$GPG_SIGNING_KEY" ]; then
+  git config --global user.signingkey "$GPG_SIGNING_KEY"
+fi
+
 # figlet -w$(tput cols) -f  small  " $(date '+%A')"
 # echo " $USER"
 # echo " -----------"

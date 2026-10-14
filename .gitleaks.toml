@@ -1,0 +1,9 @@
+# Gitleaks configuration for .dotfiles
+# Allows third-party code and local-only files that are gitignored.
+
+[allowlist]
+description = "Allow third-party helix runtime grammars and local secrets file"
+paths = [
+    '''helix/\.config/helix/runtime/''',
+    '''mise/\.config/mise/config\.local\.toml$''',
+]

@@ -4,6 +4,7 @@ helix/.config/helix/runtime/*
 yabai_state.json
 yabai_state.json.log
 yazi/plugins/**
+mise/.config/mise/config.local.toml
 # backups & editor junk
 *.bak
 *.swp

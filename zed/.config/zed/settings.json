@@ -42,7 +42,7 @@
       "command": "npx",
       "args": ["deepl-mcp-server"],
       "env": {
-        "DEEPL_API_KEY": "DEEPL_API_KEY_REMOVED",
+        "DEEPL_API_KEY": "{{ env.DEEPL_API_KEY }}",
       },
     },
     "unsplash": {
@@ -50,7 +50,7 @@
       "command": "unsplash-mcp-server",
       "args": [],
       "env": {
-        "UNSPLASH_ACCESS_KEY": "UNSPLASH_ACCESS_KEY_REMOVED",
+        "UNSPLASH_ACCESS_KEY": "{{ env.UNSPLASH_ACCESS_KEY }}",
       },
     },
     "unsplash-mcp-server": {
