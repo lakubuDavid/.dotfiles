@@ -11,6 +11,8 @@ add_to_path() {
   esac
 }
 
+add_to_path /usr/local/bin
+
 # ─────────────────────────────────────────────────────────────────────────────
 # 1. BREW & MISE FIRST (so their tools are on PATH for everything else)
 # ─────────────────────────────────────────────────────────────────────────────
@@ -82,7 +84,7 @@ export CPPFLAGS
 
 # Misc tools
 add_to_path "$HOME/.console-ninja/.bin"
-add_to_path "$HOME/.composer/vendor/bin"
+# add_to_path "$HOME/.composer/vendor/bin"
 add_to_path "/Applications/Docker.app/Contents/Resources/bin"
 
 # Go
@@ -161,6 +163,8 @@ eval "$(zoxide init zsh)"
 # oh-my-posh (defines prompt)
 eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/config.omp.toml)"
 
+eval "$(soop completion zsh)"
+
 # ─────────────────────────────────────────────────────────────────────────────
 # 6. ZINIT + PLUGINS (must run per shell - NOT inherited)
 # ─────────────────────────────────────────────────────────────────────────────
@@ -172,12 +176,12 @@ source "${ZINIT_HOME}/zinit.zsh"
 
 zinit snippet OMZP::fzf
 zinit light zdharma-continuum/fast-syntax-highlighting
-zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 zinit light Aloxaf/fzf-tab
 
 # compinit - use cache if fresh (within 24h), otherwise rebuild
 autoload -U compinit
+
 if [[ -s "$HOME/.zcompdump" ]] && [[ $(find "$HOME/.zcompdump" -mmin -1440 2>/dev/null) ]]; then
   compinit -C  # fast: use cache (~50ms)
 else
@@ -205,6 +209,10 @@ fi
 # ─────────────────────────────────────────────────────────────────────────────
 # shellcheck source=/dev/null
 source "$HOME/.config/aliases.zsh"
+
+# Zellij tab names: folder when idle, program when busy (aggregated per tab)
+# shellcheck source=/dev/null
+[[ -f "$HOME/.config/zellij/zelij_tab_name.zsh" ]] && source "$HOME/.config/zellij/zelij_tab_name.zsh"
 
 # Yazi wrapper
 yaz() {
@@ -301,8 +309,7 @@ POP_SIGNATURE="Sent with [Pop](https://github.com/charmbracelet/pop)!"
 export POP_SIGNATURE
 
 # ─────────────────────────────────────────────────────────────────────────────
-# 14. API KEYS VIA PASS (commented out - too slow, ~7.3s)
-#     Uncomment if you need these API keys
+# 14. API KEYS VIA PASS 
 # ─────────────────────────────────────────────────────────────────────────────
 if [[ -z "$__ZSHRC_LOADED" ]]; then
   RESEND_API_KEY="$(pass show ApiKeys/RESEND_API_KEY)"
@@ -311,6 +318,8 @@ if [[ -z "$__ZSHRC_LOADED" ]]; then
   export OPENROUTER_API_KEY
   OPENCODE_API_KEY="$(pass show ApiKeys/OpencodeZen)"
   export OPENCODE_API_KEY
+  NOUS_API_KEY="$(pass show ApiKeys/NOUS_PORTAL_API_KEY)"
+  export NOUS_API_KEY
   export __ZSHRC_LOADED=1
 fi
 
@@ -320,4 +329,16 @@ fi
 if [[ -z "$ZELLIJ" && -z "$TMUX" ]]; then
   # shellcheck source=/dev/null
   source "$HOME/.config/startup.sh"
+fi
+
+# opencode
+add_to_path "$HOME/.opencode/bin"
+
+# platform IO
+add_to_path "$HOME/.platformio/penv/bin"
+
+if [[ -r "$HOME/.local/share/deja/init.zsh" ]]; then
+  source "$HOME/.local/share/deja/init.zsh"
+else
+  eval "$(deja init zsh)"
 fi

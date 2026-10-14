@@ -1,6 +1,4 @@
 #!/usr/bin/env zsh
-pieces_url="http://localhost:1000/.well-known/health"
-clear
 # pfetch
 # fastfetch -c examples/10 -l none
 fastfetch -l small
@@ -20,8 +18,4 @@ function ollama-status() {
 # figlet -w$(tput cols) -f  small  " $(date '+%A')"
 # echo " $USER"
 # echo " -----------"
-echo " • Ollama Status :$(ollama-status) \n • Pieces Status :$(if curl --silent --head --fail "$pieces_url" > /dev/null; then
-  echo -e "\e[32m running\e[0m"
-else
-  echo -e "\e[30m offline\e[0m"
-fi)"
+echo " • Ollama Status :$(ollama-status)"

@@ -165,6 +165,12 @@ problems = { shortenToSingleLine = false }
 disableRuleComment = { enable = true, location = "separateLine" }
 showDocumentation = { enable = true }
 
+[language-server.gopls]
+command = "gopls"
+
+[language-server.gopls.config]
+buildFlags = ["-tags=tinygo"]
+
 [[language]]
 name = "csv"
 file-types = ["csv"]

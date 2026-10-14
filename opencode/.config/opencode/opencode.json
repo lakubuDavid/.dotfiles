@@ -1,5 +1,8 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "instructions": [
+    "/Users/davidlakubu/.agents/SYSTEM.md"
+  ],
   "lsp": {
     "basedpyright": {
       "command": [

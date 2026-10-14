@@ -1,29 +1,20 @@
 #!/bin/sh
-# bootstrap.sh - Self-contained machine setup helper
-# Usage:
-#   Fresh machine:   curl -fsSL https://raw.githubusercontent.com/lakubudavid/.dotfiles/main/bootstrap.sh | sh
-#   Reactivation:    curl -fsSL .../bootstrap.sh | sh -- --stow
-#   Existing setup:  ./bootstrap.sh --stow
-
 set -eu
 
 DOTFILES_REPO="https://github.com/lakubudavid/.dotfiles.git"
 DOTFILES_DIR="$HOME/.dotfiles"
 
-# If we're running from a cloned repo, use that
+# Check for local bootstrap.lua
 if [ -f "$DOTFILES_DIR/bootstrap.lua" ]; then
   exec lua "$DOTFILES_DIR/bootstrap.lua" "$@"
 fi
 
-# Fresh machine: bootstrap.lua not found locally
-# Install brew + lua if missing, clone repo, then run bootstrap.lua
-echo "bootstrap.lua not found — bootstrapping fresh machine..."
+echo "Bootstrap initializing (arguments: $#)"
 
-# 1. Install Homebrew if missing
+# Install Homebrew if missing
 if ! command -v brew >/dev/null 2>&1; then
   echo "Installing Homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  # Make brew available
   if [ -x /opt/homebrew/bin/brew ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
   elif [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
@@ -31,15 +22,21 @@ if ! command -v brew >/dev/null 2>&1; then
   fi
 fi
 
-# 2. Install lua if missing
+# Install lua if missing
 if ! command -v lua >/dev/null 2>&1; then
   echo "Installing lua..."
   brew install lua
 fi
 
-# 3. Clone dotfiles repo
-echo "Cloning dotfiles..."
-git clone "$DOTFILES_REPO" "$DOTFILES_DIR"
+# Clone dotfiles repo if missing
+if [ ! -d "$DOTFILES_DIR" ]; then
+  echo "Cloning dotfiles..."
+  git clone "$DOTFILES_REPO" "$DOTFILES_DIR"
+fi
 
-# 4. Run bootstrap.lua with all args
+# Update to latest
+cd "$DOTFILES_DIR"
+git pull --ff-only origin main
+
+# Run bootstrap.lua with all arguments
 exec lua "$DOTFILES_DIR/bootstrap.lua" "$@"

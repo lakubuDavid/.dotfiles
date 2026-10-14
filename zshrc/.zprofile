@@ -1,4 +1,18 @@
 
+# PATH dedup helper to prevent duplicates
+add_to_path() {
+  case ":$PATH:" in
+    *":$1:"*) ;;
+    *) export PATH="$1:$PATH" ;;
+  esac
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 1. BREW & MISE FIRST (so their tools are on PATH for everything else)
+# ─────────────────────────────────────────────────────────────────────────────
+eval "$(brew shellenv)"
+eval "$(mise activate zsh)"
+
 # Setting PATH for Python 3.10
 # The original version is saved in .zprofile.pysave
 # PATH="/Library/Frameworks/Python.framework/Versions/3.10/bin:${PATH}"
@@ -30,7 +44,6 @@ export PATH="$PSPDEV/bin:$PATH"
 
 
 # android
-export JAVA_HOME="$HOME/Applications/Android Studio.app/Contents/jbr/Contents/Home"
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 export NDK_HOME="$ANDROID_HOME/ndk/26.2.11394342"
 export PATH="$PATH:$ANDROID_HOME/tools"
@@ -40,4 +53,3 @@ export PATH="$PATH:$ANDROID_HOME/tools/bin"
 PATH="/Library/Frameworks/Python.framework/Versions/3.11/bin:${PATH}"
 export PATH
 
-# GEMINI_API_KEY — moved to pass store, do NOT commit secrets here
